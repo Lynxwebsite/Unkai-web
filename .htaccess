@@ -1,0 +1,68 @@
+# ==========================================================================
+#  UnkaiWeb — Configuration Apache (Infomaniak)
+# ==========================================================================
+
+Options -MultiViews
+RewriteEngine On
+
+# --------------------------------------------------------------------------
+# 1. Forcer le HTTPS
+# --------------------------------------------------------------------------
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# --------------------------------------------------------------------------
+# 2. Rediriger www -> non-www (version canonique : https://unkaiweb.fr/)
+# --------------------------------------------------------------------------
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# --------------------------------------------------------------------------
+# 3. URLs « propres » : /mentions-legales -> /mentions-legales.html
+#    (ne s'applique que si le fichier .html correspondant existe)
+# --------------------------------------------------------------------------
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# --------------------------------------------------------------------------
+# 4. Compression (Gzip / DEFLATE)
+# --------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml application/rss+xml
+</IfModule>
+
+# --------------------------------------------------------------------------
+# 5. Cache navigateur
+# --------------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                        "access plus 1 month"
+  ExpiresByType text/html               "access plus 0 seconds"
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType image/webp              "access plus 6 months"
+  ExpiresByType image/png               "access plus 6 months"
+  ExpiresByType image/jpeg              "access plus 6 months"
+  ExpiresByType image/svg+xml           "access plus 6 months"
+  ExpiresByType image/x-icon            "access plus 1 year"
+  ExpiresByType font/woff2              "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js|webp|png|jpe?g|gif|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # Sécurité de base
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# --------------------------------------------------------------------------
+# 6. Pages d'erreur
+# --------------------------------------------------------------------------
+ErrorDocument 404 /404.html

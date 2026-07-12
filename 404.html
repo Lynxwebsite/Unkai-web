@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page introuvable (404) | UnkaiWeb</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="icon" type="image/png" href="Favicon/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--amber:#f97316;--amber-light:#fb923c;--slate-950:#0a1426;--slate-400:#9fb0c8;--slate-300:#cbd8ea;--white:#fff}
+    body{
+      font-family:'Inter',system-ui,sans-serif;background:var(--slate-950);color:var(--slate-300);
+      min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      text-align:center;padding:24px;
+      background-image:radial-gradient(700px 420px at 50% 0%,rgba(249,115,22,.14),transparent 60%);
+    }
+    img.logo{height:48px;margin-bottom:40px}
+    .code{
+      font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:clamp(4.5rem,18vw,8rem);
+      line-height:1;background:linear-gradient(120deg,var(--amber),var(--amber-light));
+      -webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-.03em;
+    }
+    h1{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--white);
+      font-size:clamp(1.3rem,4vw,1.8rem);margin:12px 0 10px}
+    p{color:var(--slate-400);max-width:460px;margin:0 auto 32px}
+    .btn{
+      display:inline-block;font-weight:600;color:var(--slate-950);
+      background:linear-gradient(120deg,var(--amber),var(--amber-light));
+      padding:13px 26px;border-radius:12px;text-decoration:none;transition:.2s;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .links{margin-top:26px;font-size:.9rem}
+    .links a{color:var(--slate-400);text-decoration:none;margin:0 10px}
+    .links a:hover{color:var(--amber-light)}
+  </style>
+</head>
+<body>
+  <img class="logo" src="Images/Logos/U/Logo Unkai - Carré rectangle Blanc.png" alt="UnkaiWeb" />
+  <div class="code">404</div>
+  <h1>Cette page s'est perdue dans les nuages.</h1>
+  <p>La page que vous cherchez n'existe pas ou a été déplacée. Revenons sur la terre ferme.</p>
+  <a class="btn" href="/">← Retour à l'accueil</a>
+  <div class="links">
+    <a href="/realisations.html">Réalisations</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+</body>
+</html>
