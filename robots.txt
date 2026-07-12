@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Pages non publiques / techniques (à ne pas indexer)
+Disallow: /brief.html
+Disallow: /carousel-test.html
+Disallow: /laptop-carousel-test.html
+Disallow: /essai-methode-unkai.html
+Disallow: /signature.html
+Disallow: /Base-connaissance-UnkaiWeb.md
+
+Sitemap: https://unkaiweb.fr/sitemap.xml

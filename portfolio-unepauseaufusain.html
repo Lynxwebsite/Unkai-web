@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio : Une pause au fusain | UnkaiWeb</title>
+  <meta name="description" content="Étude de cas : unepauseaufusain.fr, un gîte de charme à 1h de Paris, conçu par UnkaiWeb. Site vitrine poétique et immersif, +40% de réservations par an." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Portfolio : Une pause au fusain | UnkaiWeb" />
+  <meta property="og:description" content="Le site du gîte Une pause au fusain : poétique, immersif, apaisant. +40% de réservations par an." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <link rel="icon" type="image/png" href="Favicon/favicon.png" />
+  <link rel="apple-touch-icon" href="Favicon/favicon.png" />
+  <link rel="canonical" href="https://unkaiweb.fr/portfolio-unepauseaufusain.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amber: #f97316; --amber-light: #fb923c; --amber-dark: #ea580c;
+      --slate-950: #0a1426; --slate-900: #0f1d38; --slate-800: #1a2c4d;
+      --slate-400: #9fb0c8; --slate-300: #cbd8ea; --slate-500: #6b7d99; --white: #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--slate-950); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.2; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .amber { color: var(--amber); }
+    .amber-gradient { background: linear-gradient(to right, #fbbf24, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+      width: calc(100% - 32px); max-width: 1080px; z-index: 100;
+      background: rgba(10,20,38,0.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 999px; box-shadow: 0 8px 30px rgba(2,6,23,0.35);
+      transition: background .2s, border-radius .2s;
+    }
+    nav.menu-open { background: #0a1426; backdrop-filter: none; border-radius: 24px; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: flex; align-items: center; gap: 10px; margin-left: 18px; }
+    .logo img { height: 52px; width: auto; object-fit: contain; }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { color: var(--slate-400); font-size: 0.9rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; margin-right: 10px; }
+    .nav-cta { background: var(--amber); color: #0f172a; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.85rem; padding: 10px 20px; border-radius: 999px; transition: background .2s; }
+    .nav-cta:hover { background: var(--amber-light); }
+    .hamburger { display: none; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); cursor: pointer; color: var(--white); position: relative; z-index: 10001; }
+    .mobile-menu { position: fixed; top: 72px; left: 0; right: 0; z-index: 10000; background: #0a1426; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; flex-direction: column; padding: 12px 16px 16px; opacity: 0; transform: translateY(-8px); transition: opacity .25s, transform .25s; pointer-events: none; }
+    .mobile-menu.open { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .mobile-nav-links { display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px; }
+    .mobile-nav-links a { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: var(--slate-400); padding: 12px 14px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; transition: background .2s, color .2s; }
+    .mobile-nav-links a:hover { background: rgba(255,255,255,0.05); color: var(--white); }
+    .mobile-nav-links a .arrow { color: var(--amber); opacity: 0.5; }
+    .mobile-cta-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px; background: var(--amber); color: #0f172a; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; border-radius: 8px; box-shadow: 0 4px 20px rgba(245,158,11,0.25); }
+    .mobile-menu-tagline { text-align: center; margin-top: 10px; color: var(--slate-500); font-size: 0.75rem; }
+    @media (max-width: 768px) { .nav-links { display: none; } .nav-cta { display: none; } .hamburger { display: flex; } }
+
+    /* ── BUTTONS ── */
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--amber); color: #0f172a; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; padding: 16px 32px; border-radius: 8px; border: none; cursor: pointer; box-shadow: 0 8px 30px rgba(245,158,11,0.3); transition: background .2s, transform .15s, box-shadow .2s; }
+    .btn-primary:hover { background: var(--amber-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(245,158,11,0.4); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.95rem; padding: 15px 28px; border-radius: 8px; color: var(--white); border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.03); transition: border-color .2s, background .2s; }
+    .btn-ghost:hover { border-color: rgba(245,158,11,0.4); background: rgba(255,255,255,0.06); }
+
+    /* ── SECTION LABEL ── */
+    .section-label { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+    .section-label.center { justify-content: center; }
+    .label-line { height: 1px; width: 48px; background: linear-gradient(to right, transparent, var(--amber)); }
+    .label-line.right { background: linear-gradient(to left, transparent, var(--amber)); }
+    .label-text { color: var(--amber); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; }
+
+    /* ════════ HEADER ════════ */
+    .pf-header { position: relative; overflow: hidden; padding: 150px 0 90px;
+      background: radial-gradient(900px 500px at 80% 0%, rgba(249,115,22,0.10), transparent 60%), linear-gradient(180deg, #0a1426 0%, #0d1830 100%); }
+    .pf-header-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 56px; align-items: center; }
+    .pf-header h1 { font-size: clamp(2rem, 4.2vw, 3.4rem); font-weight: 800; margin-bottom: 20px; }
+    .pf-header p.lead { font-size: clamp(1rem, 1.6vw, 1.2rem); color: var(--slate-300); max-width: 520px; margin-bottom: 28px; }
+    .project-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+    .meta-chip { font-size: 0.78rem; padding: 6px 14px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--slate-300); }
+    .header-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    /* Maquette « site sur ordi » */
+    .browser-mock { position: relative; border-radius: 14px; overflow: hidden; background: #0b1220; border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 30px 80px rgba(2,6,23,0.6), 0 0 0 1px rgba(255,255,255,0.03);
+      transform: perspective(1600px) rotateY(-7deg) rotateX(2deg); transition: transform .5s ease; }
+    .browser-mock:hover { transform: perspective(1600px) rotateY(0deg) rotateX(0deg); }
+    .browser-bar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #131f38; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .browser-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .browser-dot.r { background: #ff5f57; } .browser-dot.y { background: #febc2e; } .browser-dot.g { background: #28c840; }
+    .browser-url { margin-left: 12px; flex: 1; height: 24px; border-radius: 999px; background: rgba(255,255,255,0.06); display: flex; align-items: center; padding: 0 14px; font-size: 0.72rem; color: var(--slate-400); }
+    .browser-mock img { width: 100%; height: auto; }
+    @media (max-width: 900px) { .pf-header-grid { grid-template-columns: 1fr; gap: 40px; } .browser-mock, .browser-mock:hover { transform: none; } }
+
+    /* ════════ ZONE DE TEXTE ════════ */
+    .pf-text { padding: 90px 0; background: var(--slate-950); }
+    .pf-text-inner { max-width: 800px; margin: 0 auto; }
+    .pf-text h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; margin-bottom: 22px; text-align: center; }
+    .pf-text .lead-c { text-align: center; color: var(--slate-400); max-width: 640px; margin: 0 auto 48px; }
+    .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    @media (max-width: 760px) { .cols { grid-template-columns: 1fr; } }
+    .col-block h3 { font-size: 1.15rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .col-block h3 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); }
+    .col-block p { color: var(--slate-300); font-size: 0.98rem; }
+
+    .specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+    .specs .spec:nth-child(4) { grid-column: 1 / -1; align-items: center; text-align: center; }
+    @media (max-width: 700px) { .specs { grid-template-columns: 1fr; } .specs .spec { grid-column: auto; text-align: left; align-items: stretch; } }
+    .spec { display: flex; flex-direction: column; padding: 22px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+    .spec .spec-ico { width: 42px; height: 42px; border-radius: 10px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(245,158,11,0.08)); border: 1px solid rgba(245,158,11,0.2); color: var(--amber); }
+    .spec h4 { font-size: 1rem; margin-bottom: 6px; }
+    .spec p { font-size: 0.86rem; color: var(--slate-400); }
+
+    /* ════════ RÉSULTAT ════════ */
+    .pf-result { padding: 0 0 90px; background: var(--slate-950); }
+    .result-card { max-width: 800px; margin: 0 auto; padding: 40px; border-radius: 16px; text-align: center;
+      background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.03)); border: 1px solid rgba(245,158,11,0.25); }
+    .result-stat { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: clamp(2.4rem, 6vw, 3.6rem); margin-bottom: 6px; }
+    .result-label { color: var(--slate-300); font-size: 1.05rem; }
+
+    /* ════════ COMMENTAIRE ════════ */
+    .pf-reviews { padding: 90px 0; background: var(--slate-900); }
+    .reviews-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+    .reviews-head h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; margin-bottom: 14px; }
+    .reviews-head p { color: var(--slate-400); }
+    .review-feature { max-width: 760px; margin: 0 auto; padding: 44px; border-radius: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); position: relative; }
+    .quote-mark { font-family: 'Space Grotesk', sans-serif; font-size: 4rem; line-height: 1; color: var(--amber); opacity: 0.4; margin-bottom: -10px; }
+    .review-feature blockquote { font-size: 1.2rem; color: var(--white); line-height: 1.7; margin-bottom: 26px; font-weight: 500; }
+    .stars { display: flex; gap: 3px; color: var(--amber); margin-bottom: 22px; font-size: 1.1rem; }
+    .reviewer { display: flex; align-items: center; gap: 14px; }
+    .reviewer-avatar { width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #0f172a; background: linear-gradient(135deg, var(--amber-light), var(--amber-dark)); }
+    .reviewer-name { font-weight: 600; }
+    .reviewer-role { font-size: 0.85rem; color: var(--slate-500); }
+
+    /* ════════ CTA ════════ */
+    .pf-cta { padding: 90px 24px; text-align: center; background: linear-gradient(180deg, #0f1d38, #0a1426); }
+    .pf-cta h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); font-weight: 800; margin-bottom: 16px; }
+    .pf-cta p { color: var(--slate-300); max-width: 520px; margin: 0 auto 30px; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--slate-950); border-top: 1px solid rgba(255,255,255,0.06); padding: 64px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .logo { margin-left: 0; }
+    .footer-brand p { color: var(--slate-400); font-size: 0.875rem; line-height: 1.7; max-width: 320px; margin-top: 16px; }
+    .footer-col h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul li a { color: var(--slate-400); font-size: 0.875rem; transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--amber); }
+    .footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-bottom p { color: var(--slate-500); font-size: 0.8rem; }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <img src="Images/Logos/U/Logo Unkai - Carré rectangle Blanc.png" alt="UnkaiWeb" />
+      </a>
+      <div class="nav-links">
+        <a href="index.html#process">Méthode</a>
+        <a href="realisations.html" class="active">Réalisations</a>
+        <a href="index.html#faq">FAQ</a>
+      </div>
+      <div class="nav-actions">
+        <a href="contact.html" class="nav-cta">Démarrer mon projet →</a>
+        <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <nav class="mobile-nav-links">
+      <a href="index.html#process" onclick="closeMobileMenu()">Méthode <span class="arrow">→</span></a>
+      <a href="realisations.html" onclick="closeMobileMenu()">Réalisations <span class="arrow">→</span></a>
+      <a href="index.html#faq" onclick="closeMobileMenu()">FAQ <span class="arrow">→</span></a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="contact.html" class="mobile-cta-btn">
+        Démarrer mon projet
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <p class="mobile-menu-tagline">Devis gratuit · sans engagement</p>
+    </div>
+  </div>
+
+  <!-- ════════ HEADER : texte à gauche / site sur écran à droite ════════ -->
+  <header class="pf-header">
+    <div class="container pf-header-grid">
+      <div class="pf-header-text">
+        <div class="section-label">
+          <span class="label-line"></span>
+          <span class="label-text">Étude de cas · Réalisation</span>
+        </div>
+        <h1>Une pause au fusain,<span class="amber-gradient"> la parenthèse enchantée en ligne.</span></h1>
+        <div class="project-meta">
+          <span class="meta-chip">Tourisme &amp; Hébergement</span>
+          <span class="meta-chip">Gîte de charme</span>
+          <span class="meta-chip">Site vitrine</span>
+        </div>
+        <p class="lead">
+          Un gîte de charme à 1h de Paris, au bord de la rivière du Fusain. Le site devait
+          transmettre la poésie et la tranquillité du lieu, et donner envie de poser
+          ses valises sans réfléchir.
+        </p>
+        <div class="header-actions">
+          <a href="https://unepauseaufusain.fr/" target="_blank" rel="noopener" class="btn-primary">
+            Voir le site en ligne
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+          <a href="contact.html" class="btn-ghost">Je veux le mien</a>
+        </div>
+      </div>
+
+      <div class="pf-header-visual">
+        <div class="browser-mock">
+          <div class="browser-bar">
+            <span class="browser-dot r"></span>
+            <span class="browser-dot y"></span>
+            <span class="browser-dot g"></span>
+            <span class="browser-url">https://unepauseaufusain.fr</span>
+          </div>
+          <a href="https://unepauseaufusain.fr/" target="_blank" rel="noopener">
+            <img src="portfolio/PC/Sites%20réels/Une%20pause%20au%20fusain.jpg"
+                 alt="Aperçu du site unepauseaufusain.fr sur ordinateur" loading="eager" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════ ZONE DE TEXTE ════════ -->
+  <section class="pf-text">
+    <div class="container pf-text-inner">
+      <div class="section-label center">
+        <span class="label-line"></span>
+        <span class="label-text">Le projet</span>
+        <span class="label-line right"></span>
+      </div>
+      <h2>Faire ressentir un lieu avant même d'y avoir mis les pieds</h2>
+      <p class="lead-c">
+        Jacuzzi, kayak sur la rivière, nuits étoilées, repas faits maison : tout, chez
+        Une pause au fusain, invite au calme. Le site devait faire vivre cette atmosphère
+        dès la page d'accueil.
+      </p>
+
+      <div class="cols">
+        <div class="col-block">
+          <h3><span class="dot"></span> L'objectif</h3>
+          <p>
+            Traduire en ligne l'ambiance apaisante et poétique du gîte, mettre en valeur
+            les hôtes Michel et Bruno, et inciter au contact comme à la réservation,
+            sans tunnel compliqué, dans l'esprit chaleureux du lieu.
+          </p>
+        </div>
+        <div class="col-block">
+          <h3><span class="dot"></span> Notre réponse</h3>
+          <p>
+            Un design épuré et immersif, de grandes photographies plein cadre, un livre
+            d'or pour la preuve sociale, une présentation des hôtes, et un contact direct
+            (formulaire / WhatsApp). Le tout, fluide sur mobile.
+          </p>
+        </div>
+      </div>
+
+      <div class="specs">
+        <div class="spec">
+          <div class="spec-ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+          <h4>Galerie immersive</h4>
+          <p>De grandes photos plein cadre pour faire rêver, tout de suite.</p>
+        </div>
+        <div class="spec">
+          <div class="spec-ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div>
+          <h4>Livre d'or</h4>
+          <p>Les avis enthousiastes des hôtes mis en avant pour rassurer.</p>
+        </div>
+        <div class="spec">
+          <div class="spec-ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+          <h4>Contact simplifié</h4>
+          <p>Demande de réservation par formulaire ou WhatsApp, sans friction.</p>
+        </div>
+        <div class="spec">
+          <div class="spec-ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h4>Présentation des hôtes</h4>
+          <p>Michel &amp; Bruno mis en lumière, pour créer le lien humain.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ RÉSULTAT ════════ -->
+  <section class="pf-result">
+    <div class="container">
+      <div class="result-card">
+        <div class="result-stat amber-gradient">+40%</div>
+        <div class="result-label">de réservations par an depuis la refonte du site</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ COMMENTAIRE / AVIS ════════ -->
+  <section class="pf-reviews">
+    <div class="container">
+      <div class="reviews-head">
+        <div class="section-label center">
+          <span class="label-line"></span>
+          <span class="label-text">Le mot du client</span>
+          <span class="label-line right"></span>
+        </div>
+        <h2>Ce qu'en disent Michel &amp; Bruno</h2>
+        <p><em style="color:var(--slate-500)">(Avis à remplacer par le vrai retour du client.)</em></p>
+      </div>
+
+      <div class="review-feature">
+        <div class="quote-mark">“</div>
+        <div class="stars">★★★★★</div>
+        <blockquote>
+          Notre gîte est une bulle de calme, et le site le fait enfin ressentir.
+          Les voyageurs nous disent « on a réservé rien qu'avec les photos ». Résultat :
+          +40% de réservations sur l'année.
+        </blockquote>
+        <div class="reviewer">
+          <div class="reviewer-avatar">M</div>
+          <div>
+            <div class="reviewer-name">Michel &amp; Bruno</div>
+            <div class="reviewer-role">Hôtes · unepauseaufusain.fr</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CTA ════════ -->
+  <section class="pf-cta">
+    <h2>Envie d'un site comme celui-ci ?</h2>
+    <p>Parlons de votre projet. L'échange est gratuit et sans engagement : vous repartez avec une vision claire de ce qu'on peut faire pour vous.</p>
+    <a href="contact.html" class="btn-primary">
+      Démarrer mon projet
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo"><img src="Images/Logos/U/Logo Unkai - Carré rectangle Blanc.png" alt="UnkaiWeb" /></div>
+          <p>Sites sur mesure pour les PME, artisans et commerçants de l'Hérault. Clairs, crédibles, et pensés pour être contactés.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:contact@unkaiweb.fr">contact@unkaiweb.fr</a></li>
+            <li><span style="color:var(--slate-400);font-size:.875rem">Montpellier, Hérault</span></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Informations</h4>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="realisations.html">Réalisations</a></li>
+            <li><a href="contact.html">Démarrer mon projet</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 UnkaiWeb. Tous droits réservés.</p>
+        <p>Conçu avec passion à Montpellier 🇫🇷</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const ICON_BURGER = `<svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+    const ICON_CLOSE  = `<svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>`;
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const btn  = document.getElementById('hamburger');
+      const nav  = document.querySelector('nav');
+      const isOpen = menu.classList.toggle('open');
+      nav.classList.toggle('menu-open', isOpen);
+      btn.setAttribute('aria-expanded', isOpen);
+      btn.innerHTML = isOpen ? ICON_CLOSE : ICON_BURGER;
+    }
+    function closeMobileMenu() {
+      document.getElementById('mobile-menu').classList.remove('open');
+      document.querySelector('nav').classList.remove('menu-open');
+      document.getElementById('hamburger').setAttribute('aria-expanded', false);
+      document.getElementById('hamburger').innerHTML = ICON_BURGER;
+    }
+  </script>
+</body>
+</html>

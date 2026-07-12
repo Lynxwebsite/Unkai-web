@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test — Vitrine ordinateur flottant (carrousel) | UnkaiWeb</title>
+  <link rel="icon" type="image/png" href="Favicon/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --amber: #f97316; --amber-light: #fb923c;
+      --navy: #0a1426; --navy-2: #0f1d38;
+      --slate-300: #cbd8ea; --slate-400: #9fb0c8; --slate-500: #6b7d99; --white: #fff;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--white); overflow-x: hidden; }
+    h1,h2,h3 { font-family: 'Space Grotesk', sans-serif; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ════════ SECTION VITRINE ════════ */
+    .showcase {
+      position: relative; overflow: hidden;
+      padding: 110px 24px;
+      background:
+        radial-gradient(900px 600px at 18% 30%, rgba(249,115,22,0.10), transparent 60%),
+        radial-gradient(700px 600px at 100% 100%, rgba(20,40,80,0.5), transparent 60%),
+        linear-gradient(160deg, #0a1426 0%, #0c1830 60%, #0a1426 100%);
+    }
+    .showcase-grid {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center;
+    }
+    @media (max-width: 900px) {
+      .showcase-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    /* — Ordinateur (MacBook) flottant — */
+    .laptop-stage { position: relative; display: flex; justify-content: center; perspective: 1500px; }
+    /* halo au sol */
+    .laptop-stage::after {
+      content: ''; position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
+      width: 70%; height: 36px; border-radius: 50%;
+      background: rgba(2,6,23,0.6); filter: blur(22px); z-index: 0;
+      animation: shadowPulse 6s ease-in-out infinite;
+    }
+    .macbook { position: relative; z-index: 1; width: 100%; max-width: 600px; transform-style: preserve-3d; animation: float 8s ease-in-out infinite; }
+
+    .mb-screen {
+      position: relative; background: #0c0e14; border-radius: 18px; padding: 13px;
+      border: 2px solid #3a3f51;
+      box-shadow: inset 0 0 0 2px #0a0c11, 0 26px 60px rgba(0,0,0,0.55);
+    }
+    .mb-cam { width: 6px; height: 6px; border-radius: 50%; background: #2b3040; margin: 1px auto 9px; box-shadow: inset 0 0 2px #000; }
+    .mb-shot {
+      display: block; width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: top center;
+      border-radius: 5px; background: #000;
+      transition: opacity .25s ease;
+    }
+    /* socle / charnière argentée, plus large que l'écran */
+    .mb-base {
+      position: relative; width: 113%; left: -6.5%; height: 16px; margin-top: -1px;
+      background: linear-gradient(to bottom, #cdd2dc 0%, #b2b8c4 42%, #828897 100%);
+      border-radius: 3px 3px 11px 11px;
+      box-shadow: 0 16px 26px rgba(0,0,0,0.45);
+    }
+    .mb-base::after {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 92px; height: 7px; background: #969cab; border-radius: 0 0 8px 8px;
+    }
+
+    /* Flottement organique : translation + légères rotations sur les 3 axes */
+    @keyframes float {
+      0%   { transform: translateY(0)    rotateX(0.6deg)  rotateY(-1deg)   rotateZ(-0.35deg); }
+      25%  { transform: translateY(-4px) rotateX(0deg)    rotateY(0.5deg)  rotateZ(0.2deg); }
+      50%  { transform: translateY(-6px) rotateX(-0.6deg) rotateY(1deg)    rotateZ(0.4deg); }
+      75%  { transform: translateY(-3px) rotateX(0deg)    rotateY(0.2deg)  rotateZ(0.1deg); }
+      100% { transform: translateY(0)    rotateX(0.6deg)  rotateY(-1deg)   rotateZ(-0.35deg); }
+    }
+    @keyframes shadowPulse { 0%,100% { opacity: .6; transform: translateX(-50%) scale(1); } 50% { opacity: .35; transform: translateX(-50%) scale(0.84); } }
+    @media (prefers-reduced-motion: reduce) {
+      .macbook, .laptop-stage::after { animation: none; }
+    }
+
+    /* — Texte de présentation — */
+    .showcase-info { max-width: 460px; }
+    .showcase-info .info-fade { transition: opacity .25s ease, transform .25s ease; }
+    .sc-cat {
+      display: inline-block; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--amber-light); margin-bottom: 16px;
+    }
+    .sc-title { font-size: clamp(2.2rem, 5vw, 3.4rem); font-weight: 800; line-height: 1.02; margin-bottom: 18px; }
+    .sc-desc { color: var(--slate-400); font-size: 1.02rem; line-height: 1.7; margin-bottom: 30px; }
+    .sc-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--white);
+      transition: gap .2s, color .2s;
+    }
+    .sc-link:hover { gap: 12px; color: var(--amber); }
+
+    /* — Contrôles carrousel — */
+    .sc-controls { display: flex; align-items: center; gap: 18px; margin-top: 40px; }
+    .sc-arrows { display: flex; gap: 10px; }
+    .sc-arrows button {
+      display: flex; align-items: center; justify-content: center;
+      width: 50px; height: 50px; border-radius: 999px; cursor: pointer;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--white);
+      transition: background .2s, border-color .2s, transform .1s;
+    }
+    .sc-arrows button:hover { background: rgba(255,255,255,0.1); border-color: rgba(245,158,11,0.5); }
+    .sc-arrows button:active { transform: scale(0.93); }
+    .sc-counter { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; color: var(--slate-500); letter-spacing: 0.05em; }
+    .sc-dots { display: flex; gap: 8px; margin-left: 4px; }
+    .sc-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: background .25s, width .25s; }
+    .sc-dot.active { background: var(--amber); width: 22px; border-radius: 999px; }
+
+    .back-link { display: block; text-align: center; padding: 28px; color: var(--slate-400); font-size: 0.9rem; }
+    .back-link:hover { color: var(--amber); }
+  </style>
+</head>
+<body>
+
+  <!-- ════════ SECTION : ORDINATEUR FLOTTANT + CARROUSEL DE SITES ════════ -->
+  <section class="showcase" aria-label="Nos réalisations">
+    <div class="showcase-grid">
+
+      <!-- GAUCHE : MacBook flottant -->
+      <div class="laptop-stage">
+        <div class="macbook">
+          <div class="mb-screen">
+            <div class="mb-cam"></div>
+            <img class="mb-shot" id="scShot" src="portfolio/PC/Sites%20r%C3%A9els/vertical%20smatch.jpg" alt="Aperçu du site Vertical S' Match" loading="eager" />
+          </div>
+          <div class="mb-base"></div>
+        </div>
+      </div>
+
+      <!-- DROITE : texte de présentation + contrôles -->
+      <div class="showcase-info">
+        <div class="info-fade" id="scFade">
+          <span class="sc-cat" id="scCat">Loisirs &amp; sport</span>
+          <h2 class="sc-title" id="scTitle">Vertical S' Match</h2>
+          <p class="sc-desc" id="scDesc">Complexe multisport à Vauvert : padel, squash, badminton, pickleball et escalade. Site immersif avec réservation en ligne, lounge et boutique.</p>
+          <a class="sc-link" id="scLink" href="https://verticalsmatch.com/" target="_blank" rel="noopener">
+            Voir le site
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+        </div>
+
+        <div class="sc-controls">
+          <div class="sc-arrows">
+            <button id="scPrev" aria-label="Site précédent">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button id="scNext" aria-label="Site suivant">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+          <span class="sc-counter" id="scCounter">01 / 05</span>
+          <div class="sc-dots" id="scDots"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <a class="back-link" href="index.html">← Retour à l'accueil</a>
+
+  <script>
+    const DIR = 'portfolio/PC/Sites%20r%C3%A9els/';
+    const SITES = [
+      {
+        cat: 'Loisirs & sport', name: "Vertical S' Match", src: DIR + 'vertical%20smatch.jpg', href: 'https://verticalsmatch.com/',
+        desc: 'Complexe multisport à Vauvert : padel, squash, badminton, pickleball et escalade. Site immersif avec réservation en ligne, lounge et boutique.'
+      },
+      {
+        cat: 'Art & sculpture', name: 'Kllemo', src: DIR + 'Kllemo.jpg', href: 'https://kllemo.com/',
+        desc: 'Le site de l’artiste sculpteur Kllemo : galerie d’œuvres en grand format et boutique d’éditions numérotées, dans un écrin minimaliste et immersif.'
+      },
+      {
+        cat: 'Multiservices', name: 'RMS', src: DIR + 'Reactifms.jpg', href: 'https://www.reactifms.com/',
+        desc: 'Réactif Multiservices Solutions : aménagement et maintenance pour professionnels et particuliers, avec intervention sous 48h et devis en ligne.'
+      },
+      {
+        cat: 'Gîte de charme', name: 'Une pause au fusain', src: DIR + 'Une%20pause%20au%20fusain.jpg', href: 'https://unepauseaufusain.fr/',
+        desc: 'Gîte de charme 4 étoiles : une parenthèse ressourçante en pleine nature. Présentation du lieu, des environs et réservation directe.'
+      },
+      {
+        cat: 'Salon de coiffure', name: 'Le Carmen', src: DIR + 'Le%20carmen%20uzes.jpg', href: 'https://www.lecarmenuzes.com/',
+        desc: 'Salon de coiffure à Uzès : ambiance feutrée, réservation en ligne et prise de contact rapide pour fidéliser la clientèle.'
+      },
+    ];
+
+    let i = 0;
+    const shot    = document.getElementById('scShot');
+    const fade    = document.getElementById('scFade');
+    const elCat   = document.getElementById('scCat');
+    const elTitle = document.getElementById('scTitle');
+    const elDesc  = document.getElementById('scDesc');
+    const elLink  = document.getElementById('scLink');
+    const elCount = document.getElementById('scCounter');
+    const elDots  = document.getElementById('scDots');
+
+    // Dots
+    SITES.forEach((_, idx) => {
+      const d = document.createElement('span');
+      d.className = 'sc-dot' + (idx === 0 ? ' active' : '');
+      d.addEventListener('click', () => go(idx));
+      elDots.appendChild(d);
+    });
+    const dots = [...elDots.children];
+
+    const pad = (n) => String(n).padStart(2, '0');
+
+    function go(idx) {
+      const target = (idx + SITES.length) % SITES.length;
+      if (target === i) return;
+      // fondu sortant
+      fade.style.opacity = 0; fade.style.transform = 'translateY(8px)';
+      shot.style.opacity = 0;
+      setTimeout(() => {
+        i = target;
+        const s = SITES[i];
+        shot.src = s.src; shot.alt = 'Aperçu du site ' + s.name;
+        elCat.textContent = s.cat; elTitle.textContent = s.name;
+        elDesc.textContent = s.desc; elLink.href = s.href;
+        elCount.textContent = pad(i + 1) + ' / ' + pad(SITES.length);
+        dots.forEach((d, k) => d.classList.toggle('active', k === i));
+        // fondu entrant
+        shot.style.opacity = 1;
+        fade.style.opacity = 1; fade.style.transform = 'translateY(0)';
+      }, 250);
+    }
+    const next = () => go(i + 1);
+    const prev = () => go(i - 1);
+
+    document.getElementById('scNext').addEventListener('click', next);
+    document.getElementById('scPrev').addEventListener('click', prev);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+  </script>
+</body>
+</html>

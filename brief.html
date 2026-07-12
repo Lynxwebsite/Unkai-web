@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brief : UnkaiWeb | Échangeons sur votre projet</title>
+  <meta name="description" content="Décrivez votre projet en 2 minutes. On vous recontacte pour un échange gratuit et sans engagement." />
+  <meta name="robots" content="index, follow" />
+  <link rel="icon" type="image/png" href="Favicon/favicon.png" />
+  <link rel="apple-touch-icon" href="Favicon/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VRCW9Y73QS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VRCW9Y73QS');
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amber: #f59e0b;
+      --amber-light: #fbbf24;
+      --amber-dark: #d97706;
+      --slate-950: #020617;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-500: #64748b;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--slate-950);
+      color: var(--white);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.2; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    svg { display: inline-block; vertical-align: middle; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(2,6,23,0.85);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo img { width: 36px; height: 36px; object-fit: contain; }
+    .logo-text { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.2rem; }
+    .logo-text span { color: var(--amber); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--slate-400); font-size: 0.9rem;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: var(--white); }
+
+    /* MAIN */
+    main {
+      min-height: 100vh;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .bg-blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); pointer-events: none;
+    }
+
+    .form-wrapper { max-width: 720px; margin: 0 auto; }
+
+    /* Section header */
+    .section-label {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .label-line-l { height: 1px; width: 48px; background: linear-gradient(to right, transparent, var(--amber)); }
+    .label-line-r { height: 1px; width: 48px; background: linear-gradient(to left, transparent, var(--amber)); }
+    .label-text { color: var(--amber); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; }
+
+    .page-title {
+      text-align: center;
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      font-weight: 700; margin-bottom: 12px;
+    }
+    .page-subtitle { text-align: center; color: var(--slate-400); font-size: 1.1rem; margin-bottom: 48px; }
+
+    /* Progress */
+    .progress-wrap { margin-bottom: 32px; }
+    .progress-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 8px;
+    }
+    .progress-label { color: var(--slate-400); font-size: 0.8rem; }
+    .progress-count { color: var(--amber); font-size: 0.8rem; font-weight: 600; }
+    .progress-track {
+      height: 6px; background: rgba(255,255,255,0.1);
+      border-radius: 4px; overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, var(--amber), var(--amber-light));
+      border-radius: 4px;
+      transition: width .4s ease;
+    }
+
+    /* Form card */
+    .form-card {
+      position: relative; padding: 32px;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      margin-bottom: 24px;
+    }
+    .step-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+    .step-num-badge {
+      width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(245,158,11,0.1));
+      border: 1px solid rgba(245,158,11,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem; font-weight: 700; color: var(--amber);
+    }
+    .step-title { font-size: 1.5rem; font-weight: 700; }
+
+    /* Fields */
+    .field { margin-bottom: 20px; }
+    .field label {
+      display: block; margin-bottom: 8px;
+      color: var(--slate-300); font-size: 0.9rem;
+    }
+    .field label .required { color: var(--amber); }
+    .field .hint { color: var(--slate-500); font-size: 0.8rem; margin-top: 6px; }
+
+    input[type="text"], input[type="email"], input[type="tel"],
+    input[type="url"], textarea {
+      width: 100%; padding: 12px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color .2s;
+      outline: none;
+    }
+    input::placeholder, textarea::placeholder { color: var(--slate-500); }
+    input:focus, textarea:focus { border-color: rgba(245,158,11,0.5); }
+    textarea { resize: vertical; min-height: 120px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+    /* Radio options */
+    .radio-group { display: flex; flex-direction: column; gap: 10px; }
+    .radio-group.inline { flex-direction: row; flex-wrap: wrap; gap: 12px; }
+    .radio-option {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 8px; cursor: pointer;
+      transition: background .2s, border-color .2s;
+      user-select: none;
+    }
+    .radio-option:hover { background: rgba(255,255,255,0.08); }
+    .radio-option input[type="radio"] { display: none; }
+    .radio-dot {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid rgba(245,158,11,0.5);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: border-color .2s;
+    }
+    .radio-dot::after {
+      content: ''; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--amber); opacity: 0; transition: opacity .2s;
+    }
+    .radio-option.selected { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.3); }
+    .radio-option.selected .radio-dot { border-color: var(--amber); }
+    .radio-option.selected .radio-dot::after { opacity: 1; }
+    .radio-option span { color: var(--slate-300); font-size: 0.9rem; }
+
+    /* Nav buttons */
+    .form-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; flex-wrap: wrap;
+    }
+    .btn-back {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 24px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; cursor: pointer;
+      color: var(--white); font-size: 0.9rem;
+      transition: background .2s;
+    }
+    .btn-back:hover { background: rgba(255,255,255,0.1); }
+    .btn-back:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-next {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 28px;
+      background: var(--amber); color: #0f172a;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 0.95rem;
+      border: none; border-radius: 8px; cursor: pointer;
+      box-shadow: 0 4px 20px rgba(245,158,11,0.3);
+      transition: background .2s, transform .15s, opacity .2s;
+    }
+    .btn-next:hover { background: var(--amber-light); transform: translateY(-1px); }
+    .btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+    .btn-submit {
+      display: flex; align-items: center; gap: 8px;
+      padding: 14px 32px;
+      background: var(--amber); color: #0f172a;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      border: none; border-radius: 8px; cursor: pointer;
+      box-shadow: 0 4px 20px rgba(245,158,11,0.3);
+      transition: background .2s, transform .15s, opacity .2s;
+    }
+    .btn-submit:hover { background: var(--amber-light); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .form-legal { text-align: center; color: var(--slate-500); font-size: 0.8rem; margin-top: 20px; }
+    #submit-error { display:none; text-align:center; color:#f87171; font-size:0.85rem; margin-top:12px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Success */
+    #success-state {
+      display: none;
+      text-align: center; padding: 64px 24px;
+    }
+    .success-icon {
+      width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 24px;
+      background: linear-gradient(135deg, var(--amber), var(--amber-dark));
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 30px rgba(245,158,11,0.4);
+    }
+    .success-icon svg { color: #0f172a; }
+    #success-state h3 { font-size: 2rem; font-weight: 700; margin-bottom: 16px; }
+    #success-state p { color: var(--slate-400); font-size: 1.05rem; line-height: 1.8; }
+
+    /* FOOTER */
+    footer {
+      background: var(--slate-950);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    footer p { color: var(--slate-500); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="Images/Logos/U/Logo Unkai - Carré rectangle Blanc.png" alt="UnkaiWeb" />
+      </a>
+      <a href="index.html" class="nav-back">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+        Retour
+      </a>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <div class="bg-blob" style="top:0;left:25%;width:384px;height:384px;background:rgba(245,158,11,0.05)"></div>
+    <div class="bg-blob" style="bottom:0;right:25%;width:384px;height:384px;background:rgba(30,41,59,0.5)"></div>
+
+    <div class="form-wrapper" id="form-top">
+
+      <!-- Header -->
+      <div class="section-label">
+        <div class="label-line-l"></div>
+        <span class="label-text">Brief Laser</span>
+        <div class="label-line-r"></div>
+      </div>
+      <h1 class="page-title">
+        Prêt à décoller ?
+        <span style="background:linear-gradient(to right,#fbbf24,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+          Remplissez le formulaire
+        </span>
+      </h1>
+      <p class="page-subtitle">2 minutes pour commencer votre ascension</p>
+
+      <!-- Form UI -->
+      <div id="form-ui">
+        <!-- Progress -->
+        <div class="progress-wrap">
+          <div class="progress-top">
+            <span class="progress-label" id="progress-label">Vos coordonnées</span>
+            <span class="progress-count" id="progress-count">1 / 5</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-bar" id="progress-bar" style="width:20%"></div>
+          </div>
+        </div>
+
+        <!-- Steps -->
+        <div id="steps-container"></div>
+
+        <!-- Nav buttons -->
+        <div class="form-nav">
+          <button class="btn-back" id="btn-back" onclick="prevStep()" disabled>
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5"/><polyline points="12 19 5 12 12 5"/></svg>
+            Précédent
+          </button>
+          <button class="btn-next" id="btn-next" onclick="nextStep()">
+            Suivant
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <button class="btn-submit" id="btn-submit" onclick="submitForm()" style="display:none">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Envoyer mon brief
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </button>
+        </div>
+        <p class="form-legal">En soumettant ce formulaire, vous acceptez d'être contacté par notre équipe pour discuter de votre projet.</p>
+        <p id="submit-error"></p>
+      </div>
+
+      <!-- Success -->
+      <div id="success-state">
+        <div class="success-icon">
+          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>Formulaire envoyé avec succès !</h3>
+        <p>Nous allons étudier votre projet et revenir vers vous très vite pour en parler. 🙌</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2025 UnkaiWeb. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── State ──
+    let currentStep = 1;
+    const totalSteps = 5;
+    const stepLabels = ['Vos coordonnées', 'Votre objectif', 'Identité visuelle', 'Votre activité', 'Vos préférences'];
+    const formData = {
+      companyName:'', slogan:'', phone:'', email:'', address:'',
+      instagram:'', facebook:'', linkedin:'',
+      mainMission:'', otherMission:'',
+      hasLogo:'', logoLink:'',
+      atmosphere:'', dominantColor:'',
+      services:'', uniqueStrength:'', imagesLink:'',
+      referenceWebsite:'', dislikedWebsite:'', desiredDomain:'',
+    };
+
+    // ── Build steps HTML ──
+    function buildSteps() {
+      const container = document.getElementById('steps-container');
+      container.innerHTML = '';
+
+      const steps = [step1HTML(), step2HTML(), step3HTML(), step4HTML(), step5HTML()];
+      steps.forEach((html, i) => {
+        const div = document.createElement('div');
+        div.className = 'form-card';
+        div.id = `step-${i+1}`;
+        div.style.display = (i+1 === currentStep) ? 'block' : 'none';
+        div.innerHTML = html;
+        container.appendChild(div);
+      });
+
+      // Re-attach radio listeners
+      document.querySelectorAll('.radio-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          const group = opt.closest('.radio-group');
+          const field = group.dataset.field;
+          group.querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          formData[field] = opt.dataset.value;
+          // Handle conditional fields
+          if (field === 'hasLogo') toggleLogoLink(formData.hasLogo === 'yes');
+          if (field === 'mainMission') toggleOtherMission(formData.mainMission === 'other');
+          updateNav();
+        });
+        // Restore selected state
+        const field = opt.closest('.radio-group').dataset.field;
+        if (formData[field] === opt.dataset.value) {
+          opt.classList.add('selected');
+        }
+      });
+
+      // Restore input values
+      Object.keys(formData).forEach(key => {
+        const el = document.getElementById('field-' + key);
+        if (el) el.value = formData[key];
+      });
+
+      // Attach input listeners
+      document.querySelectorAll('[data-bind]').forEach(el => {
+        el.addEventListener('input', () => {
+          formData[el.dataset.bind] = el.value;
+          updateNav();
+        });
+      });
+
+      toggleLogoLink(formData.hasLogo === 'yes');
+      toggleOtherMission(formData.mainMission === 'other');
+      updateNav();
+    }
+
+    function step1HTML() {
+      return `
+        <div class="step-header">
+          <div class="step-num-badge">1</div>
+          <h3 class="step-title">Vos coordonnées</h3>
+        </div>
+        <div class="field">
+          <label>Nom de l'établissement / Société <span class="required">*</span></label>
+          <input type="text" id="field-companyName" data-bind="companyName" placeholder="Ex: Boulangerie Artisanale Martin" />
+        </div>
+        <div class="field">
+          <label>Slogan ou phrase d'accroche</label>
+          <input type="text" id="field-slogan" data-bind="slogan" placeholder="Ex: Le pain comme autrefois" />
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Téléphone <span class="required">*</span></label>
+            <input type="tel" id="field-phone" data-bind="phone" placeholder="06 00 00 00 00" />
+          </div>
+          <div class="field">
+            <label>Email <span class="required">*</span></label>
+            <input type="email" id="field-email" data-bind="email" placeholder="contact@votresite.fr" />
+          </div>
+        </div>
+        <div class="field">
+          <label>Adresse physique (pour SEO local) <span class="required">*</span></label>
+          <input type="text" id="field-address" data-bind="address" placeholder="12 rue de la Loge, 34000 Montpellier" />
+        </div>
+        <div class="grid-3">
+          <div class="field">
+            <label>Instagram</label>
+            <input type="text" id="field-instagram" data-bind="instagram" placeholder="@votrecompte" />
+          </div>
+          <div class="field">
+            <label>Facebook</label>
+            <input type="text" id="field-facebook" data-bind="facebook" placeholder="facebook.com/page" />
+          </div>
+          <div class="field">
+            <label>LinkedIn</label>
+            <input type="text" id="field-linkedin" data-bind="linkedin" placeholder="linkedin.com/company" />
+          </div>
+        </div>
+      `;
+    }
+
+    function step2HTML() {
+      const missions = [
+        { value: 'leads',     label: 'Générer des appels ou des demandes de devis' },
+        { value: 'portfolio', label: 'Présenter une galerie de réalisations / portfolio' },
+        { value: 'services',  label: 'Afficher une carte ou une liste de services' },
+        { value: 'other',     label: 'Autre' },
+      ];
+      return `
+        <div class="step-header">
+          <div class="step-num-badge">2</div>
+          <h3 class="step-title">Votre objectif</h3>
+        </div>
+        <div class="field">
+          <label>Quelle est la mission principale du site ? <span class="required">*</span></label>
+          <div class="radio-group" data-field="mainMission">
+            ${missions.map(m => `
+              <label class="radio-option${formData.mainMission === m.value ? ' selected' : ''}" data-value="${m.value}">
+                <input type="radio" name="mainMission" value="${m.value}" />
+                <div class="radio-dot"></div>
+                <span>${m.label}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+        <div class="field" id="other-mission-field" style="display:none">
+          <label>Précisez</label>
+          <input type="text" id="field-otherMission" data-bind="otherMission" placeholder="Précisez en 5 mots maximum" maxlength="50" />
+        </div>
+      `;
+    }
+
+    function step3HTML() {
+      const atmospheres = [
+        { value: 'modern',      label: 'Moderne & Tech' },
+        { value: 'traditional', label: 'Traditionnelle & Rassurante' },
+        { value: 'dynamic',     label: 'Dynamique & Colorée' },
+      ];
+      return `
+        <div class="step-header">
+          <div class="step-num-badge">3</div>
+          <h3 class="step-title">Votre identité visuelle</h3>
+        </div>
+        <div class="field">
+          <label>Avez-vous un logo ?</label>
+          <div class="radio-group inline" data-field="hasLogo">
+            <label class="radio-option${formData.hasLogo === 'yes' ? ' selected' : ''}" data-value="yes">
+              <input type="radio" name="hasLogo" value="yes" />
+              <div class="radio-dot"></div>
+              <span>Oui</span>
+            </label>
+            <label class="radio-option${formData.hasLogo === 'no' ? ' selected' : ''}" data-value="no">
+              <input type="radio" name="hasLogo" value="no" />
+              <div class="radio-dot"></div>
+              <span>Non</span>
+            </label>
+          </div>
+        </div>
+        <div class="field" id="logo-link-field" style="display:none">
+          <label>Lien du logo</label>
+          <input type="text" id="field-logoLink" data-bind="logoLink" placeholder="Lien de téléchargement ou nous l'envoyer par email" />
+        </div>
+        <div class="field">
+          <label>Atmosphère souhaitée <span class="required">*</span></label>
+          <div class="radio-group" data-field="atmosphere">
+            ${atmospheres.map(a => `
+              <label class="radio-option${formData.atmosphere === a.value ? ' selected' : ''}" data-value="${a.value}">
+                <input type="radio" name="atmosphere" value="${a.value}" />
+                <div class="radio-dot"></div>
+                <span>${a.label}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+        <div class="field">
+          <label>Couleur dominante souhaitée</label>
+          <input type="text" id="field-dominantColor" data-bind="dominantColor" placeholder="Ex: Bleu marine, Rouge brique, Vert sapin..." />
+        </div>
+      `;
+    }
+
+    function step4HTML() {
+      return `
+        <div class="step-header">
+          <div class="step-num-badge">4</div>
+          <h3 class="step-title">Votre activité</h3>
+        </div>
+        <div class="field">
+          <label>Liste de vos 3 à 5 services principaux <span class="required">*</span></label>
+          <textarea id="field-services" data-bind="services" placeholder="Ex:
+- Installation de pompes à chaleur
+- Entretien annuel
+- Dépannage urgence 24/7"></textarea>
+        </div>
+        <div class="field">
+          <label>Votre point fort par rapport aux autres <span class="required">*</span></label>
+          <input type="text" id="field-uniqueStrength" data-bind="uniqueStrength" placeholder="Ex: 15 ans d'expérience, Déplacement gratuit, Prix fixe" />
+        </div>
+        <div class="field">
+          <label>Images (lien vers dossier Drive, Dropbox...)</label>
+          <input type="url" id="field-imagesLink" data-bind="imagesLink" placeholder="https://drive.google.com/..." />
+          <p class="hint">Si vous n'en avez pas, nous utiliserons des images professionnelles libres de droits</p>
+        </div>
+      `;
+    }
+
+    function step5HTML() {
+      return `
+        <div class="step-header">
+          <div class="step-num-badge">5</div>
+          <h3 class="step-title">Vos préférences</h3>
+        </div>
+        <div class="field">
+          <label>Un site internet que vous appréciez</label>
+          <input type="url" id="field-referenceWebsite" data-bind="referenceWebsite" placeholder="https://exemple.com" />
+          <p class="hint">Même dans un autre domaine que le vôtre</p>
+        </div>
+        <div class="field">
+          <label>Un site que vous n'aimez pas</label>
+          <input type="url" id="field-dislikedWebsite" data-bind="dislikedWebsite" placeholder="https://exemple.com" />
+          <p class="hint">Ce que vous voulez éviter dans votre design</p>
+        </div>
+        <div class="field">
+          <label>Nom de domaine souhaité <span class="required">*</span></label>
+          <input type="text" id="field-desiredDomain" data-bind="desiredDomain" placeholder="www.monentreprise.fr" />
+        </div>
+      `;
+    }
+
+    // ── Toggle conditional fields ──
+    function toggleLogoLink(show) {
+      const el = document.getElementById('logo-link-field');
+      if (el) el.style.display = show ? 'block' : 'none';
+    }
+    function toggleOtherMission(show) {
+      const el = document.getElementById('other-mission-field');
+      if (el) el.style.display = show ? 'block' : 'none';
+    }
+
+    // ── Validation ──
+    function validateStep(step) {
+      switch (step) {
+        case 1: return formData.companyName && formData.phone && formData.email && formData.address;
+        case 2: return formData.mainMission && (formData.mainMission !== 'other' || formData.otherMission);
+        case 3: return !!formData.atmosphere;
+        case 4: return formData.services && formData.uniqueStrength;
+        case 5: return !!formData.desiredDomain;
+        default: return true;
+      }
+    }
+
+    // ── Update nav buttons ──
+    function updateNav() {
+      const valid = validateStep(currentStep);
+      document.getElementById('btn-back').disabled = currentStep === 1;
+      document.getElementById('btn-next').disabled = !valid;
+      if (currentStep < totalSteps) {
+        document.getElementById('btn-next').style.display = 'flex';
+        document.getElementById('btn-submit').style.display = 'none';
+      } else {
+        document.getElementById('btn-next').style.display = 'none';
+        document.getElementById('btn-submit').style.display = 'flex';
+        document.getElementById('btn-submit').disabled = !valid;
+      }
+    }
+
+    // ── Navigation ──
+    function showStep(n) {
+      document.querySelectorAll('.form-card').forEach((el, i) => {
+        el.style.display = (i + 1 === n) ? 'block' : 'none';
+      });
+      currentStep = n;
+      document.getElementById('progress-label').textContent = stepLabels[n - 1];
+      document.getElementById('progress-count').textContent = n + ' / ' + totalSteps;
+      document.getElementById('progress-bar').style.width = (n / totalSteps * 100) + '%';
+      updateNav();
+      window.scrollTo({ top: document.getElementById('form-top').offsetTop - 120, behavior: 'smooth' });
+    }
+
+    function nextStep() {
+      if (!validateStep(currentStep) || currentStep >= totalSteps) return;
+      buildSteps(); // rebuild to persist values in case DOM was replaced
+      showStep(currentStep + 1);
+    }
+
+    function prevStep() {
+      if (currentStep <= 1) return;
+      showStep(currentStep - 1);
+    }
+
+    // ── Submit ──
+    async function submitForm() {
+      if (!validateStep(currentStep)) return;
+
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true;
+      btn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin .8s linear infinite">
+          <path d="M12 2a10 10 0 0 1 10 10"/></svg>
+        Envoi en cours…`;
+
+      const missionLabel = {
+        leads: 'Générer des appels / devis',
+        portfolio: 'Galerie de réalisations',
+        services: 'Afficher services',
+        other: formData.otherMission,
+      };
+      const atmosphereLabel = {
+        modern: 'Moderne & Tech',
+        traditional: 'Traditionnelle & Rassurante',
+        dynamic: 'Dynamique & Colorée',
+      };
+
+      const payload = {
+        _replyto: formData.email,
+        _subject: `Nouveau brief : ${formData.companyName}`,
+        Société: formData.companyName,
+        Slogan: formData.slogan || 'Non renseigné',
+        Téléphone: formData.phone,
+        Email: formData.email,
+        Adresse: formData.address,
+        Instagram: formData.instagram || 'Non renseigné',
+        Facebook: formData.facebook || 'Non renseigné',
+        LinkedIn: formData.linkedin || 'Non renseigné',
+        'Mission principale': missionLabel[formData.mainMission] || formData.mainMission,
+        Logo: formData.hasLogo === 'yes' ? 'Oui' : 'Non',
+        'Lien logo': formData.logoLink || 'Non renseigné',
+        Atmosphère: atmosphereLabel[formData.atmosphere] || formData.atmosphere,
+        'Couleur dominante': formData.dominantColor || 'Non renseigné',
+        Services: formData.services,
+        'Point fort': formData.uniqueStrength,
+        'Lien images': formData.imagesLink || 'Non renseigné',
+        'Site de référence': formData.referenceWebsite || 'Non renseigné',
+        'Site à éviter': formData.dislikedWebsite || 'Non renseigné',
+        'Domaine souhaité': formData.desiredDomain,
+      };
+
+      try {
+        const res = await fetch('https://formspree.io/f/xwvabpka', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          document.getElementById('form-ui').style.display = 'none';
+          document.getElementById('success-state').style.display = 'block';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          throw new Error('Erreur serveur');
+        }
+      } catch (_) {
+        btn.disabled = false;
+        btn.innerHTML = `
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Envoyer mon brief
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+        const errEl = document.getElementById('submit-error');
+        errEl.textContent = 'Une erreur est survenue. Réessayez ou écrivez-nous à contact@unkaiweb.fr';
+        errEl.style.display = 'block';
+      }
+    }
+
+    // ── Init ──
+    buildSteps();
+  </script>
+</body>
+</html>

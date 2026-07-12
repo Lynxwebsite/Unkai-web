@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test — Carrousel Focus Rail | UnkaiWeb</title>
+  <link rel="icon" type="image/png" href="Favicon/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --amber: #f97316; --amber-light: #fb923c;
+      --navy: #0a1426; --navy-2: #0f1d38;
+      --slate-400: #9fb0c8; --slate-500: #6b7d99; --white: #fff;
+    }
+    body {
+      font-family: 'Inter', sans-serif; background: var(--navy); color: var(--white);
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+      padding: 64px 16px; overflow-x: hidden;
+    }
+    h1,h2 { font-family: 'Space Grotesk', sans-serif; }
+    .page-head { text-align: center; margin-bottom: 40px; }
+    .page-head h1 { font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 800; margin-bottom: 10px; }
+    .page-head p { color: var(--slate-400); }
+
+    /* ════════ FOCUS RAIL ════════ */
+    .rail-wrap {
+      position: relative; width: 100%; max-width: 1280px; height: 760px;
+      display: flex; flex-direction: column; overflow: hidden;
+      border-radius: 22px; background: #060b16;
+      border: 1px solid rgba(255,255,255,0.07);
+      outline: none; user-select: none;
+    }
+    /* Fond ambiant flouté (image active) */
+    .rail-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .rail-bg img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: blur(42px) saturate(1.7); transform: scale(1.15);
+      opacity: 0; transition: opacity .8s ease; will-change: opacity;
+    }
+    .rail-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, #060b16 0%, rgba(6,11,22,0.55) 45%, rgba(6,11,22,0.2) 100%);
+    }
+
+    .rail-stage { position: relative; z-index: 10; flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 16px; }
+
+    /* Scène 3D */
+    .rail {
+      position: relative; height: 520px; width: 100%; margin: 0 auto;
+      perspective: 1600px; transform-style: preserve-3d;
+      cursor: grab;
+    }
+    .rail:active { cursor: grabbing; }
+
+    .rail-card {
+      position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%,-50%);
+      transform-style: preserve-3d; backface-visibility: hidden;
+      will-change: transform, opacity;
+      /* On n'anime QUE transform + opacity (gérés par le GPU) → pas de lag.
+         Le flou animé a été retiré : il étranglait le rendu. */
+      transition: transform .55s cubic-bezier(.22,.61,.36,1), opacity .45s ease;
+    }
+
+    /* — Cadre « ordinateur » (navigateur) — */
+    .dev-desktop { width: 430px; }
+    .dev-desktop .frame {
+      border-radius: 12px; overflow: hidden; background: #0b1220;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.03);
+    }
+    .dev-desktop .bar { display: flex; align-items: center; gap: 6px; padding: 8px 11px; background: #131f38; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .dev-desktop .bar i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+    .dev-desktop .bar .r { background: #ff5f57; } .dev-desktop .bar .y { background: #febc2e; } .dev-desktop .bar .g { background: #28c840; }
+    .dev-desktop .shot { display: block; width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: top center; }
+
+    /* — Cadre « téléphone » — */
+    .dev-phone { width: 230px; }
+    .dev-phone .frame {
+      position: relative; border-radius: 28px; padding: 8px; background: #060a14;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+    .dev-phone .notch { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 52px; height: 15px; border-radius: 0 0 11px 11px; background: #060a14; z-index: 2; }
+    .dev-phone .shot { display: block; width: 100%; aspect-ratio: 9/19.3; object-fit: cover; object-position: top center; border-radius: 22px; }
+
+    /* — Bloc info + contrôles — */
+    .rail-foot {
+      position: relative; z-index: 10;
+      display: flex; flex-direction: column; gap: 18px; align-items: center;
+      padding: 22px 28px 28px; text-align: center;
+    }
+    @media (min-width: 760px) {
+      .rail-foot { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+    .rail-info { min-height: 78px; }
+    .rail-meta { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber-light); margin-bottom: 6px; }
+    .rail-title { font-size: clamp(1.4rem,3vw,2rem); font-weight: 700; }
+    .rail-desc { color: var(--slate-400); margin-top: 6px; max-width: 420px; font-size: 0.95rem; }
+    .rail-info > * { transition: opacity .3s ease, transform .3s ease; }
+
+    .rail-controls { display: flex; align-items: center; gap: 14px; }
+    .rail-nav { display: flex; align-items: center; gap: 4px; padding: 5px; border-radius: 999px; background: rgba(10,20,38,0.7); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(8px); }
+    .rail-nav button {
+      display: flex; align-items: center; justify-content: center;
+      width: 42px; height: 42px; border-radius: 999px; border: none; cursor: pointer;
+      background: transparent; color: var(--slate-400); transition: background .2s, color .2s, transform .1s;
+    }
+    .rail-nav button:hover { background: rgba(255,255,255,0.1); color: var(--white); }
+    .rail-nav button:active { transform: scale(0.92); }
+    .rail-counter { min-width: 56px; text-align: center; font-family: 'Space Grotesk', monospace; font-size: 0.8rem; color: var(--slate-500); }
+    .rail-explore {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; border-radius: 999px; text-decoration: none;
+      background: var(--amber); color: #0f172a;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.9rem;
+      transition: background .2s, transform .15s;
+    }
+    .rail-explore:hover { background: var(--amber-light); transform: translateY(-2px); }
+
+    .back-link { margin-top: 28px; color: var(--slate-400); text-decoration: none; font-size: 0.9rem; }
+    .back-link:hover { color: var(--amber); }
+
+    @media (max-width: 560px) {
+      .rail-wrap { height: 600px; } .rail { height: 400px; }
+      .dev-desktop { width: 300px; } .dev-phone { width: 175px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-head">
+    <h1>Réalisations en vitrine</h1>
+    <p>Glissez, faites défiler ou utilisez les flèches pour explorer.</p>
+  </div>
+
+  <!-- FOCUS RAIL -->
+  <div class="rail-wrap" id="railWrap" tabindex="0" aria-label="Carrousel de réalisations">
+    <div class="rail-bg"><img id="railBg" alt="" /></div>
+
+    <div class="rail-stage">
+      <div class="rail" id="rail"></div>
+    </div>
+
+    <div class="rail-foot">
+      <div class="rail-info">
+        <span class="rail-meta" id="railMeta"></span>
+        <h2 class="rail-title" id="railTitle"></h2>
+        <p class="rail-desc" id="railDesc"></p>
+      </div>
+      <div class="rail-controls">
+        <div class="rail-nav">
+          <button id="railPrev" aria-label="Précédent">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <span class="rail-counter" id="railCounter">1 / 1</span>
+          <button id="railNext" aria-label="Suivant">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <a class="rail-explore" href="portfolio.html">
+          Explorer
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <a class="back-link" href="index.html">← Retour à l'accueil</a>
+
+  <script>
+    // ── Données : captures du portfolio (PC = ordinateur, Portable = mobile) ──
+    const ITEMS = [
+      { type: 'desktop', src: 'portfolio/PC/1.webp',        meta: 'Vue ordinateur', title: 'Kllemo — Accueil',   description: 'Page d’accueil immersive, plein écran.' },
+      { type: 'phone',   src: 'portfolio/Portable/2.webp',  meta: 'Vue mobile',     title: 'Kllemo — Mobile',    description: 'Une expérience impeccable sur smartphone.' },
+      { type: 'desktop', src: 'portfolio/PC/3.webp',        meta: 'Vue ordinateur', title: 'Galerie d’œuvres',   description: 'Mise en valeur des sculptures en grand format.' },
+      { type: 'phone',   src: 'portfolio/Portable/8.webp',  meta: 'Vue mobile',     title: 'Navigation mobile',  description: 'Menu silencieux, lecture confortable.' },
+      { type: 'desktop', src: 'portfolio/PC/5.webp',        meta: 'Vue ordinateur', title: 'Fiche œuvre',        description: 'Présentation détaillée de chaque pièce.' },
+      { type: 'phone',   src: 'portfolio/Portable/11.webp', meta: 'Vue mobile',     title: 'Boutique mobile',    description: 'Achat d’éditions numérotées en quelques gestes.' },
+      { type: 'desktop', src: 'portfolio/PC/7.webp',        meta: 'Vue ordinateur', title: 'Boutique en ligne',  description: 'Parcours d’achat épuré et rassurant.' },
+      { type: 'phone',   src: 'portfolio/Portable/15.webp', meta: 'Vue mobile',     title: 'Contact mobile',     description: 'Demande de commande sur-mesure facilitée.' },
+      { type: 'desktop', src: 'portfolio/PC/9.webp',        meta: 'Vue ordinateur', title: 'À propos',           description: 'L’univers de l’artiste, raconté avec sobriété.' },
+      { type: 'phone',   src: 'portfolio/Portable/21.webp', meta: 'Vue mobile',     title: 'Galerie mobile',     description: 'Les œuvres, plein cadre, dans la poche.' },
+      { type: 'desktop', src: 'portfolio/PC/12.webp',       meta: 'Vue ordinateur', title: 'Détail visuel',      description: 'Finitions au pixel près, fidèles à l’œuvre.' },
+    ];
+
+    const VISIBLE = 2;       // nombre de cartes visibles de chaque côté
+    const loop = true;
+    let active = 0;
+    const count = ITEMS.length;
+
+    const railWrap = document.getElementById('railWrap');
+    const rail     = document.getElementById('rail');
+    const bgImg    = document.getElementById('railBg');
+    const elMeta   = document.getElementById('railMeta');
+    const elTitle  = document.getElementById('railTitle');
+    const elDesc   = document.getElementById('railDesc');
+    const elCount  = document.getElementById('railCounter');
+
+    const wrap = (min, max, v) => { const r = max - min; return ((((v - min) % r) + r) % r) + min; };
+
+    // Construction des cartes (une fois)
+    const cards = ITEMS.map((item) => {
+      const el = document.createElement('div');
+      el.className = 'rail-card';
+      el.innerHTML = item.type === 'phone'
+        ? `<div class="dev-phone"><div class="frame"><span class="notch"></span>
+             <img class="shot" src="${item.src}" alt="${item.title}" loading="lazy"></div></div>`
+        : `<div class="dev-desktop"><div class="frame"><div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+             <img class="shot" src="${item.src}" alt="${item.title}" loading="lazy"></div></div>`;
+      el.addEventListener('click', () => {
+        const off = parseInt(el.dataset.offset || '0', 10);
+        if (off !== 0 && !justDragged) setActive(active + off);
+      });
+      rail.appendChild(el);
+      return el;
+    });
+
+    function render() {
+      const activeIdx = wrap(0, count, active);
+      cards.forEach((el, i) => {
+        let offset = i - activeIdx;
+        if (loop) { if (offset > count / 2) offset -= count; if (offset < -count / 2) offset += count; }
+        el.dataset.offset = offset;
+        const dist = Math.abs(offset);
+
+        if (dist > VISIBLE) {
+          el.style.opacity = '0';
+          el.style.pointerEvents = 'none';
+          el.style.zIndex = '0';
+          el.style.transform = `translate(-50%,-50%) translateX(${offset > 0 ? 1 : -1}px) scale(.55)`;
+          return;
+        }
+        const x  = offset * 370;
+        const z  = -dist * 250;
+        const ry = offset * -22;
+        const sc = offset === 0 ? 1 : 0.82;
+        const op = offset === 0 ? 1 : Math.max(0.22, 1 - dist * 0.42);
+
+        el.style.zIndex = String(100 - dist);
+        el.style.opacity = op;
+        el.style.pointerEvents = offset === 0 ? 'none' : 'auto';
+        el.style.transform = `translate(-50%,-50%) translateX(${x}px) translateZ(${z}px) rotateY(${ry}deg) scale(${sc})`;
+      });
+
+      const it = ITEMS[activeIdx];
+      elMeta.textContent  = it.meta || '';
+      elTitle.textContent = it.title;
+      elDesc.textContent  = it.description || '';
+      elCount.textContent = (activeIdx + 1) + ' / ' + count;
+
+      // Fond ambiant
+      if (bgImg.dataset.src !== it.src) {
+        bgImg.dataset.src = it.src;
+        bgImg.style.opacity = '0';
+        setTimeout(() => { bgImg.src = it.src; bgImg.style.opacity = '0.4'; }, 140);
+      }
+    }
+
+    function setActive(v) { active = v; render(); }
+    const next = () => setActive(active + 1);
+    const prev = () => setActive(active - 1);
+
+    document.getElementById('railNext').addEventListener('click', next);
+    document.getElementById('railPrev').addEventListener('click', prev);
+
+    // ── Drag / swipe ──
+    let dragStartX = null, justDragged = false;
+    railWrap.addEventListener('pointerdown', (e) => { dragStartX = e.clientX; justDragged = false; pauseAuto(); });
+    railWrap.addEventListener('pointermove', (e) => { if (dragStartX !== null && Math.abs(e.clientX - dragStartX) > 8) justDragged = true; });
+    window.addEventListener('pointerup', (e) => {
+      if (dragStartX === null) return;
+      const dx = e.clientX - dragStartX;
+      if (dx <= -55) next(); else if (dx >= 55) prev();
+      dragStartX = null; resumeAuto();
+    });
+
+    // ── Molette / trackpad ──
+    let lastWheel = 0;
+    railWrap.addEventListener('wheel', (e) => {
+      const now = Date.now(); if (now - lastWheel < 400) return;
+      const horiz = Math.abs(e.deltaX) > Math.abs(e.deltaY);
+      const d = horiz ? e.deltaX : e.deltaY;
+      if (Math.abs(d) > 20) { d > 0 ? next() : prev(); lastWheel = now; }
+    }, { passive: true });
+
+    // ── Clavier ──
+    railWrap.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
+
+    // ── Autoplay (pause au survol / pendant le drag) ──
+    let autoTimer = null, hover = false;
+    function startAuto() { if (!autoTimer && !hover) autoTimer = setInterval(next, 4000); }
+    function pauseAuto() { clearInterval(autoTimer); autoTimer = null; }
+    function resumeAuto() { startAuto(); }
+    railWrap.addEventListener('mouseenter', () => { hover = true; pauseAuto(); });
+    railWrap.addEventListener('mouseleave', () => { hover = false; startAuto(); });
+
+    render();
+    startAuto();
+  </script>
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio : nos réalisations | UnkaiWeb</title>
+  <meta name="description" content="Les réalisations d'UnkaiWeb : sites vitrines et boutiques sur mesure conçus pour des entreprises locales (coiffure, sport, tourisme, industrie, art). Études de cas et résultats concrets." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Portfolio : nos réalisations | UnkaiWeb" />
+  <meta property="og:description" content="Des sites sur mesure qui transforment les visiteurs en clients. Découvrez nos études de cas." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <link rel="icon" type="image/png" href="Favicon/favicon.png" />
+  <link rel="apple-touch-icon" href="Favicon/favicon.png" />
+  <link rel="canonical" href="https://unkaiweb.fr/realisations.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amber: #f97316; --amber-light: #fb923c; --amber-dark: #ea580c;
+      --slate-950: #0a1426; --slate-900: #0f1d38; --slate-800: #1a2c4d;
+      --slate-400: #9fb0c8; --slate-300: #cbd8ea; --slate-500: #6b7d99; --white: #ffffff;
+    }
+    html { scroll-behavior: smooth; background: #0a1426; }
+    [data-theme="light"] html { background: #fdeede; }
+    body { font-family: 'Inter', sans-serif; background: transparent; color: var(--white); line-height: 1.6; overflow-x: hidden; transition: color .3s ease; }
+
+    /* ── Fond « ciel » identique à la home : image étirée derrière le hero + la liste (défile avec la page) ── */
+    .sunset-wrap { position: relative; }
+    .sunset-wrap::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: url('Images/Fond/Background Nuit 2 section.png') 50% / 100% 100% no-repeat;
+    }
+    [data-theme="light"] .sunset-wrap::before {
+      background: url('Images/Fond/Background.jpg') 50% / 100% 100% no-repeat;
+    }
+    .sunset-wrap > * { position: relative; z-index: 1; }
+
+    /* Nuages qui défilent, collés en bas de la zone ciel (comme la home) */
+    .sky-clouds {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 300px; z-index: 1; pointer-events: none; opacity: 0.5;
+      background:
+        url('Images/Fond/Nuages Unkai.png') repeat-x 0 bottom,
+        url('Images/Fond/Nuages Unkai.png') repeat-x 180px bottom;
+      background-size: 560px 300px, 380px 230px;
+      transform: translateY(45%);
+      animation: skyCloudsDrift 55s linear infinite;
+    }
+    @keyframes skyCloudsDrift { from { background-position: 0 bottom, 180px bottom; } to { background-position: -560px bottom, -200px bottom; } }
+    @media (prefers-reduced-motion: reduce) { .sky-clouds { animation: none; } }
+
+    /* ── Bouton thème + logo jour/nuit ── */
+    .theme-toggle {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 999px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--slate-300); cursor: pointer; flex-shrink: 0;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,0.1); border-color: rgba(245,158,11,0.3); color: var(--amber); }
+    .theme-toggle svg { width: 19px; height: 19px; }
+    .logo img.logo-day { display: none; }
+    [data-theme="light"] .logo img.logo-night { display: none; }
+    [data-theme="light"] .logo img.logo-day { display: block; }
+
+    /* ════════ MODE JOUR (light theme) ════════ */
+    nav, .mobile-menu, footer, .theme-toggle, .hamburger { transition: background .4s ease, border-color .4s ease, color .3s ease, box-shadow .4s ease; }
+    [data-theme="light"] {
+      --amber: #f59e0b; --amber-light: #fbbf24; --amber-dark: #d97706;
+      --slate-950: #ffffff; --slate-900: #f1f5f9; --slate-800: #e2e8f0;
+      --white: #0f172a; --slate-400: #475569; --slate-300: #334155; --slate-500: #64748b;
+    }
+    [data-theme="light"] nav { background: rgba(255,255,255,0.6); backdrop-filter: blur(18px) saturate(150%); -webkit-backdrop-filter: blur(18px) saturate(150%); border-color: rgba(15,23,42,0.08); box-shadow: 0 8px 30px rgba(15,23,42,0.08); }
+    [data-theme="light"] nav.menu-open { background: rgba(255,255,255,0.9); }
+    [data-theme="light"] .mobile-menu { background: rgba(255,255,255,0.75); backdrop-filter: blur(18px) saturate(150%); -webkit-backdrop-filter: blur(18px) saturate(150%); border-bottom-color: rgba(255,255,255,0.5); }
+    [data-theme="light"] .m-close { background: rgba(15,23,42,0.04); border-color: rgba(15,23,42,0.1); color: var(--slate-400); }
+    [data-theme="light"] .mobile-nav-links a:hover { background: rgba(15,23,42,0.05); }
+    [data-theme="light"] .hamburger { background: rgba(15,23,42,0.04); border-color: rgba(15,23,42,0.1); }
+    [data-theme="light"] .hamburger:hover { background: rgba(15,23,42,0.08); border-color: rgba(245,158,11,0.4); }
+    [data-theme="light"] .theme-toggle { background: rgba(15,23,42,0.04); border-color: rgba(15,23,42,0.1); color: var(--slate-400); }
+    [data-theme="light"] .theme-toggle:hover { background: rgba(15,23,42,0.08); border-color: rgba(245,158,11,0.4); color: var(--amber-dark); }
+    [data-theme="light"] .proof-chip { background: rgba(15,23,42,0.04); border-color: rgba(15,23,42,0.1); }
+    [data-theme="light"] .pf-cta { background: linear-gradient(180deg, rgba(253,238,222,0.35), rgba(253,238,222,0.85)); }
+    [data-theme="light"] footer { background: rgba(255,255,255,0.85); border-top-color: rgba(15,23,42,0.08); }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.2; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .amber { color: var(--amber); }
+    .amber-gradient { background: linear-gradient(to right, #fbbf24, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+      width: calc(100% - 32px); max-width: 1080px;
+      z-index: 100;
+      background: rgba(10,20,38,0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.35);
+      transition: background .2s, backdrop-filter .2s;
+    }
+    nav.menu-open {
+      background: #0a1426;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-radius: 24px;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; margin-left: 18px; }
+    .logo img { height: 52px; width: auto; object-fit: contain; display: block; }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { color: var(--slate-400); font-size: 0.9rem; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-actions { display: flex; align-items: center; gap: 12px; margin-right: 10px; }
+    .nav-cta {
+      background: var(--amber); color: #0f172a;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 0.85rem;
+      padding: 10px 20px; border-radius: 999px;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--amber-light); }
+    .hamburger {
+      display: none; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 999px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer; color: var(--white);
+      transition: background .2s, border-color .2s;
+      position: relative; z-index: 10001;
+    }
+    .hamburger:hover { background: rgba(255,255,255,0.1); border-color: rgba(245,158,11,0.3); }
+
+    /* ═══════════ MENU MOBILE : panneau latéral droit ═══════════ */
+    body.menu-open nav#topnav { display: none; }
+    @media (max-width: 768px) {
+      html:not([data-theme="light"]) nav#topnav { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: rgba(10,20,38,0.95); }
+      [data-theme="light"] nav#topnav { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: rgba(255,255,255,0.92); border-color: rgba(15,23,42,0.08); }
+    }
+
+    .mobile-backdrop {
+      position: fixed; inset: 0; z-index: 99990;
+      background: rgba(2,6,23,0.6);
+      -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+      opacity: 0; visibility: hidden;
+      transition: opacity .35s ease, visibility .35s ease;
+    }
+    .mobile-backdrop.open { opacity: 1; visibility: visible; }
+
+    /* Le panneau : glisse depuis la droite */
+    .mobile-menu {
+      position: fixed; top: 0; right: 0; z-index: 99999;
+      width: min(84vw, 340px); height: 100dvh;
+      background: #0a1426;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      box-shadow: -30px 0 80px rgba(2,6,23,0.55);
+      display: flex; flex-direction: column;
+      padding: 18px 22px 26px;
+      transform: translateX(100%);
+      transition: transform .4s cubic-bezier(.33, 1, .68, 1);
+      will-change: transform;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+
+    /* En-tête du panneau : titre + bouton fermer */
+    .m-drawer-head {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 42px; margin-bottom: 28px; flex-shrink: 0;
+    }
+    .m-drawer-title {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: .78rem;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--slate-500);
+    }
+    .m-close {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 999px; flex-shrink: 0;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white); cursor: pointer;
+      transition: background .2s, border-color .2s, color .2s, transform .25s;
+    }
+    .m-close:hover { background: rgba(255,255,255,0.1); border-color: rgba(245,158,11,0.4); color: var(--amber); transform: rotate(90deg); }
+
+    .mobile-menu-footer { margin-top: auto; }
+
+    .mobile-nav-links {
+      display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px;
+      position: static; top: auto; left: auto; right: auto; transform: none;
+      width: auto; max-width: none; z-index: auto;
+      background: transparent; border: 0; border-radius: 0; box-shadow: none;
+      -webkit-backdrop-filter: none; backdrop-filter: none;
+    }
+    .mobile-nav-links a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem; font-weight: 600;
+      color: var(--slate-400);
+      padding: 12px 14px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background .2s, color .2s;
+    }
+    .mobile-nav-links a:hover { background: rgba(255,255,255,0.05); color: var(--white); }
+    .mobile-nav-links a .arrow {
+      color: var(--amber); opacity: 0.5; font-size: 0.9rem;
+      transition: opacity .2s, transform .2s;
+    }
+    .mobile-nav-links a:hover .arrow { opacity: 1; transform: translateX(3px); }
+
+    .mobile-cta-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 13px;
+      background: var(--amber); color: #0f172a;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(245,158,11,0.25);
+      transition: background .2s;
+    }
+    .mobile-cta-btn:hover { background: var(--amber-light); }
+    .mobile-menu-tagline {
+      text-align: center; margin-top: 10px;
+      color: var(--slate-500); font-size: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--amber); color: #0f172a; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; padding: 16px 32px; border-radius: 8px; border: none; cursor: pointer; box-shadow: 0 8px 30px rgba(245,158,11,0.3); transition: background .2s, transform .15s, box-shadow .2s; }
+    .btn-primary:hover { background: var(--amber-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(245,158,11,0.4); }
+
+    /* ── SECTION LABEL ── */
+    .section-label { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+    .section-label.center { justify-content: center; }
+    .label-line { height: 1px; width: 48px; background: linear-gradient(to right, transparent, var(--amber)); }
+    .label-line.right { background: linear-gradient(to left, transparent, var(--amber)); }
+    .label-text { color: var(--amber); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; }
+
+    /* ════════ HERO LISTE ════════ */
+    .list-hero { position: relative; overflow: hidden; padding: 150px 0 60px; text-align: center; background: transparent; }
+    .list-hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); font-weight: 800; margin-bottom: 18px; }
+    .list-hero p { color: var(--slate-300); max-width: 600px; margin: 0 auto; font-size: clamp(1rem, 1.6vw, 1.15rem); }
+
+    /* ════════ LISTE DES RÉALISATIONS ════════ */
+    .pf-list-section { padding: 60px 0 150px; position: relative; }
+    .pf-list-section::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: linear-gradient(180deg, transparent 0%, transparent 12%, rgba(8,12,24,0.28) 45%, rgba(8,12,24,0.42) 100%); }
+    [data-theme="light"] .pf-list-section::before {
+      background: linear-gradient(180deg, transparent 0%, transparent 14%, rgba(255,255,255,0.10) 48%, rgba(255,255,255,0.20) 100%); }
+    .pf-list-section > .container { position: relative; z-index: 1; }
+    .proof-list { display: flex; flex-direction: column; gap: 72px; }
+    .proof-item { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 50px; align-items: center; }
+    .proof-item:nth-child(even) .proof-visual { order: 2; }
+
+    .proof-visual {
+      position: relative; display: block; border-radius: 16px; overflow: hidden;
+      background: #0b1220; border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 30px 70px rgba(2,6,23,0.5);
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    .proof-visual:hover { transform: translateY(-5px); box-shadow: 0 42px 90px rgba(2,6,23,0.62); }
+    .proof-bar { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: #131f38; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .proof-bar i { width: 10px; height: 10px; border-radius: 50%; display: block; flex-shrink: 0; }
+    .proof-bar .r { background: #ff5f57; } .proof-bar .y { background: #febc2e; } .proof-bar .g { background: #28c840; }
+    .proof-bar .url { flex: 1; height: 22px; border-radius: 999px; background: rgba(255,255,255,0.06); display: flex; align-items: center; padding: 0 12px; font-size: .72rem; color: var(--slate-400); font-style: normal; }
+    .proof-visual img { width: 100%; height: auto; display: block; }
+
+    .proof-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .proof-chip { font-size: .76rem; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: var(--slate-300); }
+    .proof-body h3 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; margin-bottom: 14px; color: var(--white); }
+    .proof-body > p { color: var(--slate-400); font-size: 1rem; line-height: 1.7; margin-bottom: 24px; max-width: 480px; }
+    .proof-result {
+      display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.14), rgba(245,158,11,0.04));
+      border: 1px solid rgba(245,158,11,0.22); margin-bottom: 26px;
+    }
+    .proof-stat { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: clamp(1.9rem, 4.5vw, 2.6rem); line-height: 1; color: var(--amber); white-space: nowrap; }
+    .proof-stat-label { color: var(--slate-300); font-size: .92rem; line-height: 1.4; }
+    .proof-link { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: var(--white); transition: gap .2s, color .2s; }
+    .proof-link:hover { gap: 12px; color: var(--amber); }
+
+    .proof-soon .proof-visual { display: flex; align-items: center; justify-content: center; min-height: 260px; background: rgba(255,255,255,0.02); border-style: dashed; box-shadow: none; }
+    .proof-soon .proof-visual:hover { transform: none; box-shadow: none; }
+    .proof-soon-tag { font-family: 'Space Grotesk', sans-serif; color: var(--slate-500); font-size: .85rem; letter-spacing: .14em; text-transform: uppercase; }
+
+    @media (max-width: 860px) {
+      .proof-item { grid-template-columns: 1fr; gap: 24px; }
+      .proof-item:nth-child(even) .proof-visual { order: 0; }
+      .proof-body > p { max-width: none; }
+    }
+
+    /* ════════ CTA ════════ */
+    .pf-cta { padding: 90px 24px; text-align: center; background: linear-gradient(180deg, rgba(15,29,56,0.55), rgba(10,20,38,0.85)); }
+    .pf-cta h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); font-weight: 800; margin-bottom: 16px; }
+    .pf-cta p { color: var(--slate-300); max-width: 520px; margin: 0 auto 30px; }
+
+    /* ── FOOTER ── */
+    footer { background: rgba(10,20,38,0.92); border-top: 1px solid rgba(255,255,255,0.06); padding: 64px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .logo { margin-left: 0; }
+    .footer-brand p { color: var(--slate-400); font-size: 0.875rem; line-height: 1.7; max-width: 320px; margin-top: 16px; }
+    .footer-col h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul li a { color: var(--slate-400); font-size: 0.875rem; transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--amber); }
+    .footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-bottom p { color: var(--slate-500); font-size: 0.8rem; }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+  </style>
+
+  <!-- Applique le thème mémorisé avant le rendu (évite le flash) -->
+  <script>(function(){try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="topnav">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <img class="logo-night" src="Images/Logos/U/Logo Unkai - Carré rectangle Blanc.png" alt="UnkaiWeb" />
+        <img class="logo-day" src="Images/Logos/U/Logo Unkai - Carré rectangle noir.png" alt="UnkaiWeb" />
+      </a>
+      <div class="nav-links">
+        <a href="realisations.html" class="active">Réalisations</a>
+        <a href="index.html#process">Méthode</a>
+        <a href="index.html#faq">FAQ</a>
+      </div>
+      <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Activer le mode jour"></button>
+      <a href="contact.html" class="nav-cta">Démarrer mon projet →</a>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false">
+        <svg id="hamburger-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-backdrop" id="mobile-backdrop" onclick="closeMobileMenu()"></div>
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+    <div class="m-drawer-head">
+      <span class="m-drawer-title">Menu</span>
+      <button class="m-close" onclick="closeMobileMenu()" aria-label="Fermer le menu">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="realisations.html" onclick="closeMobileMenu()">
+        Réalisations <span class="arrow">→</span>
+      </a>
+      <a href="index.html#process" onclick="closeMobileMenu()">
+        Méthode <span class="arrow">→</span>
+      </a>
+      <a href="index.html#faq" onclick="closeMobileMenu()">
+        FAQ <span class="arrow">→</span>
+      </a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="contact.html" class="mobile-cta-btn">
+        Démarrer mon projet
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <p class="mobile-menu-tagline">Sur mesure · Échange sans engagement</p>
+    </div>
+  </div>
+
+  <div class="sunset-wrap">
+
+  <!-- ════════ HERO ════════ -->
+  <header class="list-hero">
+    <div class="container">
+      <div class="section-label center">
+        <span class="label-line"></span>
+        <span class="label-text">Réalisations</span>
+        <span class="label-line right"></span>
+      </div>
+      <h1>La preuve avant la promesse.<span class="amber-gradient"> Voici ce qu'on livre.</span></h1>
+      <p>Des sites sur mesure, pensés pour transformer les visiteurs en clients. Voici quelques projets récents et leurs résultats concrets.</p>
+    </div>
+  </header>
+
+  <!-- ════════ LISTE DES RÉALISATIONS ════════ -->
+  <section class="pf-list-section">
+    <div class="container">
+      <div class="proof-list">
+
+        <!-- PROJET 1 : Kllemo (réel) -->
+        <article class="proof-item">
+          <a class="proof-visual" href="portfolio.html" aria-label="Étude de cas Kllemo">
+            <div class="proof-bar">
+              <i class="r"></i><i class="y"></i><i class="g"></i>
+              <i class="url">kllemo.com</i>
+            </div>
+            <img src="portfolio/PC/Sites%20réels/Kllemo.jpg" alt="Site kllemo.com réalisé par UnkaiWeb" loading="lazy" />
+          </a>
+          <div class="proof-body">
+            <div class="proof-chips">
+              <span class="proof-chip">Art &amp; Sculpture</span>
+              <span class="proof-chip">Vitrine + boutique</span>
+            </div>
+            <h3>Kllemo</h3>
+            <p>Un site épuré et immersif pour l'artiste sculpteur : galerie d'œuvres en grand format et boutique d'éditions numérotées intégrée.</p>
+            <!-- TODO : remplacer le chiffre par le vrai résultat du client -->
+            <div class="proof-result">
+              <span class="proof-stat">×3</span>
+              <span class="proof-stat-label">de demandes entrantes depuis la mise en ligne</span>
+            </div>
+            <a href="portfolio.html" class="proof-link">
+              Voir l'étude de cas
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJET 2 : Le Carmen (réel) -->
+        <article class="proof-item">
+          <a class="proof-visual" href="portfolio-lecarmenuzes.html" aria-label="Étude de cas Le Carmen">
+            <div class="proof-bar">
+              <i class="r"></i><i class="y"></i><i class="g"></i>
+              <i class="url">lecarmenuzes.com</i>
+            </div>
+            <img src="portfolio/PC/Sites%20réels/Le%20carmen%20uzes.jpg" alt="Site lecarmenuzes.com réalisé par UnkaiWeb" loading="lazy" />
+          </a>
+          <div class="proof-body">
+            <div class="proof-chips">
+              <span class="proof-chip">Coiffure &amp; Beauté</span>
+              <span class="proof-chip">Réservation + SEO local</span>
+            </div>
+            <h3>Le Carmen</h3>
+            <p>Le site du salon de coiffure haut de gamme d'Uzès : présentation de l'équipe, réservation Planity intégrée et SEO local soigné.</p>
+            <div class="proof-result">
+              <span class="proof-stat">Top 3</span>
+              <span class="proof-stat-label">du référencement Google local en 1 mois</span>
+            </div>
+            <a href="portfolio-lecarmenuzes.html" class="proof-link">
+              Voir l'étude de cas
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJET 3 : Vertical S'Match (réel) -->
+        <article class="proof-item">
+          <a class="proof-visual" href="portfolio-verticalsmatch.html" aria-label="Étude de cas Vertical S'Match">
+            <div class="proof-bar">
+              <i class="r"></i><i class="y"></i><i class="g"></i>
+              <i class="url">verticalsmatch.com</i>
+            </div>
+            <img src="portfolio/PC/Sites%20réels/vertical%20smatch.jpg" alt="Site verticalsmatch.com réalisé par UnkaiWeb" loading="lazy" />
+          </a>
+          <div class="proof-body">
+            <div class="proof-chips">
+              <span class="proof-chip">Sport &amp; Loisirs</span>
+              <span class="proof-chip">Réservation en ligne</span>
+            </div>
+            <h3>Vertical S'Match</h3>
+            <p>Le site du complexe multisport de Vauvert : padel, squash, badminton, pickleball et escalade, avec réservation en ligne intégrée.</p>
+            <div class="proof-result">
+              <span class="proof-stat">350 visiteurs</span>
+              <span class="proof-stat-label">dès la première semaine de lancement</span>
+            </div>
+            <a href="portfolio-verticalsmatch.html" class="proof-link">
+              Voir l'étude de cas
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJET 4 : Une pause au fusain (réel) -->
+        <article class="proof-item">
+          <a class="proof-visual" href="portfolio-unepauseaufusain.html" aria-label="Étude de cas Une pause au fusain">
+            <div class="proof-bar">
+              <i class="r"></i><i class="y"></i><i class="g"></i>
+              <i class="url">unepauseaufusain.fr</i>
+            </div>
+            <img src="portfolio/PC/Sites%20réels/Une%20pause%20au%20fusain.jpg" alt="Site unepauseaufusain.fr réalisé par UnkaiWeb" loading="lazy" />
+          </a>
+          <div class="proof-body">
+            <div class="proof-chips">
+              <span class="proof-chip">Tourisme &amp; Hébergement</span>
+              <span class="proof-chip">Gîte de charme</span>
+            </div>
+            <h3>Une pause au fusain</h3>
+            <p>Un site vitrine poétique et immersif pour un gîte de charme à 1h de Paris : grandes photos, livre d'or et contact simplifié.</p>
+            <div class="proof-result">
+              <span class="proof-stat">+40%</span>
+              <span class="proof-stat-label">de réservations par an depuis la refonte</span>
+            </div>
+            <a href="portfolio-unepauseaufusain.html" class="proof-link">
+              Voir l'étude de cas
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJET 5 : Réactif Multiservices (réel) -->
+        <article class="proof-item">
+          <a class="proof-visual" href="portfolio-reactifms.html" aria-label="Étude de cas Réactif Multiservices">
+            <div class="proof-bar">
+              <i class="r"></i><i class="y"></i><i class="g"></i>
+              <i class="url">reactifms.com</i>
+            </div>
+            <img src="portfolio/PC/Sites%20réels/Reactifms.jpg" alt="Site reactifms.com réalisé par UnkaiWeb" loading="lazy" />
+          </a>
+          <div class="proof-body">
+            <div class="proof-chips">
+              <span class="proof-chip">Industrie &amp; BTP</span>
+              <span class="proof-chip">Vitrine + devis</span>
+            </div>
+            <h3>Réactif Multiservices</h3>
+            <p>Le site d'une entreprise multiservices technique : portfolio de chantiers, double parcours pro / particuliers et demande de devis en 24h.</p>
+            <!-- TODO : remplacer par un vrai chiffre communiqué par le client -->
+            <div class="proof-result">
+              <span class="proof-stat">+15%</span>
+              <span class="proof-stat-label">de demandes de devis dès la première semaine</span>
+            </div>
+            <a href="portfolio-reactifms.html" class="proof-link">
+              Voir l'étude de cas
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- PROJET 6 : placeholder, et si le prochain c'était vous -->
+        <article class="proof-item proof-soon">
+          <a class="proof-visual" href="contact.html" aria-label="Votre projet ici">
+            <span class="proof-soon-tag">Réalisation à venir</span>
+          </a>
+          <div class="proof-body">
+            <div class="proof-chips">
+              <span class="proof-chip">Votre secteur</span>
+            </div>
+            <h3>Et si le prochain, c'était le vôtre&nbsp;?</h3>
+            <p>On conçoit votre site sur mesure, pensé pour transformer vos visiteurs en clients. Votre réalisation prendra place ici.</p>
+            <a href="contact.html" class="proof-link">
+              Démarrer mon projet
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /.sunset-wrap -->
+
+  <!-- ════════ CTA ════════ -->
+  <section class="pf-cta">
+    <h2>Envie d'un site comme ceux-ci ?</h2>
+    <p>Parlons de votre projet. L'échange est gratuit et sans engagement : vous repartez avec une vision claire de ce qu'on peut faire pour vous.</p>
+    <a href="contact.html" class="btn-primary">
+      Démarrer mon projet
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo"><img class="logo-night" src="Images/Logos/U/Logo Unkai - Carré rectangle Blanc.png" alt="UnkaiWeb" /><img class="logo-day" src="Images/Logos/U/Logo Unkai - Carré rectangle noir.png" alt="UnkaiWeb" /></div>
+          <p>Sites sur mesure pour les PME, artisans et commerçants de l'Hérault. Clairs, crédibles, et pensés pour être contactés.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:contact@unkaiweb.fr">contact@unkaiweb.fr</a></li>
+            <li><span style="color:var(--slate-400);font-size:.875rem">Montpellier, Hérault</span></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Informations</h4>
+          <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="realisations.html">Réalisations</a></li>
+            <li><a href="contact.html">Démarrer mon projet</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 UnkaiWeb. Tous droits réservés.</p>
+        <p>Conçu avec passion à Montpellier 🇫🇷</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Menu mobile : panneau latéral droit ──
+    function setMobileMenu(open) {
+      document.getElementById('mobile-menu').classList.toggle('open', open);
+      document.getElementById('mobile-backdrop').classList.toggle('open', open);
+      document.body.classList.toggle('menu-open', open);
+      const btn = document.getElementById('hamburger');
+      if (btn) btn.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function toggleMobileMenu() {
+      setMobileMenu(!document.getElementById('mobile-menu').classList.contains('open'));
+    }
+    function closeMobileMenu() { setMobileMenu(false); }
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMobileMenu(); });
+
+    /* ── Mode jour / nuit ── */
+    const ICON_SUN  = `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`;
+    const ICON_MOON = `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+    function updateThemeIcon() {
+      const btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      btn.innerHTML = isLight ? ICON_MOON : ICON_SUN;
+      btn.setAttribute('aria-label', isLight ? 'Activer le mode sombre' : 'Activer le mode jour');
+    }
+    function applyTheme() {
+      const root = document.documentElement;
+      const isLight = root.getAttribute('data-theme') === 'light';
+      if (isLight) { root.removeAttribute('data-theme'); }
+      else { root.setAttribute('data-theme', 'light'); }
+      try { localStorage.setItem('theme', isLight ? 'dark' : 'light'); } catch (e) {}
+      updateThemeIcon();
+    }
+    function toggleTheme() {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (document.startViewTransition && !reduce) { document.startViewTransition(applyTheme); }
+      else { applyTheme(); }
+    }
+    updateThemeIcon();
+  </script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Essai ·La méthode UNKAI | UnkaiWeb</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="Favicon/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --amber: #f97316; --amber-light: #fb923c;
+      --navy: #0a1426; --navy-2: #0f1d38;
+      --slate-400: #9fb0c8; --slate-300: #cbd8ea; --slate-500: #6b7d99; --white: #fff;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; line-height: 1.15; }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+    /* barre d'essai */
+    .essai-bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .essai-bar .logo img { height: 38px; display: block; }
+    .essai-tag { font-family: 'Space Grotesk', sans-serif; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--slate-500); }
+    .essai-back { color: var(--slate-400); font-size: .85rem; }
+    .essai-back:hover { color: var(--amber); }
+
+    /* hero compact */
+    .m-hero { text-align: center; padding: 56px 0 30px;
+      background: radial-gradient(720px 380px at 50% -20%, rgba(249,115,22,0.12), transparent 60%); }
+    .m-label { display: inline-flex; align-items: center; gap: 10px; color: var(--amber); font-size: .74rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 16px; }
+    .m-label::before, .m-label::after { content: ''; width: 26px; height: 1px; background: linear-gradient(to right, transparent, var(--amber)); }
+    .m-hero h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; }
+    /* mot UNKAI : typographie de la marque (serif Cormorant) */
+    .m-hero h1 .w { font-family: var(--serif); font-weight: 700; letter-spacing: .14em;
+      background: linear-gradient(to right, #fbbf24, #d97706); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .m-hero p { color: var(--slate-400); max-width: 660px; margin: 18px auto 0; font-size: 1rem; }
+
+    /* onglets U N K A I */
+    .m-tabs { display: flex; gap: 10px; max-width: 800px; margin: 34px auto 0; }
+    .m-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;
+      padding: 14px 6px 12px; border-radius: 14px; background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08); color: var(--slate-400);
+      transition: border-color .25s, background .25s, color .25s, transform .15s; }
+    .m-tab:hover { background: rgba(255,255,255,0.05); color: var(--white); transform: translateY(-2px); }
+    .m-tab .t-let { font-family: var(--serif); font-weight: 700; font-size: 2.3rem; line-height: 1; }
+    .m-tab .t-name { font-size: .76rem; letter-spacing: .03em; }
+    .m-tab.active { background: linear-gradient(135deg, rgba(245,158,11,0.16), rgba(245,158,11,0.04));
+      border-color: rgba(245,158,11,0.45); color: var(--white); }
+    .m-tab.active .t-let { color: var(--amber); }
+
+    /* panneau étape */
+    .m-stage { max-width: 880px; margin: 26px auto 0; }
+    .m-panel { display: none; }
+    .m-panel.active { display: block; animation: panelIn .35s ease; }
+    @keyframes panelIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+    .panel-card { position: relative; padding: 32px 34px; border-radius: 20px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
+    .panel-card::before { content: attr(data-letter); position: absolute; right: 22px; top: -34px;
+      font-family: var(--serif); font-weight: 700; font-size: 14rem; line-height: 1;
+      color: rgba(245,158,11,0.07); pointer-events: none; }
+    .panel-head { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .panel-letter { width: 64px; height: 64px; flex-shrink: 0; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-weight: 700; font-size: 2.4rem; color: var(--amber);
+      background: radial-gradient(circle at 30% 25%, rgba(245,158,11,0.2), rgba(245,158,11,0.05)); border: 1px solid rgba(245,158,11,0.35); }
+    .panel-num { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; }
+    .panel-head h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; }
+    .panel-head h2 small { font-family: var(--serif); font-weight: 600; color: var(--slate-500); font-size: .62em; }
+    .panel-intro { color: var(--slate-300); margin-bottom: 24px; max-width: 720px; font-size: 1.02rem; }
+    .panel-sub { color: var(--slate-500); font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 14px; }
+    .panel-card ul { list-style: none; columns: 2; column-gap: 40px; margin-bottom: 24px; }
+    @media (max-width: 620px) { .panel-card ul { columns: 1; } }
+    .panel-card li { position: relative; padding-left: 26px; margin-bottom: 11px; color: var(--slate-300); font-size: .94rem; break-inside: avoid; }
+    .panel-card li::before { content: ''; position: absolute; left: 0; top: 7px; width: 13px; height: 13px; border-radius: 50%;
+      background: rgba(245,158,11,0.14); border: 1px solid rgba(245,158,11,0.4); }
+    .panel-card li::after { content: ''; position: absolute; left: 4.5px; top: 11px; width: 5px; height: 5px; border-radius: 50%; background: var(--amber); }
+    .panel-goal { display: flex; gap: 10px; padding: 15px 18px; border-radius: 12px; color: var(--slate-300); font-size: .95rem;
+      background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.03)); border: 1px solid rgba(245,158,11,0.22); }
+    .panel-goal strong { color: var(--amber); font-family: 'Space Grotesk', sans-serif; }
+
+    /* navigation préc / suiv */
+    .m-nav { display: flex; align-items: center; justify-content: center; gap: 22px; margin: 26px auto 0; }
+    .m-nav button { width: 46px; height: 46px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--white); transition: background .2s, border-color .2s; }
+    .m-nav button:hover { background: rgba(255,255,255,0.1); border-color: rgba(245,158,11,0.5); }
+    .m-count { font-family: 'Space Grotesk', sans-serif; font-size: .9rem; color: var(--slate-500); letter-spacing: .06em; min-width: 64px; text-align: center; }
+
+    /* cta */
+    .m-cta { text-align: center; padding: 56px 24px 80px; }
+    .m-cta h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; margin-bottom: 12px; }
+    .m-cta p { color: var(--slate-400); max-width: 480px; margin: 0 auto 24px; }
+    .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--amber); color: #0f172a;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; padding: 15px 30px; border-radius: 8px;
+      box-shadow: 0 8px 30px rgba(245,158,11,0.3); transition: background .2s, transform .15s; }
+    .btn:hover { background: var(--amber-light); transform: translateY(-2px); }
+
+    @media (max-width: 560px) {
+      .m-tab .t-let { font-size: 1.8rem; } .m-tab .t-name { font-size: .64rem; }
+      .panel-card { padding: 26px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="essai-bar">
+    <a href="index.html" class="logo"><img src="Images/Logos/U/Logo Unkai - Carré rectangle Blanc.png" alt="UnkaiWeb" /></a>
+    <span class="essai-tag">Essai ·Méthode UNKAI</span>
+    <a href="index.html" class="essai-back">← Retour au site</a>
+  </div>
+
+  <header class="m-hero">
+    <div class="container">
+      <span class="m-label">Notre méthode</span>
+      <h1>La méthode <span class="w">UNKAI</span></h1>
+      <p>Créer un site, ce n'est pas assembler des pages : c'est un processus de clarification, de conception et d'optimisation. Avec la méthode UNKAI, chaque projet avance étape par étape, du cadrage à la mise en ligne, avec des validations à chaque moment clé.</p>
+
+      <!-- ONGLETS -->
+      <div class="m-tabs" role="tablist">
+        <button class="m-tab active" data-i="0"><span class="t-let">U</span><span class="t-name">Univers</span></button>
+        <button class="m-tab" data-i="1"><span class="t-let">N</span><span class="t-name">Narration</span></button>
+        <button class="m-tab" data-i="2"><span class="t-let">K</span><span class="t-name">Kōbō</span></button>
+        <button class="m-tab" data-i="3"><span class="t-let">A</span><span class="t-name">Assurance</span></button>
+        <button class="m-tab" data-i="4"><span class="t-let">I</span><span class="t-name">Inauguration</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PANNEAUX -->
+  <section class="m-stage">
+    <div class="container">
+
+      <!-- U -->
+      <div class="m-panel active" data-i="0">
+        <div class="panel-card" data-letter="U">
+          <div class="panel-head">
+            <span class="panel-letter">U</span>
+            <div>
+              <p class="panel-num">Étape 1 / 5 · Cadrage</p>
+              <h2>Univers <small>· U comme Univers</small></h2>
+            </div>
+          </div>
+          <p class="panel-intro">On pose l'univers de la marque : besoins, objectifs, arborescence, palette, typo. Tout part de là.</p>
+          <p class="panel-sub">Ce qu'elle comprend</p>
+          <ul>
+            <li>Sauvegarde du site actuel et de sa base de données</li>
+            <li>Recueil des besoins, objectifs et priorités</li>
+            <li>Analyse de l'existant</li>
+            <li>Définition de l'arborescence du site</li>
+            <li>Sélection d'une palette de couleurs adaptée au digital</li>
+            <li>Typographie optimisée pour le web</li>
+          </ul>
+          <p class="panel-goal"><strong>L'objectif :</strong> partir sur des fondations propres, avec une vision claire du site à créer.</p>
+        </div>
+      </div>
+
+      <!-- N -->
+      <div class="m-panel" data-i="1">
+        <div class="panel-card" data-letter="N">
+          <div class="panel-head">
+            <span class="panel-letter">N</span>
+            <div>
+              <p class="panel-num">Étape 2 / 5 · Conception</p>
+              <h2>Narration <small>· N comme Narration</small></h2>
+            </div>
+          </div>
+          <p class="panel-intro">On raconte visuellement : logos, maquettes, contenus. Le site prend une voix.</p>
+          <p class="panel-sub">Ce qu'elle comprend</p>
+          <ul>
+            <li>Retouche ou adaptation des logos</li>
+            <li>Définition d'un univers visuel cohérent</li>
+            <li>Création de maquettes pour les pages clés</li>
+            <li>Ajustements, retouches et validation des maquettes</li>
+            <li>Rédaction ou adaptation des contenus</li>
+            <li>Intégration des éléments spécifiques (formations, prix, durées, catalogue)</li>
+          </ul>
+          <p class="panel-goal"><strong>L'objectif :</strong> valider une direction claire (une identité et une voix) avant de produire.</p>
+        </div>
+      </div>
+
+      <!-- K -->
+      <div class="m-panel" data-i="2">
+        <div class="panel-card" data-letter="K">
+          <div class="panel-head">
+            <span class="panel-letter">K</span>
+            <div>
+              <p class="panel-num">Étape 3 / 5 · Production</p>
+              <h2>Kōbō <small>· K comme Kōbō</small></h2>
+            </div>
+          </div>
+          <p class="panel-intro"><strong style="color:var(--white);font-weight:600">Kōbō</strong> <span style="font-family:var(--serif);color:var(--amber);font-weight:600;font-size:1.15em">工房</span>, « atelier » en japonais : l'endroit où le site se façonne, pièce par pièce : intégration des pages, graphisme, performance, SEO structurel. C'est ici qu'on construit, avec le souci du détail.</p>
+          <p class="panel-sub">Ce qu'elle comprend</p>
+          <ul>
+            <li>Création et intégration des pages demandées</li>
+            <li>Création ou adaptation des éléments graphiques</li>
+            <li>Intégration des textes, visuels et contenus</li>
+            <li>Optimisation des images et des performances</li>
+            <li>Optimisation SEO de la structure</li>
+            <li>Balises Meta Title, Meta Description (et catalogue si nécessaire)</li>
+          </ul>
+          <p class="panel-goal"><strong>L'objectif :</strong> produire un site propre, rapide et cohérent, affiné en continu.</p>
+        </div>
+      </div>
+
+      <!-- A -->
+      <div class="m-panel" data-i="3">
+        <div class="panel-card" data-letter="A">
+          <div class="panel-head">
+            <span class="panel-letter">A</span>
+            <div>
+              <p class="panel-num">Étape 4 / 5 · Test</p>
+              <h2>Assurance <small>· A comme Assurance</small></h2>
+            </div>
+          </div>
+          <p class="panel-intro">Assurance qualité : responsive, fonctionnalités, recette client. Rien ne passe sans contrôle.</p>
+          <p class="panel-sub">Ce qu'elle comprend</p>
+          <ul>
+            <li>Vérification du responsive (ordinateur, tablette, mobile)</li>
+            <li>Tests des formulaires, liens, boutons et fonctionnalités</li>
+            <li>Recette finale avec le client</li>
+          </ul>
+          <p class="panel-goal"><strong>L'objectif :</strong> ne rien laisser passer : un site fiable, validé sous tous les angles.</p>
+        </div>
+      </div>
+
+      <!-- I -->
+      <div class="m-panel" data-i="4">
+        <div class="panel-card" data-letter="I">
+          <div class="panel-head">
+            <span class="panel-letter">I</span>
+            <div>
+              <p class="panel-num">Étape 5 / 5 · Mise en ligne</p>
+              <h2>Inauguration <small>· I comme Inauguration</small></h2>
+            </div>
+          </div>
+          <p class="panel-intro">On franchit les nuages : lancement, vérif des perfs, suivi post-live.</p>
+          <p class="panel-sub">Ce qu'elle comprend</p>
+          <ul>
+            <li>Mise en ligne du nouveau site</li>
+            <li>Vérification des performances après lancement</li>
+            <li>Suivi et corrections mineures après mise en ligne</li>
+          </ul>
+          <p class="panel-goal"><strong>L'objectif :</strong> lancer un site optimisé, et l'accompagner dans la durée.</p>
+        </div>
+      </div>
+
+      <!-- NAV -->
+      <div class="m-nav">
+        <button id="mPrev" type="button" aria-label="Étape précédente">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <span class="m-count" id="mCount">01 / 05</span>
+        <button id="mNext" type="button" aria-label="Étape suivante">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="m-cta">
+    <h2>Envie d'avancer avec une méthode claire ?</h2>
+    <p>On cadre votre projet ensemble, étape par étape. Premier échange gratuit et sans engagement.</p>
+    <a href="brief.html" class="btn">Démarrer mon projet
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    </a>
+  </section>
+
+  <script>
+    const tabs = Array.from(document.querySelectorAll('.m-tab'));
+    const panels = Array.from(document.querySelectorAll('.m-panel'));
+    const count = document.getElementById('mCount');
+    let cur = 0;
+    function show(i) {
+      cur = (i + panels.length) % panels.length;
+      tabs.forEach((t, k) => t.classList.toggle('active', k === cur));
+      panels.forEach((p, k) => p.classList.toggle('active', k === cur));
+      count.textContent = String(cur + 1).padStart(2, '0') + ' / 05';
+    }
+    tabs.forEach((t, k) => t.addEventListener('click', () => show(k)));
+    document.getElementById('mPrev').addEventListener('click', () => show(cur - 1));
+    document.getElementById('mNext').addEventListener('click', () => show(cur + 1));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') show(cur + 1);
+      if (e.key === 'ArrowLeft') show(cur - 1);
+    });
+  </script>
+</body>
+</html>

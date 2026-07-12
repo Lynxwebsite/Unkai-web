@@ -1,0 +1,3149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UnkaiWeb · sites web sur mesure pour les PME de Montpellier et l'Hérault</title>
+  <meta name="description" content="UnkaiWeb conçoit des sites web sur mesure pour les PME, artisans et commerçants de Montpellier et de l'Hérault. Des sites clairs et crédibles, pensés pour être compris et faciliter la prise de contact." />
+  <meta name="keywords" content="création site web sur mesure, agence web Montpellier, site web Hérault, site vitrine, site e-commerce, refonte de site, référencement local, UnkaiWeb" />
+  <meta name="author" content="UnkaiWeb" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="UnkaiWeb · sites web sur mesure pour les PME de Montpellier et l'Hérault" />
+  <meta property="og:description" content="Des sites web sur mesure, clairs et crédibles, pour les entreprises locales qui veulent une présence en ligne sérieuse." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <link rel="icon" type="image/png" href="Favicon/favicon.png" />
+  <link rel="apple-touch-icon" href="Favicon/favicon.png" />
+  <link rel="canonical" href="https://unkaiweb.fr/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VRCW9Y73QS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-VRCW9Y73QS');
+  </script>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "UnkaiWeb",
+    "description": "Création de sites web sur mesure pour les PME, artisans et commerçants de Montpellier et de l'Hérault. Des sites clairs, crédibles et structurés pour être compris et facilement contactés.",
+    "url": "https://unkaiweb.fr",
+    "priceRange": "1800€ - 4000€+",
+    "areaServed": "Montpellier et l'Hérault",
+    "email": "contact@unkaiweb.fr"
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amber: #f97316;        /* orange « coucher de soleil » (inspiré Unkaiweb) */
+      --amber-light: #fb923c;
+      --amber-dark: #ea580c;
+      --slate-950: #0a1426;    /* bleu nuit profond (fond de page) */
+      --slate-900: #0f1d38;    /* sections alternées / cartes */
+      --slate-800: #1a2c4d;
+      --slate-400: #9fb0c8;    /* texte secondaire (gris bleuté) */
+      --slate-300: #cbd8ea;    /* texte accentué */
+      --slate-500: #6b7d99;    /* texte discret */
+      --white: #ffffff;
+      --hero-side-bg: #0a1426; /* couleur vers laquelle le carrousel se fond */
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--slate-950);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.2; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .container-lg { max-width: 1400px; margin: 0 auto; padding: 0 24px; }
+
+    .amber { color: var(--amber); }
+    .amber-gradient {
+      background: linear-gradient(to right, #fbbf24, #d97706);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── ZONES DE FLOU (bords haut / bas de page) ── */
+    .edge-blur {
+      position: fixed; left: 0; right: 0;
+      height: 90px; z-index: 90;
+      pointer-events: none;
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    }
+    .edge-blur.top { display: none; }
+    .edge-blur.bottom {
+      bottom: 0; height: 70px;
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+      -webkit-mask-image: linear-gradient(to top, #000 0%, #000 40%, transparent 100%);
+      mask-image: linear-gradient(to top, #000 0%, #000 40%, transparent 100%);
+    }
+    /* On masque le flou quand le menu mobile est ouvert (évite les conflits de superposition) */
+    body.menu-open .edge-blur { display: none; }
+    @media (max-width: 768px) { .edge-blur { display: none; } }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+      width: calc(100% - 32px); max-width: 1080px;
+      z-index: 100;
+      background: rgba(10,20,38,0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.35);
+      transition: background .2s, backdrop-filter .2s;
+    }
+    nav.menu-open {
+      background: #0a1426;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-radius: 24px;
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; margin-left: 18px; }
+    /* 52px reste < hauteur de nav (64px) → le header ne se déforme pas */
+    .logo img { height: 52px; width: auto; object-fit: contain; display: block; }
+    /* Bascule du logo selon le thème : blanc la nuit, noir le jour
+       (sélecteurs assez spécifiques pour battre « .logo img ») */
+    .logo img.logo-day { display: none; }
+    [data-theme="light"] .logo img.logo-night { display: none; }
+    [data-theme="light"] .logo img.logo-day { display: block; }
+    .logo-text { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.2rem; }
+    .logo-text span { color: var(--amber); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { color: var(--slate-400); font-size: 0.9rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--amber); color: #0f172a;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 0.85rem;
+      padding: 10px 20px; border-radius: 999px;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--amber-light); }
+    .hamburger {
+      display: none; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 999px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer; color: var(--white);
+      transition: background .2s, border-color .2s;
+      position: relative; z-index: 10001;
+    }
+    .hamburger:hover { background: rgba(255,255,255,0.1); border-color: rgba(245,158,11,0.3); }
+
+    /* ═══════════ MENU MOBILE : panneau latéral droit ═══════════ */
+    /* Quand le panneau est ouvert, on masque la barre (son backdrop-filter passerait au-dessus) */
+    body.menu-open #topnav { display: none; }
+    /* Sur mobile, la barre n'utilise pas de backdrop-filter (bug de superposition Chromium avec le panneau) */
+    @media (max-width: 768px) {
+      html:not([data-theme="light"]) #topnav { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: rgba(10,20,38,0.95); }
+      [data-theme="light"] #topnav { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background: rgba(255,255,255,0.92); border-color: rgba(15,23,42,0.08); }
+    }
+
+    .mobile-backdrop {
+      position: fixed; inset: 0; z-index: 99990;
+      background: rgba(2,6,23,0.6);
+      -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+      opacity: 0; visibility: hidden;
+      transition: opacity .35s ease, visibility .35s ease;
+    }
+    .mobile-backdrop.open { opacity: 1; visibility: visible; }
+
+    /* Le panneau : glisse depuis la droite */
+    .mobile-menu {
+      position: fixed; top: 0; right: 0; z-index: 99999;
+      width: min(84vw, 340px); height: 100dvh;
+      background: #0a1426;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      box-shadow: -30px 0 80px rgba(2,6,23,0.55);
+      display: flex; flex-direction: column;
+      padding: 18px 22px 26px;
+      transform: translateX(100%);
+      transition: transform .4s cubic-bezier(.33, 1, .68, 1);
+      will-change: transform;
+    }
+    .mobile-menu.open { transform: translateX(0); }
+
+    /* En-tête du panneau : titre + bouton fermer */
+    .m-drawer-head {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 42px; margin-bottom: 28px; flex-shrink: 0;
+    }
+    .m-drawer-title {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: .78rem;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--slate-500);
+    }
+    .m-close {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 999px; flex-shrink: 0;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white); cursor: pointer;
+      transition: background .2s, border-color .2s, color .2s, transform .25s;
+    }
+    .m-close:hover { background: rgba(255,255,255,0.1); border-color: rgba(245,158,11,0.4); color: var(--amber); transform: rotate(90deg); }
+
+    .mobile-menu-footer { margin-top: auto; }
+
+    .mobile-nav-links {
+      display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px;
+      /* Neutralise la règle globale « nav » (pilule flottante) qui s'appliquerait sinon à ce <nav> */
+      position: static; top: auto; left: auto; right: auto; transform: none;
+      width: auto; max-width: none; z-index: auto;
+      background: transparent; border: 0; border-radius: 0; box-shadow: none;
+      -webkit-backdrop-filter: none; backdrop-filter: none;
+    }
+    .mobile-nav-links a {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem; font-weight: 600;
+      color: var(--slate-400);
+      padding: 12px 14px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background .2s, color .2s;
+    }
+    .mobile-nav-links a:hover { background: rgba(255,255,255,0.05); color: var(--white); }
+    .mobile-nav-links a .arrow {
+      color: var(--amber); opacity: 0.5; font-size: 0.9rem;
+      transition: opacity .2s, transform .2s;
+    }
+    .mobile-nav-links a:hover .arrow { opacity: 1; transform: translateX(3px); }
+
+    .mobile-cta-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 13px;
+      background: var(--amber); color: #0f172a;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(245,158,11,0.25);
+      transition: background .2s;
+    }
+    .mobile-cta-btn:hover { background: var(--amber-light); }
+    .mobile-menu-tagline {
+      text-align: center; margin-top: 10px;
+      color: var(--slate-500); font-size: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      margin-bottom: 24px;
+    }
+    .label-line-l {
+      height: 1px; width: 48px;
+      background: linear-gradient(to right, transparent, var(--amber));
+    }
+    .label-line-r {
+      height: 1px; width: 48px;
+      background: linear-gradient(to left, transparent, var(--amber));
+    }
+    .label-text {
+      color: var(--amber); font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .section-title {
+      font-size: clamp(1.75rem, 3.5vw, 3rem); font-weight: 700;
+      text-align: center; max-width: 800px; margin: 0 auto;
+    }
+    .section-header { text-align: center; margin-bottom: 54px; }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--amber); color: #0f172a;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      padding: 16px 32px; border-radius: 8px;
+      border: none; cursor: pointer;
+      box-shadow: 0 8px 30px rgba(245,158,11,0.3);
+      transition: background .2s, transform .15s, box-shadow .2s;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: var(--amber-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(245,158,11,0.4); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-full { display: flex; width: 100%; justify-content: center; }
+
+    /* CTA de fin de section */
+    .section-cta { margin-top: 64px; text-align: center; }
+    .section-cta p {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 600;
+      color: var(--slate-300); font-size: clamp(1.05rem, 2vw, 1.3rem); margin-bottom: 20px;
+    }
+    @media (max-width: 480px) { .section-cta .btn-primary, .section-cta .btn-secondary { width: 100%; justify-content: center; } }
+
+    /* CTA secondaire (ghost) — ex. « Voir les réalisations » */
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.04); color: var(--white);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600; font-size: 1rem;
+      padding: 16px 30px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.18); cursor: pointer;
+      transition: background .2s, border-color .2s, transform .15s;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.09); border-color: rgba(245,158,11,0.5); transform: translateY(-2px); }
+    .btn-secondary:active { transform: translateY(0); }
+    [data-theme="light"] .btn-secondary { background: rgba(15,23,42,0.03); color: #0f172a; border-color: rgba(15,23,42,0.15); }
+    [data-theme="light"] .btn-secondary:hover { background: rgba(15,23,42,0.07); border-color: rgba(245,158,11,0.5); }
+
+    /* Rangée de boutons du hero */
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+    @media (max-width: 768px) {
+      .hero-actions { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 12px; }
+      .hero-actions .btn-primary, .hero-actions .btn-secondary { width: 100%; justify-content: center; text-align: center; }
+    }
+    @media (max-width: 430px) {
+      .hero-actions { gap: 10px; }
+    }
+    /* Hero mobile : carrousel en fond plein cadre (sinon le masque desktop ne le montre qu'à droite = bande sombre) */
+    @media (max-width: 967px) {
+      #hero .rows-container { -webkit-mask-image: none !important; mask-image: none !important; }
+      /* Nuit : voile sombre pour lire le texte blanc */
+      html:not([data-theme="light"]) #hero .bg-center-dark { background: radial-gradient(ellipse 115% 80% at 50% 40%, rgba(6,10,22,0.82) 0%, rgba(6,10,22,0.5) 55%, rgba(6,10,22,0.2) 100%) !important; }
+      /* Jour : voile clair pour lire le texte foncé */
+      [data-theme="light"] #hero .bg-center-dark { background: radial-gradient(ellipse 130% 92% at 50% 42%, rgba(248,250,252,0.94) 0%, rgba(248,250,252,0.74) 52%, rgba(248,250,252,0.42) 100%) !important; }
+    }
+
+    /* ════════ RÉALISATIONS — PREUVE IMMÉDIATE (section 2) ════════ */
+    #realisations { position: relative; padding: 100px 24px 90px; overflow: hidden; }
+    /* Voile de lisibilité : transparent aux extrémités → se fond dans le ciel, pas de couture */
+    #realisations::after {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: linear-gradient(180deg,
+        transparent 0%, rgba(6,10,22,0.42) 18%, rgba(6,10,22,0.55) 48%, rgba(10,20,38,0.72) 80%, #0a1426 100%);
+    }
+    [data-theme="light"] #realisations::after {
+      background: linear-gradient(180deg,
+        transparent 0%, rgba(255,255,255,0.45) 18%, rgba(255,255,255,0.62) 50%, rgba(255,255,255,0.45) 82%, transparent 100%);
+    }
+    #realisations > .container { position: relative; z-index: 2; }
+
+    /* ── Bannière logos clients / partenaires (défilement + fondu sur les côtés) ── */
+    .logo-band { margin: 64px auto 52px; }
+    .logo-band-label { text-align: center; color: var(--slate-500); font-size: 0.76rem; letter-spacing: .15em; text-transform: uppercase; margin-bottom: 24px; }
+    .logo-marquee {
+      position: relative; overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
+    }
+    .logo-track { display: flex; align-items: center; width: max-content; animation: logoScroll 40s linear infinite; }
+    .logo-marquee:hover .logo-track { animation-play-state: paused; }
+    .logo-track img {
+      height: 34px; width: auto; object-fit: contain; flex-shrink: 0; margin-right: 64px;
+      filter: brightness(0) invert(1); opacity: 0.6; transition: opacity .25s, filter .25s;
+    }
+    .logo-track img:hover { opacity: 1; filter: none; }
+    .logo-track img.logo-kllemo { height: 11px; }
+    @media (max-width: 768px) { .logo-track img.logo-kllemo { height: 9px; } }
+
+    /* ── Méthode UNKAI (stepper à onglets) ── */
+    .um-lede { text-align: center; color: var(--slate-400); max-width: 600px; margin: 16px auto 0; font-size: 1rem; }
+    .um-tabs { display: flex; gap: 10px; max-width: 800px; margin: 40px auto 0; }
+    .um-tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer;
+      padding: 14px 6px 12px; border-radius: 14px; background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1); color: var(--slate-400);
+      transition: border-color .25s, background .25s, color .25s, transform .15s; }
+    .um-tab:hover { background: rgba(255,255,255,0.06); color: var(--white); transform: translateY(-2px); }
+    .um-tab .um-let { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: 2.3rem; line-height: 1; }
+    .um-tab .um-name { font-size: .78rem; }
+    .um-tab.active { background: linear-gradient(135deg, rgba(245,158,11,0.16), rgba(245,158,11,0.04)); border-color: rgba(245,158,11,0.45); color: var(--white); }
+    .um-tab.active .um-let { color: var(--amber); }
+    [data-theme="light"] .um-tab { background: rgba(15,23,42,0.03); border-color: rgba(15,23,42,0.1); }
+    [data-theme="light"] .um-tab:hover { background: rgba(15,23,42,0.06); color: #0f172a; }
+    [data-theme="light"] .um-tab.active { color: #0f172a; }
+
+    .um-stage { max-width: 880px; margin: 26px auto 0; }
+    .um-panel { display: none; }
+    .um-panel.active { display: block; animation: umIn .35s ease; }
+    @keyframes umIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .um-card { position: relative; padding: 32px 34px; border-radius: 18px; overflow: hidden;
+      background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.12); }
+    [data-theme="light"] .um-card { background: rgba(255,255,255,0.72); border-color: rgba(15,23,42,0.08); }
+    .um-card::before { content: attr(data-letter); position: absolute; right: 22px; top: -34px;
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: 14rem; line-height: 1;
+      color: rgba(245,158,11,0.07); pointer-events: none; }
+    .um-head { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .um-letter { width: 64px; height: 64px; flex-shrink: 0; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: 2.4rem; color: var(--amber);
+      background: radial-gradient(circle at 30% 25%, rgba(245,158,11,0.2), rgba(245,158,11,0.05)); border: 1px solid rgba(245,158,11,0.35); }
+    .um-num { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; }
+    .um-head h3 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--white); }
+    [data-theme="light"] .um-head h3 { color: #0f172a; }
+    .um-head h3 small { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; color: var(--slate-500); font-size: .6em; }
+    .um-intro { color: var(--slate-300); margin-bottom: 24px; max-width: 720px; }
+    .um-sub { color: var(--slate-500); font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 14px; }
+    .um-card ul { list-style: none; columns: 2; column-gap: 40px; margin-bottom: 24px; }
+    @media (max-width: 620px) { .um-card ul { columns: 1; } }
+    .um-card li { position: relative; padding-left: 26px; margin-bottom: 11px; color: var(--slate-300); font-size: .94rem; break-inside: avoid; }
+    .um-card li::before { content: ''; position: absolute; left: 0; top: 7px; width: 13px; height: 13px; border-radius: 50%; background: rgba(245,158,11,0.14); border: 1px solid rgba(245,158,11,0.4); }
+    .um-card li::after { content: ''; position: absolute; left: 4.5px; top: 11px; width: 5px; height: 5px; border-radius: 50%; background: var(--amber); }
+    .um-goal { display: flex; gap: 10px; padding: 15px 18px; border-radius: 12px; color: var(--slate-300); font-size: .95rem; background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.03)); border: 1px solid rgba(245,158,11,0.22); }
+    .um-goal strong { color: var(--amber); font-family: 'Space Grotesk', sans-serif; }
+
+    /* ── Élan : outil de structure de page, utilisé DANS l'étape Narration ── */
+    .elan { margin: 0 0 24px; padding: 22px 24px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); }
+    [data-theme="light"] .elan { background: rgba(15,23,42,0.03); border-color: rgba(15,23,42,0.1); }
+    .elan-eyebrow { font-family: 'Space Grotesk', sans-serif; font-size: .7rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--amber); margin-bottom: 8px; }
+    .elan-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.12rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .elan-text { color: var(--slate-400); font-size: .92rem; line-height: 1.6; margin-bottom: 20px; }
+    .elan-text strong { color: var(--slate-300); font-weight: 600; }
+    .elan-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; position: relative; }
+    /* chemin discret reliant les 4 repères (desktop) */
+    .elan-steps::before { content: ''; position: absolute; top: 19px; left: 9%; right: 9%; height: 1px; background: linear-gradient(to right, transparent, rgba(245,158,11,0.35), transparent); z-index: 0; }
+    .elan-step { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 1; }
+    .elan-letter { width: 40px; height: 40px; border-radius: 11px; flex-shrink: 0; margin-bottom: 11px; display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--amber); background: linear-gradient(135deg, rgba(245,158,11,0.22), rgba(245,158,11,0.06)); border: 1px solid rgba(245,158,11,0.32); }
+    .elan-step-name { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: .85rem; color: var(--white); margin-bottom: 4px; }
+    .elan-step-desc { color: var(--slate-500); font-size: .78rem; line-height: 1.45; }
+    @media (max-width: 720px) {
+      .elan-steps { grid-template-columns: 1fr; gap: 12px; }
+      .elan-steps::before { display: none; }
+      .elan-step { flex-direction: row; align-items: flex-start; text-align: left; gap: 12px; }
+      .elan-letter { margin-bottom: 0; }
+    }
+    .um-nav { display: flex; align-items: center; justify-content: center; gap: 22px; margin: 26px auto 0; }
+    .um-nav button { width: 46px; height: 46px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--white); transition: background .2s, border-color .2s; }
+    .um-nav button:hover { background: rgba(255,255,255,0.1); border-color: rgba(245,158,11,0.5); }
+    [data-theme="light"] .um-nav button { background: rgba(15,23,42,0.04); border-color: rgba(15,23,42,0.12); color: #0f172a; }
+    .um-count { font-family: 'Space Grotesk', sans-serif; font-size: .9rem; color: var(--slate-500); letter-spacing: .06em; min-width: 64px; text-align: center; }
+    @media (max-width: 560px) {
+      /* Onglets U-N-K-A-I : carrés parfaitement identiques (les libellés qui se renvoyaient à la ligne cassaient l'harmonie) */
+      .um-tabs { gap: 8px; }
+      .um-tab { flex: 1; padding: 0; gap: 0; aspect-ratio: 1; justify-content: center; }
+      .um-tab .um-let { font-size: 1.7rem; }
+      .um-tab .um-name { display: none; }
+      .um-card { padding: 26px 22px; }
+    }
+    [data-theme="light"] .logo-track img { filter: brightness(0); opacity: 0.45; }
+    [data-theme="light"] .logo-track img:hover { filter: none; opacity: 1; }
+    @keyframes logoScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .logo-track { animation: none; } }
+    @media (max-width: 768px) { .logo-track img { height: 28px; margin-right: 44px; } }
+
+    /* ── Réalisations : ordinateur flottant + fiche (carrousel) ── */
+    .proof-showcase { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 50px; align-items: center; margin-top: 56px; touch-action: pan-y; cursor: grab; -webkit-user-select: none; user-select: none; }
+    .proof-showcase.dragging { cursor: grabbing; }
+
+    /* Ordinateur (MacBook) flottant à gauche */
+    .laptop-stage { position: relative; display: flex; justify-content: center; perspective: 1500px; }
+    .laptop-stage::after {
+      content: ''; position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%);
+      width: 70%; height: 36px; border-radius: 50%; background: rgba(2,6,23,0.6); filter: blur(22px); z-index: 0;
+      animation: laptopShadow 6s ease-in-out infinite;
+    }
+    [data-theme="light"] .laptop-stage::after { background: rgba(15,23,42,0.28); }
+    .macbook { position: relative; z-index: 1; width: 100%; max-width: 600px; transform-style: preserve-3d; animation: laptopFloat 8s ease-in-out infinite; }
+    .mb-screen { position: relative; background: #0c0e14; border-radius: 18px; padding: 13px; border: 2px solid #3a3f51; box-shadow: inset 0 0 0 2px #0a0c11, 0 26px 60px rgba(0,0,0,0.55); }
+    .mb-cam { width: 6px; height: 6px; border-radius: 50%; background: #2b3040; margin: 1px auto 9px; box-shadow: inset 0 0 2px #000; }
+    .mb-shot { display: block; width: 100%; aspect-ratio: 16/10; object-fit: cover; object-position: top center; border-radius: 5px; background: #000; transition: opacity .25s ease; }
+    .mb-base { position: relative; width: 113%; left: -6.5%; height: 16px; margin-top: -1px; background: linear-gradient(to bottom, #cdd2dc 0%, #b2b8c4 42%, #828897 100%); border-radius: 3px 3px 11px 11px; box-shadow: 0 16px 26px rgba(0,0,0,0.45); }
+    .mb-base::after { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 92px; height: 7px; background: #969cab; border-radius: 0 0 8px 8px; }
+    @keyframes laptopFloat {
+      0%   { transform: translateY(0)     rotateX(0.8deg)  rotateY(-1.6deg) rotateZ(-0.5deg); }
+      25%  { transform: translateY(-11px) rotateX(0deg)    rotateY(0.9deg)  rotateZ(0.35deg); }
+      50%  { transform: translateY(-18px) rotateX(-1deg)   rotateY(1.8deg)  rotateZ(0.6deg); }
+      75%  { transform: translateY(-8px)  rotateX(0deg)    rotateY(0.4deg)  rotateZ(0.2deg); }
+      100% { transform: translateY(0)     rotateX(0.8deg)  rotateY(-1.6deg) rotateZ(-0.5deg); }
+    }
+    @keyframes laptopShadow { 0%,100% { opacity: .6; transform: translateX(-50%) scale(1); } 50% { opacity: .35; transform: translateX(-50%) scale(0.84); } }
+    @media (prefers-reduced-motion: reduce) { .macbook, .laptop-stage::after { animation: none; } }
+
+    /* Transition « glissement horizontal » : l'ancien sort à gauche, le nouveau entre par la droite */
+    .proof-reveal { transition: opacity .35s ease, transform .5s cubic-bezier(.22,.61,.36,1); will-change: opacity, transform; }
+    .laptop-reveal { perspective: 1500px; }
+    .info-fade.proof-reveal { transition-delay: .12s; }                 /* le texte suit l'ordinateur */
+    .info-fade.proof-reveal.is-out, .info-fade.proof-reveal.is-enter { transition-delay: 0s; }
+    .proof-reveal.is-out   { opacity: 0; transform: translateX(-48px); }                 /* sortie vers la gauche */
+    .proof-reveal.is-enter { opacity: 0; transform: translateX(48px); transition: none; } /* départ à droite, sans anim */
+    @media (prefers-reduced-motion: reduce) { .proof-reveal { transition: opacity .3s ease; } .proof-reveal.is-out, .proof-reveal.is-enter { transform: none; } }
+
+    /* Fiche à droite */
+    .proof-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .proof-chip { font-size: .76rem; padding: 5px 12px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); color: var(--slate-300); }
+    [data-theme="light"] .proof-chip { background: rgba(15,23,42,0.04); border-color: rgba(15,23,42,0.1); }
+    .proof-body h3 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; margin-bottom: 14px; color: var(--white); }
+    [data-theme="light"] .proof-body h3 { color: #0f172a; }
+    .proof-body p.desc { color: var(--slate-400); font-size: 1rem; line-height: 1.7; margin-bottom: 24px; max-width: 480px; }
+    .proof-result {
+      display: flex; align-items: center; gap: 16px; padding: 16px 20px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.14), rgba(245,158,11,0.04));
+      border: 1px solid rgba(245,158,11,0.22); margin-bottom: 26px;
+    }
+    .proof-stat { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: clamp(1.9rem, 4.5vw, 2.6rem); line-height: 1; color: var(--amber); white-space: nowrap; }
+    .proof-stat-label { color: var(--slate-300); font-size: .92rem; line-height: 1.4; }
+    [data-theme="light"] .proof-stat-label { color: #475569; }
+    .proof-link { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: var(--white); transition: gap .2s, color .2s; }
+    [data-theme="light"] .proof-link { color: #0f172a; }
+    .proof-link:hover { gap: 12px; color: var(--amber); }
+
+    /* Contrôles du carrousel */
+    .proof-controls { display: flex; align-items: center; gap: 18px; margin-top: 40px; }
+    .proof-arrows { display: flex; gap: 10px; }
+    .proof-arrows button { display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: 999px; cursor: pointer; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: var(--white); transition: background .2s, border-color .2s, transform .1s; }
+    .proof-arrows button:hover { background: rgba(255,255,255,0.1); border-color: rgba(245,158,11,0.5); }
+    .proof-arrows button:active { transform: scale(0.93); }
+    [data-theme="light"] .proof-arrows button { background: rgba(15,23,42,0.04); border-color: rgba(15,23,42,0.12); color: #0f172a; }
+    .proof-counter { font-family: 'Space Grotesk', sans-serif; font-size: .9rem; color: var(--slate-500); letter-spacing: .05em; }
+    .proof-dots { display: flex; gap: 8px; margin-left: 4px; }
+    .proof-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; transition: background .25s, width .25s; }
+    .proof-dot.active { background: var(--amber); width: 22px; border-radius: 999px; }
+    [data-theme="light"] .proof-dot { background: rgba(15,23,42,0.18); }
+
+    @media (max-width: 860px) {
+      .proof-showcase { grid-template-columns: 1fr; gap: 36px; }
+      .proof-body p.desc { max-width: none; }
+    }
+
+    /* ── SCROLLING BACKGROUND ── */
+    .scrolling-bg {
+      position: absolute; inset: 0; overflow: hidden;
+      /* image ciel + dégradé « coucher de soleil » (bleu nuit → orange) sur tout le hero */
+      background:
+        linear-gradient(180deg,
+          rgba(10,20,38,0.80) 0%,
+          rgba(12,18,34,0.55) 42%,
+          rgba(70,38,16,0.45) 78%,
+          rgba(130,62,18,0.55) 100%),
+        url('Images/Fond/Background.jpg') center / cover no-repeat,
+        #0a1426;
+      z-index: 0;
+    }
+    .scrolling-bg::before {
+      content: '';
+      position: absolute; top: -20%; left: -20%; width: 140%; height: 140%;
+      background:
+        radial-gradient(ellipse at 25% 30%, rgba(245,158,11,0.07) 0%, transparent 50%),
+        radial-gradient(ellipse at 75% 65%, rgba(245,158,11,0.05) 0%, transparent 45%),
+        radial-gradient(ellipse at 50% 80%, rgba(251,191,36,0.03) 0%, transparent 50%);
+      z-index: 0; animation: glowPulse 10s ease-in-out infinite alternate;
+    }
+    @keyframes glowPulse { 0% { opacity: 1; } 100% { opacity: 0.5; } }
+
+    .rows-container {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(-8deg);
+      z-index: 1; width: 200vw; overflow: hidden;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .scroll-row { display: flex; }
+    .scroll-row-inner {
+      display: flex; gap: 20px;
+      will-change: transform;
+      animation: scrollLeft 130s linear infinite;
+    }
+    .scroll-row:nth-child(1) .scroll-row-inner { animation-duration: 130s; animation-delay: 0s; }
+    .scroll-row:nth-child(2) .scroll-row-inner { animation-duration: 110s; animation-delay: -30s; }
+    .scroll-row:nth-child(3) .scroll-row-inner { animation-duration: 150s; animation-delay: -15s; }
+    .scroll-row:nth-child(4) .scroll-row-inner { animation-duration: 120s; animation-delay: -45s; }
+    .scroll-row:nth-child(5) .scroll-row-inner { animation-duration: 140s; animation-delay: -60s; }
+    /* Perf : on fige le défilement quand le hero n'est plus à l'écran */
+    .scrolling-bg.paused .scroll-row-inner { animation-play-state: paused; }
+
+    @keyframes scrollLeft {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-25%); }
+    }
+
+    .grid-cell {
+      border-radius: 8px; overflow: hidden; position: relative;
+      flex-shrink: 0;
+    }
+    .cell-landscape { width: 320px; height: 180px; }
+    .cell-portrait  { width: 101px; height: 180px; }
+
+    .cell-showcase { box-shadow: 0 0 20px rgba(245,158,11,0.08); outline: 1px solid rgba(255,255,255,0.08); }
+    .cell-showcase img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      opacity: 1; filter: brightness(0.82) grayscale(10%);
+    }
+    .cell-showcase .showcase-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(145deg, rgba(2,6,23,0.3) 0%, rgba(2,6,23,0.1) 50%, rgba(2,6,23,0.4) 100%);
+      pointer-events: none;
+    }
+
+    .bg-overlay {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background:
+        linear-gradient(to bottom, rgba(2,6,23,0.7) 0%, rgba(2,6,23,0.05) 18%, transparent 35%, transparent 65%, rgba(2,6,23,0.05) 82%, rgba(2,6,23,0.7) 100%),
+        linear-gradient(to right, rgba(2,6,23,0.35) 0%, transparent 18%, transparent 82%, rgba(2,6,23,0.35) 100%);
+    }
+    .bg-vignette {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      box-shadow: inset 0 0 150px 40px rgba(2,6,23,0.25);
+    }
+    .bg-center-dark {
+      position: absolute; inset: 0; z-index: 4; pointer-events: none;
+      background: radial-gradient(ellipse 65% 60% at 50% 50%, rgba(2,6,23,0.7) 0%, rgba(2,6,23,0.35) 50%, transparent 100%);
+    }
+    .bg-glow-line {
+      position: absolute; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent 10%, #f59e0b, transparent 90%);
+      z-index: 5; pointer-events: none;
+    }
+    .bg-glow-line.top    { top: 0; opacity: 0.12; }
+    .bg-glow-line.bottom { bottom: 0; opacity: 0.08; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-content {
+      position: relative; z-index: 10;
+      max-width: 620px; margin: 0 auto;
+      padding: 56px clamp(28px, 5vw, 56px) 60px;
+      text-align: center;
+    }
+    .hero-aura { display: none; }
+    h1 { font-size: clamp(2.2rem, 5vw, 4.5rem); font-weight: 800; margin-bottom: 24px; }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.35rem); color: var(--slate-300); font-weight: 500;
+      margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .hero-sub strong { color: var(--white); font-weight: 600; }
+    .badges { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 40px; }
+    .badge {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      font-size: 0.85rem; color: var(--slate-300); font-weight: 500;
+    }
+    .badge svg { color: var(--amber); flex-shrink: 0; }
+    .hero-mention { margin-top: 16px; font-size: 0.85rem; color: var(--slate-500); }
+    .hero-mention strong { color: var(--slate-400); }
+
+    /* Mobile : le hero démarre sous le header (sinon le titre le touche) */
+    @media (max-width: 967px) {
+      #hero { align-items: flex-start; }
+      .hero-content { padding-top: 104px; }
+    }
+
+    /* Wrapper du texte du hero (centré sur mobile) */
+    .hero-inner {
+      position: relative; z-index: 10; width: 100%;
+      display: flex; justify-content: center;
+      padding: 0 20px;
+    }
+    /* Voile qui fond le bord gauche du carrousel vers le fond du texte */
+    .bg-fade-side { position: absolute; inset: 0; z-index: 6; pointer-events: none; display: none; }
+
+    /* Hero scindé sur desktop : texte à gauche (50%), carrousel à droite (50%) */
+    @media (min-width: 968px) {
+      #hero { justify-content: flex-start; }
+      .hero-inner {
+        width: 50%;
+        justify-content: flex-start; align-items: center;
+        padding: 0 40px 0 clamp(48px, 6vw, 112px);
+      }
+      .hero-content {
+        max-width: none; margin: 0;
+        padding: 96px 0 64px; text-align: left;
+      }
+      #hero .section-label { justify-content: flex-start; }
+      .hero-sub { max-width: none; margin-left: 0; margin-right: 0; }
+      .badges { justify-content: flex-start; }
+      /* Carrousel en pleine largeur : plus de bord net à 50%, le fondu devient invisible */
+      .scrolling-bg { left: 0; }
+      /* Le fond du hero (zone texte) = image « ciel pastel », masquée pour se fondre vers le carrousel */
+      .bg-fade-side {
+        display: block;
+        /* fond opaque bleu nuit (cache le carrousel) + image + dégradé coucher de soleil */
+        background:
+          linear-gradient(180deg,
+            rgba(10,20,38,0.82) 0%,
+            rgba(10,18,34,0.62) 55%,
+            rgba(60,34,15,0.50) 100%),
+          url('Images/Fond/Background.jpg') center / cover no-repeat,
+          #0a1426;
+        -webkit-mask-image: linear-gradient(to right, #000 0%, #000 52%, transparent 70%);
+        mask-image: linear-gradient(to right, #000 0%, #000 52%, transparent 70%);
+      }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      z-index: 10; display: none;
+    }
+    @media (min-width: 768px) { .scroll-indicator { display: block; } }
+    .scroll-dot-wrap {
+      width: 24px; height: 40px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      display: flex; justify-content: center; padding-top: 6px;
+    }
+    .scroll-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--amber);
+      animation: scrollBounce 1.5s ease-in-out infinite;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(10px); opacity: 0.5; }
+    }
+
+    /* ── PROBLEM ── (2e section : fond « ciel pastel ») */
+    #problem { position: relative; padding: 88px 24px; background: var(--slate-950); overflow: hidden; }
+    /* Image de fond : ciel pastel pêche / lavande / bleu */
+    #problem::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(1150px 840px at 16% 92%, rgba(255,224,194,0.95), transparent 56%),
+        radial-gradient(1080px 800px at 86% 10%, rgba(244,213,236,0.85), transparent 55%),
+        radial-gradient(980px 760px at 50% 42%, rgba(150,152,232,0.60), transparent 62%),
+        linear-gradient(165deg, #aab6f1 0%, #b2a7e6 38%, #efdadd 68%, #fdeede 100%);
+    }
+    /* Voile + fondu depuis le hero : le haut démarre en bleu nuit (= bas du hero) puis se dissout */
+    #problem::after {
+      content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(180deg,
+        #0a1426 0%,
+        rgba(10,20,38,0.94) 7%,
+        rgba(8,14,28,0.66) 24%,
+        rgba(6,8,25,0.58) 60%,
+        rgba(6,8,25,0.52) 100%);
+    }
+    #problem > .container { position: relative; z-index: 2; }
+    .glow-blob {
+      position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
+    }
+    .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-bottom: 64px; }
+    .pain-card {
+      position: relative; padding: 32px; height: 100%;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px;
+      transition: border-color .5s;
+    }
+    .pain-card:hover { border-color: rgba(245,158,11,0.2); }
+    .pain-icon {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.28), rgba(245,158,11,0.1));
+      border: 1px solid rgba(245,158,11,0.45);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      color: var(--amber);
+      box-shadow: 0 6px 18px rgba(245,158,11,0.12);
+      transition: border-color .3s, transform .3s;
+    }
+    .pain-card:hover .pain-icon { border-color: rgba(245,158,11,0.7); transform: translateY(-2px); }
+
+    /* ── Section bénéfices (design asymétrique) ── */
+    .bn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 48px; }
+    @media (max-width: 820px) { .bn-grid { grid-template-columns: 1fr; } }
+    .bn-feature { position: relative; overflow: hidden; padding: 38px; border-radius: 18px; display: flex; flex-direction: column; justify-content: center;
+      background: linear-gradient(160deg, rgba(245,158,11,0.15), rgba(245,158,11,0.03)); border: 1px solid rgba(245,158,11,0.3); }
+    .bn-ico-lg { width: 54px; height: 54px; border-radius: 13px; display: flex; align-items: center; justify-content: center; color: var(--amber);
+      background: rgba(245,158,11,0.18); border: 1px solid rgba(245,158,11,0.4); margin-bottom: 22px; }
+    .bn-stat { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: clamp(2.6rem, 6vw, 3.6rem); line-height: 1; color: var(--amber); margin-bottom: 12px; }
+    .bn-stat span { font-size: 1.05rem; color: var(--slate-300); font-weight: 600; }
+    .bn-feature h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; font-weight: 700; margin-bottom: 10px; color: var(--white); }
+    .bn-feature p { color: var(--slate-400); font-size: 0.96rem; max-width: 380px; }
+    .bn-list { display: flex; flex-direction: column; gap: 14px; }
+    .bn-item { flex: 1; display: flex; gap: 16px; align-items: center; padding: 22px 24px; border-radius: 18px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); transition: border-color .25s, transform .25s, background .25s; }
+    .bn-item:hover { border-color: rgba(245,158,11,0.3); transform: translateX(4px); background: rgba(255,255,255,0.05); }
+    .bn-ico { width: 44px; height: 44px; flex-shrink: 0; border-radius: 11px; display: flex; align-items: center; justify-content: center; color: var(--amber);
+      background: linear-gradient(135deg, rgba(245,158,11,0.22), rgba(245,158,11,0.08)); border: 1px solid rgba(245,158,11,0.35); }
+    .bn-item h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 4px; color: var(--white); }
+    .bn-item p { color: var(--slate-400); font-size: 0.9rem; line-height: 1.5; }
+    [data-theme="light"] .bn-item { background: rgba(15,23,42,0.03); border-color: rgba(15,23,42,0.08); }
+    [data-theme="light"] .bn-feature h3, [data-theme="light"] .bn-item h4 { color: #0f172a; }
+    [data-theme="light"] .bn-stat span { color: #475569; }
+
+    /* ── Section problèmes (panneau éditorial) ── */
+    .prob-panel { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 44px; align-items: center; padding: 46px;
+      border-radius: 18px; background: rgba(10,15,28,0.74); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 18px 50px rgba(2,6,23,0.5), inset 0 1px 0 rgba(255,255,255,0.07); }
+    @media (max-width: 860px) { .prob-panel { grid-template-columns: 1fr; gap: 30px; padding: 32px 26px; } }
+    [data-theme="light"] .prob-panel { background: rgba(255,255,255,0.88); border-color: rgba(15,23,42,0.08); box-shadow: 0 18px 50px rgba(15,23,42,0.12), inset 0 1px 0 rgba(255,255,255,0.7); }
+    .prob-kicker { display: inline-block; color: var(--amber); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 16px; }
+    .prob-intro h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; line-height: 1.18; margin-bottom: 16px; color: var(--white); }
+    [data-theme="light"] .prob-intro h2 { color: #0f172a; }
+    .prob-lead { color: var(--slate-400); font-size: 0.98rem; line-height: 1.6; margin-bottom: 22px; }
+    .prob-cta { color: var(--slate-300); font-size: 1.02rem; }
+    [data-theme="light"] .prob-cta { color: #334155; }
+    .prob-list { display: flex; flex-direction: column; }
+    .prob-row { display: flex; gap: 18px; align-items: flex-start; padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .prob-row:first-child { padding-top: 0; }
+    .prob-row:last-child { border-bottom: none; padding-bottom: 0; }
+    [data-theme="light"] .prob-row { border-bottom-color: rgba(15,23,42,0.08); }
+    .prob-ico { width: 44px; height: 44px; flex-shrink: 0; border-radius: 11px; display: flex; align-items: center; justify-content: center; color: var(--amber);
+      background: linear-gradient(135deg, rgba(245,158,11,0.22), rgba(245,158,11,0.08)); border: 1px solid rgba(245,158,11,0.35); }
+    .prob-txt h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; color: var(--white); }
+    [data-theme="light"] .prob-txt h3 { color: #0f172a; }
+    .prob-txt p { color: var(--slate-400); font-size: 0.92rem; line-height: 1.5; }
+
+    /* ── Section audit gratuit ── */
+    .audit-card { max-width: 760px; margin: 0 auto; text-align: center; padding: 48px 44px; border-radius: 18px;
+      background: linear-gradient(160deg, rgba(245,158,11,0.13), rgba(245,158,11,0.03)); border: 1px solid rgba(245,158,11,0.3);
+      box-shadow: 0 24px 70px rgba(2,6,23,0.4), inset 0 1px 0 rgba(255,255,255,0.06); }
+    @media (max-width: 560px) { .audit-card { padding: 36px 24px; } }
+    .audit-badge { display: inline-block; background: var(--amber); color: #0f172a; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; margin-bottom: 20px; }
+    .audit-card h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.6rem, 3.4vw, 2.4rem); font-weight: 800; line-height: 1.18; margin-bottom: 16px; color: var(--white); }
+    [data-theme="light"] .audit-card h2 { color: #0f172a; }
+    .audit-card > p { color: var(--slate-300); max-width: 560px; margin: 0 auto 26px; }
+    [data-theme="light"] .audit-card > p { color: #334155; }
+    .audit-list { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 26px; margin-bottom: 30px; }
+    .audit-list li { display: flex; align-items: center; gap: 8px; color: var(--slate-300); font-size: 0.92rem; }
+    [data-theme="light"] .audit-list li { color: #475569; }
+    .audit-list li svg { color: var(--amber); flex-shrink: 0; }
+    .audit-note { margin-top: 16px; color: var(--slate-500); font-size: 0.82rem; }
+    .pain-icon svg { color: var(--slate-500); transition: color .5s; }
+    .pain-card:hover .pain-icon svg { color: var(--amber); }
+    .pain-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+    .pain-card p { font-size: 0.875rem; color: var(--slate-400); line-height: 1.8; }
+    .transition-text { text-align: center; font-size: clamp(1rem, 2vw, 1.25rem); color: var(--slate-300); max-width: 640px; margin: 0 auto; }
+
+    /* ── COMPARATIF : site classique vs site sur mesure ── */
+    .compare-grid {
+      position: relative;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+      margin-bottom: 56px; align-items: stretch;
+    }
+    .compare-card {
+      position: relative; padding: 38px 32px; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      transition: transform .4s, border-color .4s, box-shadow .4s;
+    }
+    /* Carte « classique » : désaturée, en retrait */
+    .compare-card.classic { background: rgba(255,255,255,0.015); filter: saturate(0.55); opacity: 0.9; }
+    /* Carte « sur mesure » : mise en avant, halo orange */
+    .compare-card.custom {
+      border-color: rgba(245,158,11,0.4);
+      background: linear-gradient(160deg, rgba(245,158,11,0.10), rgba(245,158,11,0.02));
+      box-shadow: 0 20px 60px rgba(245,158,11,0.12);
+    }
+    @media (min-width: 768px) { .compare-card.custom { transform: translateY(-14px) scale(1.02); } }
+
+    .compare-kicker {
+      display: inline-block; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 999px; margin-bottom: 16px;
+      background: rgba(255,255,255,0.06); color: var(--slate-400);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .compare-card.custom .compare-kicker { background: rgba(245,158,11,0.15); color: var(--amber); border-color: rgba(245,158,11,0.35); }
+    .compare-card h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); font-weight: 800; margin-bottom: 8px; }
+    .compare-card-head p { color: var(--slate-400); font-size: 0.9rem; margin-bottom: 28px; }
+    .compare-card.custom .compare-card-head p { color: var(--slate-300); }
+
+    .compare-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .compare-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.92rem; line-height: 1.5; color: var(--slate-300); }
+    .compare-card.classic .compare-list li { color: var(--slate-400); }
+    .compare-ico {
+      flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin-top: 1px;
+    }
+    .compare-card.classic .compare-ico { background: rgba(148,163,184,0.12); color: var(--slate-500); }
+    .compare-card.custom .compare-ico { background: rgba(245,158,11,0.18); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+
+    /* Badge VS au centre */
+    .compare-vs {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 5;
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.95rem;
+      color: var(--white); background: var(--slate-950);
+      border: 1px solid rgba(245,158,11,0.4); box-shadow: 0 8px 24px rgba(2,6,23,0.5);
+    }
+    @media (max-width: 767px) {
+      .compare-grid { grid-template-columns: 1fr; gap: 40px; }
+      .compare-card.custom { transform: none; }
+      .compare-vs { position: static; transform: none; margin: -10px auto; }
+    }
+
+    /* Comparatif — mode jour (glassmorphism) */
+    [data-theme="light"] .compare-card {
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border-color: rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(15,23,42,0.08);
+    }
+    [data-theme="light"] .compare-card.custom {
+      border-color: rgba(245,158,11,0.45);
+      background: linear-gradient(160deg, rgba(245,158,11,0.12), rgba(255,255,255,0.55));
+      box-shadow: 0 20px 60px rgba(245,158,11,0.14);
+    }
+    [data-theme="light"] .compare-vs { background: #fff; }
+
+    /* Pied de carte : « Potentiel de conversion » (l'accent de la section) */
+    .compare-footer { margin-top: 30px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .compare-card.custom .compare-footer { border-top-color: rgba(245,158,11,0.25); }
+    .compare-foot-label {
+      display: block; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--slate-500); margin-bottom: 12px;
+    }
+    .conv-bar { position: relative; height: 10px; border-radius: 999px; background: rgba(255,255,255,0.08); overflow: hidden; }
+    .conv-fill { position: absolute; top: 0; bottom: 0; left: 0; border-radius: 999px; overflow: hidden; }
+    /* Classique : déchargée (peu remplie) et rouge */
+    .compare-card.classic .conv-fill { width: 22%; background: linear-gradient(to right, #f87171, #dc2626); box-shadow: 0 0 14px rgba(220,38,38,0.5); }
+    /* Sur mesure : pleine et orange */
+    .compare-card.custom .conv-fill { width: 100%; background: linear-gradient(to right, #fbbf24, #d97706); box-shadow: 0 0 14px rgba(245,158,11,0.45); }
+    /* Brillance qui balaie le remplissage de gauche à droite */
+    .conv-fill::after {
+      content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 50%;
+      background: linear-gradient(100deg, transparent 0%, rgba(255,255,255,0.7) 50%, transparent 100%);
+      transform: translateX(-100%);
+      animation: convShine 2.6s ease-in-out infinite;
+    }
+    @keyframes convShine { 0% { transform: translateX(-100%); } 55%, 100% { transform: translateX(250%); } }
+    @media (prefers-reduced-motion: reduce) { .conv-fill::after { display: none; } }
+    [data-theme="light"] .conv-bar { background: rgba(15,23,42,0.08); }
+    .conv-verdict { display: inline-block; margin-top: 14px; font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.15rem; }
+    .compare-card.classic .conv-verdict { color: #ef4444; }
+    .compare-card.custom .conv-verdict { color: var(--amber); }
+    .conv-note { font-size: 0.82rem; color: var(--slate-500); margin-top: 6px; line-height: 1.45; }
+    .compare-card.custom .conv-note { color: var(--slate-300); }
+
+    /* ── PROCESS ── */
+    #process {
+      position: relative; padding: 88px 24px;
+      background: var(--slate-900); overflow: hidden;
+    }
+    .process-bg-img {
+      position: absolute; inset: 0;
+      background: url('Images/Fond/Background Nuit 2 section.png') center/cover;
+      opacity: 0.16;
+    }
+    .process-bg-gradient {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, #020617, rgba(15,23,42,0.95), #020617);
+    }
+    .process-diag-lines { position: absolute; inset: 0; overflow: hidden; opacity: 0.2; pointer-events: none; }
+    .diag-line {
+      position: absolute; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(245,158,11,0.5), transparent);
+      left: -10%; right: -10%; transform: rotate(-5deg);
+    }
+    .steps-grid {
+      position: relative;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+    }
+    .steps-connection {
+      display: none;
+      position: absolute; top: 50%; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(245,158,11,0.3), transparent);
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+    @media (min-width: 1024px) {
+      .steps-grid { grid-template-columns: repeat(4, 1fr); }
+      .steps-connection { display: block; }
+    }
+    .step-card {
+      position: relative; padding: 24px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px; height: 100%;
+      transition: border-color .5s, transform .3s;
+    }
+    .step-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-8px); }
+    .step-bg-num {
+      position: absolute; top: -16px; left: -8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 5rem; font-weight: 900;
+      color: rgba(255,255,255,0.03); user-select: none; pointer-events: none;
+    }
+    .step-head { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .step-icon-wrap {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(245,158,11,0.05));
+      border: 1px solid rgba(245,158,11,0.3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: box-shadow .5s;
+    }
+    .step-card:hover .step-icon-wrap { box-shadow: 0 8px 20px rgba(245,158,11,0.2); }
+    .step-icon-wrap svg { color: var(--amber); }
+    .step-num-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem; font-weight: 900;
+      color: rgba(245,158,11,0.2);
+      transition: color .5s;
+    }
+    .step-card:hover .step-num-label { color: rgba(245,158,11,0.4); }
+    .step-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+    .step-card p { font-size: 0.875rem; color: var(--slate-400); line-height: 1.8; }
+    .step-arrow {
+      display: none; position: absolute; top: 50%; right: -16px;
+      transform: translateY(-50%);
+      color: rgba(245,158,11,0.4); z-index: 2;
+    }
+    @media (min-width: 1024px) { .step-arrow { display: block; } }
+
+    /* ── PROCESS : timeline verticale (5 étapes) ── */
+    .process-timeline { position: relative; max-width: 820px; margin: 0 auto; }
+    .proc-step {
+      position: relative;
+      display: grid; grid-template-columns: 56px 1fr; gap: 28px;
+      padding-bottom: 40px;
+    }
+    .proc-step:last-child { padding-bottom: 0; }
+    .proc-marker { position: relative; display: flex; justify-content: center; }
+    /* ligne verticale reliant les pastilles */
+    .proc-step:not(:last-child) .proc-marker::after {
+      content: ''; position: absolute; top: 60px; bottom: -40px; left: 50%; transform: translateX(-50%);
+      width: 2px; background: linear-gradient(to bottom, rgba(245,158,11,0.55), rgba(245,158,11,0.12));
+    }
+    .proc-num {
+      width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--amber);
+      background: linear-gradient(135deg, rgba(245,158,11,0.22), rgba(245,158,11,0.05));
+      border: 1px solid rgba(245,158,11,0.35);
+    }
+    .proc-content {
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; padding: 26px 28px;
+      transition: border-color .4s, transform .4s;
+    }
+    .proc-content:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-4px); }
+    .proc-stage {
+      display: inline-block; font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--slate-500); margin-bottom: 10px;
+    }
+    .proc-content h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: var(--white); }
+    .proc-content > p { font-size: 0.92rem; color: var(--slate-400); line-height: 1.7; margin-bottom: 18px; }
+    .proc-role {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.88rem; color: var(--slate-300); line-height: 1.55;
+      padding: 12px 16px; border-radius: 10px;
+      background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.15);
+    }
+    .proc-role svg { color: var(--amber); flex-shrink: 0; margin-top: 2px; }
+    .proc-role strong { color: var(--amber); font-weight: 600; }
+    @media (max-width: 600px) {
+      .proc-step { grid-template-columns: 44px 1fr; gap: 16px; padding-bottom: 32px; }
+      .proc-num { width: 44px; height: 44px; font-size: 1.15rem; }
+      .proc-step:not(:last-child) .proc-marker::after { top: 48px; bottom: -32px; }
+      .proc-content { padding: 22px 20px; }
+    }
+    /* Mode jour : cartes en glassmorphism */
+    [data-theme="light"] .proc-content {
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(16px) saturate(150%); -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border-color: rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(15,23,42,0.08);
+    }
+
+    /* ── SERVICES ── */
+    #services { position: relative; padding: 88px 24px; background: var(--slate-950); overflow: hidden; }
+    .fade-divider { height: 84px; pointer-events: none; margin: -1px 0; }
+    .services-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media (min-width: 768px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+    .service-card {
+      position: relative; padding: 32px; height: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color .5s, transform .3s;
+    }
+    .service-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-5px) scale(1.01); }
+    .service-card-glow {
+      position: absolute; inset: 0; border-radius: 10px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.05), transparent);
+      opacity: 0; transition: opacity .5s;
+    }
+    .service-card:hover .service-card-glow { opacity: 1; }
+    .service-corner-top {
+      position: absolute; top: 0; right: 0; width: 80px; overflow: hidden;
+      border-top-right-radius: 10px;
+    }
+    .service-corner-line-h {
+      position: absolute; top: 0; right: 0; width: 80px; height: 1px;
+      background: linear-gradient(to left, rgba(245,158,11,0.5), transparent);
+      transform: scaleX(0); transform-origin: right;
+      transition: transform .5s;
+    }
+    .service-corner-line-v {
+      position: absolute; top: 0; right: 0; width: 1px; height: 80px;
+      background: linear-gradient(to bottom, rgba(245,158,11,0.5), transparent);
+      transform: scaleY(0); transform-origin: top;
+      transition: transform .5s;
+    }
+    .service-card:hover .service-corner-line-h,
+    .service-card:hover .service-corner-line-v { transform: scale(1); }
+    .service-icon {
+      position: relative; width: 56px; height: 56px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(245,158,11,0.1));
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      transition: box-shadow .5s;
+    }
+    .service-card:hover .service-icon { box-shadow: 0 8px 20px rgba(245,158,11,0.2); }
+    .service-icon svg { color: var(--amber); }
+    .service-card h3 {
+      position: relative; font-size: 1.2rem; font-weight: 700;
+      margin-bottom: 12px;
+      transition: color .5s;
+    }
+    .service-card:hover h3 { color: #fef3c7; }
+    .service-card p {
+      position: relative; font-size: 0.9rem; color: var(--slate-400); line-height: 1.8;
+      transition: color .5s;
+    }
+    .service-card:hover p { color: var(--slate-300); }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { position: relative; padding: 88px 24px; background: var(--slate-900); overflow: hidden; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+    .testimonial-card {
+      position: relative; padding: 32px; height: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      transition: border-color .5s, transform .3s;
+    }
+    .testimonial-card:hover { border-color: rgba(245,158,11,0.3); transform: translateY(-4px); }
+    .quote-badge {
+      position: absolute; top: -16px; left: -16px;
+      width: 48px; height: 48px;
+      background: rgba(245,158,11,0.2);
+      border: 1px solid rgba(245,158,11,0.3);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .quote-badge svg { color: var(--amber); }
+    .stars { display: flex; gap: 4px; margin-bottom: 24px; padding-top: 16px; }
+    .star { color: var(--amber); font-size: 1.1rem; }
+    .tc-result {
+      display: flex; flex-direction: column; gap: 5px; padding: 14px 16px; margin: 12px 0 22px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.14), rgba(245,158,11,0.04));
+      border: 1px solid rgba(245,158,11,0.22);
+    }
+    .tc-stat { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.85rem; line-height: 1; color: var(--amber); }
+    .tc-stat-label { color: var(--slate-300); font-size: 0.82rem; line-height: 1.35; }
+    [data-theme="light"] .tc-stat-label { color: #475569; }
+    .testimonial-card blockquote {
+      font-size: 1.02rem; color: var(--slate-300);
+      font-style: italic; line-height: 1.75; margin-bottom: 28px;
+    }
+    [data-theme="light"] .testimonial-card blockquote { color: #334155; }
+    .testimonial-author { display: flex; align-items: center; gap: 16px; }
+    .author-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(245,158,11,0.1));
+      border: 1px solid rgba(245,158,11,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--amber); font-size: 1.1rem; flex-shrink: 0;
+    }
+    .author-name { font-weight: 600; font-size: 0.95rem; }
+    .author-role { color: var(--slate-500); font-size: 0.8rem; }
+    .testimonial-bottom-line {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, transparent, rgba(245,158,11,0.5), transparent);
+      opacity: 0; transition: opacity .5s;
+    }
+    .testimonial-card:hover .testimonial-bottom-line { opacity: 1; }
+
+    /* ── PRICING ── */
+    #pricing { position: relative; padding: 88px 24px; background: var(--slate-900); overflow: hidden; }
+    .pricing-bg-blob {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px; height: 800px;
+      background: rgba(245,158,11,0.05);
+      border-radius: 50%; filter: blur(80px);
+      pointer-events: none;
+    }
+    .pricing-bg-grid {
+      position: absolute; inset: 0; opacity: 0.05; pointer-events: none;
+    }
+    .pricing-card-wrapper { max-width: 580px; margin: 0 auto; position: relative; }
+    .pricing-glow {
+      position: absolute; inset: -4px;
+      background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(245,158,11,0.3), rgba(245,158,11,0.2));
+      border-radius: 16px; filter: blur(16px); opacity: .5;
+    }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1200px; margin: 0 auto; align-items: stretch; }
+    @media (max-width: 920px) { .pricing-grid { grid-template-columns: 1fr; max-width: 520px; } }
+    .pricing-card {
+      position: relative; display: flex; flex-direction: column;
+      padding: 44px 36px;
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px; overflow: hidden;
+    }
+    .pricing-card-featured { border-color: rgba(245,158,11,0.45); box-shadow: 0 0 0 1px rgba(245,158,11,0.22), 0 24px 60px rgba(2,6,23,0.5); transform: translateY(-10px); }
+    @media (max-width: 920px) { .pricing-card-featured { transform: none; } }
+    .pricing-tag { position: absolute; top: 18px; right: 18px; font-family: 'Space Grotesk', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #0f172a; background: var(--amber); padding: 6px 13px; border-radius: 999px; }
+    .pricing-head { padding-bottom: 26px; margin-bottom: 26px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    [data-theme="light"] .pricing-head { border-bottom-color: rgba(15,23,42,0.08); }
+    .tier-label { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.4rem; color: var(--white); }
+    [data-theme="light"] .tier-label { color: #0f172a; }
+    .tier-amount { display: flex; align-items: baseline; gap: 8px; margin-top: 14px; }
+    .tier-amount em { font-style: normal; font-size: 0.82rem; color: var(--slate-500); }
+    .tier-num { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 2.7rem; line-height: 1; color: var(--amber); }
+    .tier-desc { color: var(--slate-400); font-size: 0.95rem; line-height: 1.55; margin-top: 16px; }
+    .pricing-card .feature-list { flex: 1; gap: 16px; margin-bottom: 30px; }
+    .pricing-card .feature-list li { font-size: 0.98rem; }
+    .pricing-card .btn-full { margin-top: auto; padding-top: 17px; padding-bottom: 17px; }
+    .pricing-header {
+      padding: 40px 40px 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      text-align: center;
+    }
+    .pack-label {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      color: var(--amber); font-size: 0.75rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .pack-label svg { color: var(--amber); }
+    .price-wrap { display: flex; align-items: flex-end; justify-content: center; gap: 8px; }
+    .price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(4rem, 8vw, 5.5rem); font-weight: 900; line-height: 1;
+    }
+    .price-unit { color: var(--slate-400); font-size: 1.1rem; margin-bottom: 12px; }
+    .price-sub { color: var(--slate-500); font-size: 0.8rem; margin-top: 12px; }
+    .price-arg { color: var(--slate-400); font-size: 0.875rem; font-weight: 500; margin-top: 8px; }
+    .pricing-tiers { display: flex; flex-direction: column; gap: 12px; margin: 4px 0; text-align: left; }
+    .tier { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 15px 20px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+    .tier-featured { background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.03)); border-color: rgba(245,158,11,0.3); }
+    .tier-name { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.02rem; color: var(--white); }
+    .tier-price { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 1.45rem; color: var(--amber); white-space: nowrap; }
+    .tier-price em { font-style: normal; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.7rem; color: var(--slate-500); margin-right: 5px; }
+    [data-theme="light"] .tier { background: rgba(15,23,42,0.03); border-color: rgba(15,23,42,0.08); }
+    [data-theme="light"] .tier-name { color: #0f172a; }
+    .features-title { color: var(--slate-400); font-size: 0.78rem; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 16px; }
+    .pricing-features { padding: 32px 40px; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 16px; margin-bottom: 40px; }
+    .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.9rem; color: var(--slate-300); }
+    .feature-check {
+      width: 20px; height: 20px; border-radius: 50%;
+      background: rgba(245,158,11,0.15);
+      border: 1px solid rgba(245,158,11,0.3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+      color: var(--amber); font-size: 0.6rem;
+    }
+    .pricing-note { text-align: center; color: var(--slate-500); font-size: 0.8rem; margin-top: 16px; }
+
+    /* ── Services d'acquisition (récurrents, après la création du site) ── */
+    .acq-block { max-width: 1200px; margin: 80px auto 0; }
+    .acq-divider { width: 1px; height: 56px; margin: 0 auto 28px; background: linear-gradient(to bottom, transparent, rgba(245,158,11,0.5)); }
+    .acq-intro { text-align: center; max-width: 700px; margin: 0 auto 38px; }
+    .acq-intro .label-text { display: inline-block; margin-bottom: 14px; }
+    .acq-intro h3 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 14px; }
+    .acq-intro p { color: var(--slate-400); font-size: 1rem; line-height: 1.7; }
+    .acq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 820px; margin: 0 auto; align-items: stretch; }
+    @media (max-width: 760px) { .acq-grid { grid-template-columns: 1fr; max-width: 520px; } }
+    .tier-per { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1rem; color: var(--slate-400); align-self: flex-end; margin-bottom: 5px; }
+
+    /* ── FAQ ── */
+    #faq { position: relative; padding: 88px 24px; background: var(--slate-950); }
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 10px; overflow: hidden;
+      transition: border-color .3s;
+    }
+    .faq-item.open { border-color: rgba(245,158,11,0.3); }
+    .faq-question {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px; text-align: left; background: none; border: none; cursor: pointer;
+      gap: 16px; color: var(--white);
+    }
+    .faq-q-text { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: var(--slate-300); }
+    .faq-item.open .faq-q-text { color: var(--white); }
+    .faq-chevron { color: var(--slate-500); transition: transform .3s; flex-shrink: 0; }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--amber); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .35s ease, padding .35s ease; }
+    .faq-answer p { padding: 0 24px 20px 24px; color: var(--slate-400); font-size: 0.9rem; line-height: 1.8; }
+    .faq-item.open .faq-answer { max-height: 400px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--slate-950);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 64px 24px 32px;
+    }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+    .footer-brand p { color: var(--slate-400); font-size: 0.875rem; line-height: 1.7; max-width: 320px; margin-top: 16px; }
+    .footer-col h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul li a { color: var(--slate-400); font-size: 0.875rem; transition: color .2s; }
+    .footer-col ul li a:hover { color: var(--amber); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { color: var(--slate-500); font-size: 0.8rem; }
+
+    /* ── STICKY CTA MOBILE ── */
+    #sticky-cta {
+      display: none;
+      position: fixed; bottom: 0; left: 0; right: 0;
+      z-index: 9999;
+      padding: 16px;
+      background: rgba(2,6,23,0.95);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      transform: translateY(100%);
+      transition: transform .3s ease;
+    }
+    #sticky-cta.visible { transform: translateY(0); }
+    #sticky-cta .btn-primary { width: 100%; justify-content: center; font-size: 0.95rem; padding: 14px; }
+    #sticky-cta p { text-align: center; color: var(--slate-500); font-size: 0.75rem; margin-top: 8px; }
+    @media (max-width: 768px) { #sticky-cta { display: block; } }
+
+    svg { display: inline-block; vertical-align: middle; }
+
+    /* ── THEME TOGGLE BUTTON ── */
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+    .theme-toggle {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--slate-300); cursor: pointer;
+      transition: background .2s, border-color .2s, color .2s;
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,0.1); border-color: rgba(245,158,11,0.3); color: var(--amber); }
+    .theme-toggle svg { width: 19px; height: 19px; }
+
+    /* ════════════════════════════════════════════════
+       ☀️  MODE JOUR (light theme) — activé via [data-theme="light"] sur <html>
+       Le hero (#hero) reste volontairement sombre (bande vitrine animée).
+       ════════════════════════════════════════════════ */
+    body { transition: background-color .3s ease, color .3s ease; }
+
+    /* ── Transition jour ↔ nuit : crossfade doux (API View Transitions) ── */
+    @media (prefers-reduced-motion: no-preference) {
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation-duration: .55s;
+        animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+      }
+    }
+    /* 2) Repli : transition des couleurs sur les surfaces clés (navigateurs sans View Transitions) */
+    @supports not (view-transition-name: none) {
+      body, nav, .mobile-menu, #problem::after, .scrolling-bg, .bg-fade-side,
+      .pain-card, .step-card, .service-card, .testimonial-card, .pricing-card, .faq-item,
+      .badge, .nav-cta, .hamburger, .theme-toggle, footer {
+        transition: background-color .5s ease, background .5s ease,
+                    border-color .5s ease, color .5s ease, box-shadow .5s ease;
+      }
+    }
+
+    [data-theme="light"] {
+      --amber: #f59e0b;       /* orange d'origine conservé en mode jour */
+      --amber-light: #fbbf24;
+      --amber-dark: #d97706;
+      --slate-950: #ffffff;   /* fond de page, footer, sections claires */
+      --slate-900: #f1f5f9;   /* sections alternées (process, témoignages, tarif) */
+      --slate-800: #e2e8f0;
+      --white:     #0f172a;   /* texte principal */
+      --slate-400: #475569;   /* texte secondaire */
+      --slate-300: #334155;   /* texte accentué */
+      --slate-500: #64748b;   /* texte discret */
+      /* Palette « ciel pastel » pour les fonds dégradés discrets */
+      --sunset-blue:  138,150,235;  /* périwinkle bleu-mauve */
+      --sunset-peach: 255,224,194;  /* pêche */
+      --sunset-orange:230,170,205;  /* rose poudré */
+      --hero-side-bg: #eef0fb;
+    }
+
+    /* — Fond dégradé discret (calque fixe, sous tout le contenu) — */
+    [data-theme="light"] body { background: transparent; }
+    [data-theme="light"] body::before {
+      content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(1100px 760px at 12% -8%, rgba(var(--sunset-blue),0.22), transparent 60%),
+        radial-gradient(900px 680px at 88% 108%, rgba(var(--sunset-orange),0.20), transparent 60%),
+        radial-gradient(700px 520px at 70% 60%, rgba(var(--sunset-peach),0.16), transparent 65%),
+        linear-gradient(180deg, #eef0fb 0%, #f3edf3 55%, #fdeede 100%);
+    }
+    /* Sections transparentes : le dégradé traverse toute la page */
+    [data-theme="light"] #problem,
+    [data-theme="light"] #process,
+    [data-theme="light"] #services,
+    [data-theme="light"] #testimonials,
+    [data-theme="light"] #pricing,
+    [data-theme="light"] #faq,
+    [data-theme="light"] footer { background: transparent; }
+    /* En mode jour : fondu depuis le bas clair du hero, puis voile léger */
+    [data-theme="light"] #problem::after {
+      background: linear-gradient(180deg,
+        rgba(248,238,230,0.92) 0%,
+        rgba(248,240,235,0.5) 12%,
+        rgba(255,255,255,0.2) 28%,
+        rgba(255,255,255,0.3) 100%);
+    }
+
+    /* — Nav & menu mobile — */
+    [data-theme="light"] nav {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      border-color: rgba(15,23,42,0.08);
+      box-shadow: 0 8px 30px rgba(15,23,42,0.08);
+    }
+    [data-theme="light"] nav.menu-open { background: rgba(255,255,255,0.9); }
+    [data-theme="light"] .mobile-menu {
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      border-bottom-color: rgba(255,255,255,0.5);
+    }
+    [data-theme="light"] .m-close { background: rgba(15,23,42,0.04); border-color: rgba(15,23,42,0.1); color: var(--slate-400); }
+    [data-theme="light"] .mobile-nav-links a:hover { background: rgba(15,23,42,0.05); }
+    [data-theme="light"] .hamburger { background: rgba(15,23,42,0.04); border-color: rgba(15,23,42,0.1); }
+    [data-theme="light"] .hamburger:hover { background: rgba(15,23,42,0.08); border-color: rgba(245,158,11,0.4); }
+    [data-theme="light"] .theme-toggle { background: rgba(15,23,42,0.04); border-color: rgba(15,23,42,0.1); color: var(--slate-400); }
+    [data-theme="light"] .theme-toggle:hover { background: rgba(15,23,42,0.08); border-color: rgba(245,158,11,0.4); color: var(--amber-dark); }
+
+    /* — Hero en mode jour : image « ciel pastel » à 20% derrière tout le hero — */
+    [data-theme="light"] .scrolling-bg {
+      background:
+        linear-gradient(rgba(238,240,251,0.60), rgba(238,240,251,0.60)),
+        url('Images/Fond/Background.jpg') center / cover no-repeat,
+        #eef0fb;
+    }
+    [data-theme="light"] .scrolling-bg::before { opacity: 0.6; }
+    /* En mode jour : fond clair opaque + image « ciel pastel » à 20% par-dessus */
+    [data-theme="light"] .bg-fade-side {
+      background:
+        linear-gradient(rgba(238,240,251,0.60), rgba(238,240,251,0.60)),
+        url('Images/Fond/Background.jpg') center / cover no-repeat,
+        #eef0fb;
+    }
+    [data-theme="light"] .cell-showcase img { filter: brightness(1.02) grayscale(8%); opacity: 0.9; }
+    [data-theme="light"] .cell-showcase { outline-color: rgba(15,23,42,0.06); }
+    [data-theme="light"] .cell-showcase .showcase-overlay {
+      background: linear-gradient(145deg, rgba(241,245,249,0.35) 0%, rgba(241,245,249,0.15) 50%, rgba(241,245,249,0.45) 100%);
+    }
+    [data-theme="light"] .bg-overlay {
+      background:
+        linear-gradient(to bottom, rgba(241,245,249,0.75) 0%, rgba(241,245,249,0.05) 18%, transparent 35%, transparent 65%, rgba(241,245,249,0.05) 82%, rgba(241,245,249,0.75) 100%),
+        linear-gradient(to right, rgba(241,245,249,0.4) 0%, transparent 18%, transparent 82%, rgba(241,245,249,0.4) 100%);
+    }
+    [data-theme="light"] .bg-vignette { box-shadow: inset 0 0 150px 40px rgba(241,245,249,0.3); }
+    [data-theme="light"] .bg-center-dark {
+      background: radial-gradient(ellipse 65% 60% at 50% 50%, rgba(248,250,252,0.88) 0%, rgba(248,250,252,0.5) 50%, transparent 100%);
+    }
+    [data-theme="light"] #hero .badge { background: rgba(255,255,255,0.7); border-color: rgba(15,23,42,0.1); color: var(--slate-300); }
+    [data-theme="light"] .scroll-dot-wrap { border-color: rgba(15,23,42,0.2); }
+
+    /* — Cartes en glassmorphism — */
+    [data-theme="light"] .pain-card,
+    [data-theme="light"] .step-card,
+    [data-theme="light"] .service-card,
+    [data-theme="light"] .testimonial-card,
+    [data-theme="light"] .pricing-card,
+    [data-theme="light"] .faq-item {
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(16px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(150%);
+      border-color: rgba(255,255,255,0.6);
+      box-shadow: 0 8px 32px rgba(15,23,42,0.08), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+    [data-theme="light"] .pain-icon {
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border-color: rgba(245,158,11,0.25);
+    }
+    [data-theme="light"] .step-bg-num { color: rgba(15,23,42,0.05); }
+    [data-theme="light"] .service-card:hover h3 { color: var(--amber-dark); }
+
+    /* — Bordures & séparateurs — */
+    [data-theme="light"] .pricing-header { border-bottom-color: rgba(15,23,42,0.08); }
+    [data-theme="light"] footer,
+    [data-theme="light"] .footer-bottom { border-color: rgba(15,23,42,0.08); }
+    [data-theme="light"] .fade-divider { background: transparent !important; }
+
+    /* — Section "process" : on laisse passer le dégradé de fond — */
+    [data-theme="light"] .process-bg-gradient { background: transparent; }
+    [data-theme="light"] .process-bg-img { opacity: 0.04; }
+
+    /* — CTA collant mobile — */
+    [data-theme="light"] #sticky-cta {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      border-top-color: rgba(255,255,255,0.5);
+      box-shadow: 0 -4px 20px rgba(15,23,42,0.08);
+    }
+
+    /* ════════════════════════════════════════════════
+       🌇  CIEL DE NUIT CONTINU (hero + section problème)
+       Le dégradé coucher de soleil s'étire du haut du hero
+       jusqu'au bas de la section 2. Mode nuit uniquement.
+       ════════════════════════════════════════════════ */
+    .sunset-wrap { position: relative; }
+    html:not([data-theme="light"]) .sunset-wrap::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: url('Images/Fond/Background Nuit 2 section.png') 50% / 100% 100% no-repeat;
+    }
+
+    /* — Hero : fond transparent (le ciel passe) + on neutralise les voiles de BORD
+         (vignette, scrim haut/bas, lignes) qui créaient une couture avec la section 2 — */
+    html:not([data-theme="light"]) .scrolling-bg {
+      background: transparent;
+      /* on estompe le premier plan du hero (carrousel + voiles) vers le bas :
+         le bas du hero redevient du ciel nu = identique au haut de la section 2 → pas de couture */
+      -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 96%);
+      mask-image: linear-gradient(to bottom, #000 72%, transparent 96%);
+    }
+    html:not([data-theme="light"]) .scrolling-bg::before { opacity: .4; }
+    html:not([data-theme="light"]) .bg-center-dark { background: transparent; }
+    html:not([data-theme="light"]) .bg-overlay { background: none; }
+    html:not([data-theme="light"]) .bg-vignette { box-shadow: none; }
+    html:not([data-theme="light"]) .bg-glow-line { opacity: 0; }
+
+    /* — Zone texte : on masque le carrousel à gauche (le ciel apparaît) + léger voile lisibilité — */
+    html:not([data-theme="light"]) .rows-container {
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 50%, #000 68%);
+      mask-image: linear-gradient(to right, transparent 0%, transparent 50%, #000 68%);
+    }
+    @media (min-width: 968px) {
+      html:not([data-theme="light"]) .bg-fade-side {
+        background: linear-gradient(to right,
+          rgba(8,14,28,0.50) 0%, rgba(8,14,28,0.22) 42%, transparent 64%);
+        -webkit-mask-image: none; mask-image: none;
+      }
+    }
+
+    /* ════════════════════════════════════════════════
+       FONDS CIEL PAR PAIRES DE SECTIONS (« 2 sections = 1 fond »)
+       Le ciel « 2 sections » est utilisé à sa bonne échelle (pas
+       étiré sur toute la page) :
+         • problème + comment ça marche  → .sunset-wrap2
+         • témoignages + tarifs          → .sunset-wrap3
+         • FAQ (seule)                   → .sunset-wrap4
+       Chaque fond est fondu en haut et en bas (mask) : entre deux
+       fonds, l'image se dissout dans le bleu nuit → transition douce,
+       aucune couture. Jour ET nuit.
+       ════════════════════════════════════════════════ */
+    .sunset-wrap2, .sunset-wrap3, .sunset-wrap4 { position: relative; }
+    .sunset-wrap2 > *, .sunset-wrap3 > *, .sunset-wrap4 > * { position: relative; z-index: 1; }
+    /* Le ciel (image à l'échelle 2 sections), fondu haut/bas pour se raccorder */
+    html:not([data-theme="light"]) .sunset-wrap2::before,
+    html:not([data-theme="light"]) .sunset-wrap3::before,
+    html:not([data-theme="light"]) .sunset-wrap4::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: url('Images/Fond/Background Nuit 2 section.png') 50% / 100% 100% no-repeat;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 91%, transparent 100%);
+              mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 91%, transparent 100%);
+    }
+    [data-theme="light"] .sunset-wrap2::before,
+    [data-theme="light"] .sunset-wrap3::before,
+    [data-theme="light"] .sunset-wrap4::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: url('Images/Fond/Background.jpg') 50% / 100% 100% no-repeat;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 91%, transparent 100%);
+              mask-image: linear-gradient(to bottom, transparent 0%, #000 9%, #000 91%, transparent 100%);
+    }
+    /* Voile global de lisibilité (plus dense vers le bas où le ciel s'éclaircit) */
+    html:not([data-theme="light"]) .sunset-wrap2::after,
+    html:not([data-theme="light"]) .sunset-wrap3::after,
+    html:not([data-theme="light"]) .sunset-wrap4::after {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(10,20,38,0.50) 0%, rgba(10,20,38,0.46) 38%, rgba(10,20,38,0.62) 74%, rgba(10,20,38,0.80) 100%);
+    }
+    [data-theme="light"] .sunset-wrap2::after,
+    [data-theme="light"] .sunset-wrap3::after,
+    [data-theme="light"] .sunset-wrap4::after {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(253,238,222,0.42) 0%, rgba(255,255,255,0.50) 50%, rgba(253,238,222,0.60) 100%);
+    }
+    /* Sections + dividers transparents → le ciel de chaque paire les traverse */
+    html:not([data-theme="light"]) #problem,
+    html:not([data-theme="light"]) #process,
+    html:not([data-theme="light"]) #testimonials,
+    html:not([data-theme="light"]) #pricing,
+    html:not([data-theme="light"]) #faq,
+    html:not([data-theme="light"]) .fade-divider { background: transparent !important; }
+    /* neutralise les voiles internes qui doublaient le ciel (miroir process supprimé) */
+    html:not([data-theme="light"]) #problem::before,
+    html:not([data-theme="light"]) #problem::after,
+    html:not([data-theme="light"]) #process::after { display: none; }
+    /* Voile qui démarre TRANSPARENT en haut (= bas du hero) puis s'assombrit doucement :
+       aucune marche à la jointure, et lisibilité des cartes plus bas */
+    html:not([data-theme="light"]) #problem::after {
+      background: linear-gradient(180deg,
+        transparent 0%,
+        transparent 14%,
+        rgba(8,12,24,0.30) 45%,
+        rgba(8,12,24,0.44) 100%);
+    }
+
+    /* ════════════════════════════════════════════════
+       ☀️  MÊME FONDU EN MODE JOUR
+       Le ciel pastel (Background.jpg) s'étire en continu du
+       hero jusqu'au bas de la section 2 → aucune couture.
+       ════════════════════════════════════════════════ */
+    [data-theme="light"] .sunset-wrap::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: url('Images/Fond/Background.jpg') 50% / 100% 100% no-repeat;
+    }
+    /* Hero : fond transparent + estompage du premier plan vers le bas + voiles de bord neutralisés */
+    [data-theme="light"] .scrolling-bg {
+      background: transparent;
+      -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 96%);
+      mask-image: linear-gradient(to bottom, #000 72%, transparent 96%);
+    }
+    [data-theme="light"] .scrolling-bg::before { opacity: .4; }
+    [data-theme="light"] .bg-center-dark { background: transparent; }
+    [data-theme="light"] .bg-overlay { background: none; }
+    [data-theme="light"] .bg-vignette { box-shadow: none; }
+    [data-theme="light"] .bg-glow-line { opacity: 0; }
+    /* Zone texte : carrousel masqué à gauche + léger voile CLAIR (texte foncé lisible) */
+    [data-theme="light"] .rows-container {
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 50%, #000 68%);
+      mask-image: linear-gradient(to right, transparent 0%, transparent 50%, #000 68%);
+    }
+    @media (min-width: 968px) {
+      [data-theme="light"] .bg-fade-side {
+        background: linear-gradient(to right,
+          rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.28) 42%, transparent 64%);
+        -webkit-mask-image: none; mask-image: none;
+      }
+    }
+    /* Mode jour : sections transparentes → le ciel pastel de chaque paire passe au travers */
+    [data-theme="light"] #problem,
+    [data-theme="light"] #process,
+    [data-theme="light"] #testimonials,
+    [data-theme="light"] #pricing,
+    [data-theme="light"] #faq { background: transparent; }
+    [data-theme="light"] #problem::before,
+    [data-theme="light"] #problem::after { display: none; }
+
+    /* ════════════════════════════════════════════════
+       « COMMENT ÇA MARCHE » (#process)
+       Le process fait désormais partie du ciel CONTINU (problème →
+       FAQ). Plus de miroir opaque séparé : il cassait le fondu et
+       faisait ressortir le process en orange vif. On masque l'ancien
+       calque image et on garde un voile léger pour la lisibilité.
+       ════════════════════════════════════════════════ */
+    .process-bg-img { display: none !important; }
+    html:not([data-theme="light"]) .process-bg-gradient,
+    [data-theme="light"] .process-bg-gradient { display: block; z-index: 0; }
+    html:not([data-theme="light"]) .process-bg-gradient {
+      background: linear-gradient(180deg, transparent 0%, rgba(10,20,38,0.16) 45%, rgba(10,20,38,0.16) 55%, transparent 100%);
+    }
+    [data-theme="light"] .process-bg-gradient {
+      background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.20) 45%, rgba(255,255,255,0.20) 55%, transparent 100%);
+    }
+    /* Tarifs : le calque de bord (bande --slate-900) cassait le ciel continu en haut.
+       Avec le ciel par paires, on le rend transparent → fondu doux témoignages → tarifs. */
+    .pricing-edge-fade { background: none !important; }
+    /* On retire les effets de fond propres à tarifs (beams animés, blob, grille ambre)
+       → la section n'affiche plus que le ciel partagé, comme les autres. */
+    #beams-canvas, .pricing-bg-blob, .pricing-bg-grid { display: none !important; }
+
+    /* ════════════════════════════════════════════════
+       🌫️  SECTION CONCEPT « UNKAI » (mer de nuages)
+       Image en fond plein écran, bloc texte à droite.
+       ════════════════════════════════════════════════ */
+    #concept {
+      position: relative;
+      min-height: 78vh;
+      display: flex; align-items: center;
+      padding: 90px 0;
+      background: #0a1426;
+      overflow: hidden;
+    }
+    /* Calque image dédié → permet un Ken Burns (zoom très léger et lent) */
+    .concept-bg {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: url('Images/Fond/Section Unkai.png') center center / cover no-repeat;
+      transform-origin: 50% 50%;
+      animation: conceptKenBurns 34s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    @keyframes conceptKenBurns {
+      from { transform: scale(1.03); }
+      to   { transform: scale(1.09); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .concept-bg { transform: scale(1.03); animation: none; }
+    }
+    /* Voile pour la lisibilité : sombre à droite (sous le texte) → transparent vers la gauche */
+    #concept .concept-scrim {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background:
+        linear-gradient(to left,
+          rgba(7,14,30,0.85) 0%, rgba(7,14,30,0.58) 30%, rgba(7,14,30,0.18) 56%, transparent 76%),
+        linear-gradient(to bottom, rgba(7,14,30,0.30) 0%, transparent 28%);
+    }
+    /* Fondu haut + bas LONG : le navy (= bas de la section précédente) se dissout dans l'image,
+       aucune démarcation visible. Couleurs raccordées aux voisines (navy en nuit, clair en jour). */
+    #concept::before, #concept::after {
+      content: ''; position: absolute; left: 0; right: 0;
+      z-index: 1; pointer-events: none;
+    }
+    #concept::before {
+      top: 0; height: 340px;
+      background: linear-gradient(to bottom, #0a1426 0%, #0a1426 6%, rgba(10,20,38,0.55) 45%, transparent 100%);
+    }
+    #concept::after {
+      bottom: 0; height: 55px;
+      background: linear-gradient(to top, #0a1426 0%, rgba(10,20,38,0.6) 55%, transparent 100%);
+    }
+    [data-theme="light"] #concept::before {
+      background: linear-gradient(to bottom, #fdeede 0%, #fdeede 6%, rgba(253,238,222,0.55) 45%, transparent 100%);
+    }
+    [data-theme="light"] #concept::after {
+      background: linear-gradient(to top, #fdeede 0%, rgba(253,238,222,0.55) 45%, transparent 100%);
+    }
+    #concept .concept-inner { position: relative; z-index: 2; width: 100%; }
+    .concept-text { margin-left: auto; max-width: 540px; text-align: left; color: #fff; }
+    .concept-label {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.82rem; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--amber-light); margin-bottom: 16px;
+    }
+    .concept-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 600; color: #fff;
+      font-size: clamp(3.4rem, 7vw, 5.4rem); line-height: 0.95;
+      display: flex; align-items: center; gap: 20px;
+      margin-bottom: 12px;
+    }
+    .concept-kanji {
+      writing-mode: vertical-rl;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.34em; font-weight: 500; line-height: 1.05;
+      letter-spacing: 2px; color: var(--amber-light);
+    }
+    .concept-subtitle {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--amber-light); margin-bottom: 30px;
+    }
+    .concept-text p:not(.concept-subtitle) {
+      font-size: 1.06rem; line-height: 1.75; color: rgba(255,255,255,0.9); margin-bottom: 20px;
+    }
+    .concept-text p:last-child { margin-bottom: 0; }
+
+    /* Nuages qui défilent en boucle, collés en bas de la section.
+       La moitié basse est coupée par le bord (overflow:hidden de #concept).
+       Tuile de largeur fixe (600px) → la boucle est parfaitement raccordée. */
+    #concept .concept-clouds {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      height: 420px; z-index: 2; pointer-events: none; opacity: 0.3;
+      /* 3 couches aux largeurs incommensurables (730/540/410) → la répétition combinée est quasi invisible */
+      background:
+        url('Images/Fond/Nuages Unkai.png') repeat-x 0 bottom,
+        url('Images/Fond/Nuages Unkai.png') repeat-x 130px bottom,
+        url('Images/Fond/Nuages Unkai.png') repeat-x 70px bottom;
+      background-size: 730px 340px, 540px 250px, 410px 190px;
+      transform: translateY(50%);
+      animation: concept-clouds-drift 70s linear infinite;
+    }
+    @keyframes concept-clouds-drift {
+      from { background-position: 0 bottom, 130px bottom, 70px bottom; }
+      to   { background-position: -730px bottom, -410px bottom, -340px bottom; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #concept .concept-clouds { animation: none; }
+    }
+
+    @media (max-width: 768px) {
+      #concept { min-height: 0; padding: 84px 0; }
+      #concept .concept-scrim {
+        background: linear-gradient(to bottom, rgba(7,14,30,0.35) 0%, rgba(7,14,30,0.80) 60%);
+      }
+      .concept-text { margin: 0 auto; max-width: 100%; }
+      .concept-text p:not(.concept-subtitle) { color: rgba(255,255,255,0.94); }
+      #concept .concept-clouds { height: 300px; background-size: 560px 230px, 420px 175px, 320px 135px; }
+    }
+
+    /* ════════════════════════════════════════════════
+       ⚡ PERFORMANCE MOBILE (≤ 768px)
+       Sur mobile, on coupe ce qui fait ramer le scroll :
+       - backdrop-filter (flou recalculé à chaque frame)
+       - animations en boucle (carrousel, nuages, Ken Burns)
+       Les cartes deviennent un peu plus opaques pour compenser
+       la perte du flou et rester lisibles.
+       ════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      *, *::before, *::after {
+        -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+      }
+      .scroll-row-inner, .concept-clouds, .concept-bg { animation: none !important; }
+      .pricing-card { background: rgba(13,22,41,0.66); }
+      .testimonial-card { background: rgba(13,22,41,0.52); }
+      [data-theme="light"] .pricing-card { background: rgba(255,255,255,0.88); }
+      [data-theme="light"] .testimonial-card { background: rgba(255,255,255,0.82); }
+    }
+  </style>
+
+  <!-- Applique le thème mémorisé avant le rendu (évite le flash) -->
+  <script>(function(){try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
+</head>
+<body>
+
+  <!-- Zones de flou : bords haut et bas de la page -->
+  <div class="edge-blur top" aria-hidden="true"></div>
+  <div class="edge-blur bottom" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav id="topnav">
+    <div class="container nav-inner">
+      <a href="/" class="logo">
+        <img class="logo-night" src="Images/Logos/U/Logo Unkai - Carré rectangle Blanc.png" alt="UnkaiWeb" />
+        <img class="logo-day" src="Images/Logos/U/Logo Unkai - Carré rectangle noir.png" alt="UnkaiWeb" />
+      </a>
+      <div class="nav-links">
+        <a href="realisations.html">Réalisations</a>
+        <a href="#process">Méthode</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Activer le mode jour"></button>
+      <a href="contact.html" class="nav-cta">Démarrer mon projet →</a>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false">
+        <svg id="hamburger-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-backdrop" id="mobile-backdrop" onclick="closeMobileMenu()"></div>
+  <div class="mobile-backdrop" id="mobile-backdrop" onclick="closeMobileMenu()"></div>
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+    <div class="m-drawer-head">
+      <span class="m-drawer-title">Menu</span>
+      <button class="m-close" onclick="closeMobileMenu()" aria-label="Fermer le menu">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="realisations.html" onclick="closeMobileMenu()">
+        Réalisations <span class="arrow">→</span>
+      </a>
+      <a href="#process" onclick="closeMobileMenu()">
+        Méthode <span class="arrow">→</span>
+      </a>
+      <a href="#faq" onclick="closeMobileMenu()">
+        FAQ <span class="arrow">→</span>
+      </a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="contact.html" class="mobile-cta-btn">
+        Démarrer mon projet
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <p class="mobile-menu-tagline">Sur mesure · Échange sans engagement</p>
+    </div>
+  </div>
+
+  <!-- Conteneur « ciel de nuit » : porte le dégradé coucher de soleil continu sur le hero + la section problème (mode nuit uniquement) -->
+  <div class="sunset-wrap">
+
+  <!-- HERO -->
+  <section id="hero">
+    <!-- Animated scrolling background (built by JS below) -->
+    <div class="scrolling-bg" id="scrolling-bg">
+      <div class="rows-container" id="rows-container"></div>
+      <div class="bg-overlay"></div>
+      <div class="bg-vignette"></div>
+      <div class="bg-center-dark"></div>
+      <div class="bg-glow-line top"></div>
+      <div class="bg-glow-line bottom"></div>
+      <div class="bg-fade-side"></div>
+    </div>
+
+    <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-aura"></div>
+
+      <h1>
+        Des sites qui transforment vos visiteurs en
+        <span class="amber-gradient"> clients.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Nous accompagnons les entreprises de <strong style="color:var(--amber)">Montpellier</strong> et de <strong style="color:var(--amber)">l’Hérault</strong> dans leur croissance, grâce à la méthode <strong style="color:var(--amber)">UNKAI</strong> développée sur mesure.
+      </p>
+
+      <div class="badges">
+        <div class="badge">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+          Sur-mesure
+        </div>
+        <div class="badge">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 11 11 13 15 9"/></svg>
+          Confiance
+        </div>
+        <div class="badge">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Proximité
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a href="contact.html" class="btn-primary" id="hero-cta">
+          Démarrer mon projet
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <a href="realisations.html" class="btn-secondary">
+          Voir les réalisations
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+        </a>
+      </div>
+      <p class="hero-mention">Échangeons sur votre projet, <strong>gratuitement et sans engagement.</strong></p>
+    </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-dot-wrap">
+        <div class="scroll-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ PROBLÈMES ════════ -->
+  <section id="problems" style="position:relative;padding:90px 24px;background:transparent;">
+    <div class="container">
+      <div class="prob-panel">
+        <div class="prob-intro">
+          <span class="prob-kicker">Nous savons ce que c'est</span>
+          <h2>Votre site vous freine, sans que vous le voyiez&nbsp;?</h2>
+          <p class="prob-lead">Beaucoup d'entreprises sont dans cette situation, souvent sans s'en rendre compte. Voici les signes qui ne trompent pas.</p>
+          <p class="prob-cta">Nous pouvons le transformer en <span class="amber" style="font-weight:600">véritable levier de croissance.</span></p>
+        </div>
+        <div class="prob-list">
+          <div class="prob-row">
+            <div class="prob-ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <div class="prob-txt"><h3>Invisible sur Google</h3><p>Votre entreprise est peu visible, voire invisible, sur Google.</p></div>
+          </div>
+          <div class="prob-row">
+            <div class="prob-ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div class="prob-txt"><h3>Un site qui ne vous ressemble plus</h3><p>Vieillissant, peu attractif, il ne reflète plus votre image.</p></div>
+          </div>
+          <div class="prob-row">
+            <div class="prob-ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div class="prob-txt"><h3>Trop peu de demandes</h3><p>Il ne vous apporte pas assez de contacts ni de clients.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ RÉALISATIONS — PREUVE IMMÉDIATE (section 2) ════════ -->
+  <section id="realisations">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">
+          <div class="label-line-l"></div>
+          <span class="label-text">Réalisations</span>
+          <div class="label-line-r"></div>
+        </div>
+        <h2 class="section-title">
+          La preuve avant la promesse.
+          <span class="amber-gradient"> Voici ce que nous livrons.</span>
+        </h2>
+      </div>
+
+      <div class="proof-showcase">
+
+        <!-- GAUCHE : ordinateur flottant -->
+        <div class="laptop-stage">
+          <div class="laptop-reveal proof-reveal" id="pfLaptop">
+            <div class="macbook">
+              <div class="mb-screen">
+                <div class="mb-cam"></div>
+                <img class="mb-shot" id="pfShot" src="portfolio/PC/Sites%20réels/Kllemo.jpg" alt="Aperçu du site Kllemo" loading="eager" />
+              </div>
+              <div class="mb-base"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DROITE : fiche de la réalisation + contrôles -->
+        <div class="proof-body">
+          <div class="info-fade proof-reveal" id="pfFade">
+            <div class="proof-chips" id="pfChips">
+              <span class="proof-chip">Art &amp; Sculpture</span>
+              <span class="proof-chip">Vitrine + boutique</span>
+            </div>
+            <h3 id="pfTitle">Kllemo</h3>
+            <p class="desc" id="pfDesc">Un site épuré et immersif pour l'artiste sculpteur : galerie d'œuvres en grand format et boutique d'éditions numérotées intégrée.</p>
+            <div class="proof-result">
+              <span class="proof-stat" id="pfStat">×3</span>
+              <span class="proof-stat-label" id="pfStatLabel">de demandes entrantes depuis la mise en ligne</span>
+            </div>
+            <a class="proof-link" id="pfLink" href="portfolio.html">
+              Voir l'étude de cas
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+
+          <div class="proof-controls">
+            <div class="proof-arrows">
+              <button id="pfPrev" type="button" aria-label="Réalisation précédente">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button id="pfNext" type="button" aria-label="Réalisation suivante">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
+            <span class="proof-counter" id="pfCounter">01 / 05</span>
+            <div class="proof-dots" id="pfDots"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bannière logos clients / partenaires -->
+      <div class="logo-band">
+        <p class="logo-band-label">Ils nous font confiance</p>
+        <div class="logo-marquee">
+          <div class="logo-track">
+            <img src="Images/Logos%20partenaires/Logo-le-carmen-v3-transparent%20(1).webp" alt="Le Carmen" />
+            <img src="Images/Logos%20partenaires/Logo-VSM-carre.webp" alt="Vertical S'Match" />
+            <img class="logo-kllemo" src="Images/Logos%20partenaires/Logo-Kllemo-1024x73.png" alt="Kllemo" />
+            <img src="Images/Logos%20partenaires/cropped-Une-pause-au-fusain-2%20(1).webp" alt="Une pause au fusain" />
+            <img src="Images/Logos%20partenaires/logo-full.png" alt="Partenaire" />
+            <img src="Images/Logos%20partenaires/Mcm-Logo.png" alt="Partenaire" />
+            <img src="Images/Logos%20partenaires/logo%20(1).png" alt="Partenaire" />
+            <!-- duplicata pour la boucle continue -->
+            <img src="Images/Logos%20partenaires/Logo-le-carmen-v3-transparent%20(1).webp" alt="" aria-hidden="true" />
+            <img src="Images/Logos%20partenaires/Logo-VSM-carre.webp" alt="" aria-hidden="true" />
+            <img class="logo-kllemo" src="Images/Logos%20partenaires/Logo-Kllemo-1024x73.png" alt="" aria-hidden="true" />
+            <img src="Images/Logos%20partenaires/cropped-Une-pause-au-fusain-2%20(1).webp" alt="" aria-hidden="true" />
+            <img src="Images/Logos%20partenaires/logo-full.png" alt="" aria-hidden="true" />
+            <img src="Images/Logos%20partenaires/Mcm-Logo.png" alt="" aria-hidden="true" />
+            <img src="Images/Logos%20partenaires/logo%20(1).png" alt="" aria-hidden="true" />
+          </div>
+        </div>
+      </div>
+
+      <div class="section-cta">
+        <p>Découvrez l'ensemble de nos projets.</p>
+        <a href="realisations.html" class="btn-secondary">Voir toutes les réalisations
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /.sunset-wrap (héros + réalisations) -->
+
+  <div class="sunset-wrap2">
+
+  <!-- PROBLEM -->
+  <section id="problem">
+    <div class="glow-blob" style="top:50%;left:25%;width:384px;height:384px;background:rgba(245,158,11,0.04);transform:translateY(-50%)"></div>
+    <div class="glow-blob" style="top:50%;right:25%;width:256px;height:256px;background:rgba(30,41,59,0.4);transform:translateY(-50%)"></div>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">
+          <div class="label-line-l"></div>
+          <span class="label-text">Sur mesure vs classique</span>
+          <div class="label-line-r"></div>
+        </div>
+        <h2 class="section-title">
+          Un beau site ne suffit pas.
+          <span class="amber-gradient"> Il doit convertir.</span>
+        </h2>
+      </div>
+      <div class="compare-grid">
+        <article class="compare-card classic">
+          <div class="compare-card-head">
+            <span class="compare-kicker">Le plus répandu</span>
+            <h3>Un site « classique »</h3>
+            <p>Template acheté, modèle réutilisé, vu partout.</p>
+          </div>
+          <ul class="compare-list">
+            <li><span class="compare-ico"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Ressemble à tout le monde, et ce qui ne se distingue pas n'inspire pas confiance.</li>
+            <li><span class="compare-ico"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Message générique : le visiteur ne comprend pas vite ce que vous faites.</li>
+            <li><span class="compare-ico"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Lent et mal optimisé : peu visible dans votre zone.</li>
+            <li><span class="compare-ico"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Une vitrine qui dort : des visites, mais aucun appel ni devis.</li>
+            <li><span class="compare-ico"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span> Support impersonnel : en cas de besoin, vous êtes seul.</li>
+          </ul>
+          <div class="compare-footer">
+            <span class="compare-foot-label">Potentiel de conversion</span>
+            <div class="conv-bar"><span class="conv-fill"></span></div>
+            <span class="conv-verdict">Faible</span>
+            <p class="conv-note">Le visiteur regarde, puis repart sans passer à l'action.</p>
+          </div>
+        </article>
+
+        <div class="compare-vs">VS</div>
+
+        <article class="compare-card custom">
+          <div class="compare-card-head">
+            <span class="compare-kicker">La méthode UnkaiWeb</span>
+            <h3>Un site sur mesure</h3>
+            <p>Conçu de zéro, pour votre activité et vos clients.</p>
+          </div>
+          <ul class="compare-list">
+            <li><span class="compare-ico"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Une identité unique, qui vous démarque et rassure d'emblée.</li>
+            <li><span class="compare-ico"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Votre offre clarifiée, comprise en quelques secondes.</li>
+            <li><span class="compare-ico"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Rapide et optimisé pour le référencement local.</li>
+            <li><span class="compare-ico"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Un parcours pensé pour déclencher appels, devis et réservations.</li>
+            <li><span class="compare-ico"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Un interlocuteur dédié, du premier échange au suivi.</li>
+          </ul>
+          <div class="compare-footer">
+            <span class="compare-foot-label">Potentiel de conversion</span>
+            <div class="conv-bar"><span class="conv-fill"></span></div>
+            <span class="conv-verdict">Élevé</span>
+            <p class="conv-note">Chaque page guide vos visiteurs vers la prise de contact.</p>
+          </div>
+        </article>
+      </div>
+      <p class="transition-text">Nous avons créé UnkaiWeb pour que votre site arrête d'être une simple vitrine, et devienne un <span class="amber" style="font-weight:600">vrai outil de conversion.</span></p>
+
+      <div class="section-cta">
+        <p>Passez du côté qui convertit.</p>
+        <a href="contact.html" class="btn-primary">Démarrer mon projet
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="process-bg-img"></div>
+    <div class="process-bg-gradient"></div>
+    <div class="process-diag-lines">
+      <div class="diag-line" style="top:20%"></div>
+      <div class="diag-line" style="top:35%"></div>
+      <div class="diag-line" style="top:50%"></div>
+      <div class="diag-line" style="top:65%"></div>
+      <div class="diag-line" style="top:80%"></div>
+    </div>
+    <div class="container" style="position:relative;z-index:10">
+      <div class="section-header">
+        <div class="section-label">
+          <div class="label-line-l"></div>
+          <span class="label-text">La méthode</span>
+          <div class="label-line-r"></div>
+        </div>
+        <h2 class="section-title">
+          La méthode<span class="amber-gradient" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;letter-spacing:.12em"> UNKAI</span>
+        </h2>
+        <p class="um-lede">Cinq étapes, du cadrage à la mise en ligne, avec une validation à chaque moment clé.</p>
+      </div>
+
+      <!-- Onglets U N K A I -->
+      <div class="um-tabs" role="tablist">
+        <button class="um-tab active" data-i="0"><span class="um-let">U</span><span class="um-name">Univers</span></button>
+        <button class="um-tab" data-i="1"><span class="um-let">N</span><span class="um-name">Narration</span></button>
+        <button class="um-tab" data-i="2"><span class="um-let">K</span><span class="um-name">Kōbō</span></button>
+        <button class="um-tab" data-i="3"><span class="um-let">A</span><span class="um-name">Assurance</span></button>
+        <button class="um-tab" data-i="4"><span class="um-let">I</span><span class="um-name">Inauguration</span></button>
+      </div>
+
+      <div class="um-stage">
+
+        <div class="um-panel active" data-i="0">
+          <div class="um-card" data-letter="U">
+            <div class="um-head">
+              <span class="um-letter">U</span>
+              <div>
+                <p class="um-num">Étape 1 / 5 · Cadrage</p>
+                <h3>Univers <small>· U comme Univers</small></h3>
+              </div>
+            </div>
+            <p class="um-intro">Nous posons l'univers de la marque : besoins, objectifs, arborescence, palette, typo. Tout part de là.</p>
+            <p class="um-sub">Ce qu'elle comprend</p>
+            <ul>
+              <li>Sauvegarde du site actuel et de sa base de données</li>
+              <li>Recueil des besoins, objectifs et priorités</li>
+              <li>Analyse de l'existant</li>
+              <li>Définition de l'arborescence du site</li>
+              <li>Sélection d'une palette de couleurs adaptée au digital</li>
+              <li>Typographie optimisée pour le web</li>
+            </ul>
+            <p class="um-goal"><strong>L'objectif :</strong> partir sur des fondations propres, avec une vision claire du site à créer.</p>
+          </div>
+        </div>
+
+        <div class="um-panel" data-i="1">
+          <div class="um-card" data-letter="N">
+            <div class="um-head">
+              <span class="um-letter">N</span>
+              <div>
+                <p class="um-num">Étape 2 / 5 · Conception</p>
+                <h3>Narration <small>· N comme Narration</small></h3>
+              </div>
+            </div>
+            <p class="um-intro">Nous racontons visuellement : logos, maquettes, contenus. Le site prend une voix.</p>
+            <p class="um-sub">Ce qu'elle comprend</p>
+            <ul>
+              <li>Retouche ou adaptation des logos</li>
+              <li>Définition d'un univers visuel cohérent</li>
+              <li>Création de maquettes pour les pages clés</li>
+              <li>Ajustements, retouches et validation des maquettes</li>
+              <li>Rédaction ou adaptation des contenus</li>
+              <li>Intégration des éléments spécifiques (formations, prix, durées, catalogue)</li>
+            </ul>
+
+            <!-- Élan : structure de page appliquée pendant la Narration (pas une méthode à part) -->
+            <div class="elan">
+              <p class="elan-eyebrow">Structure de page</p>
+              <h4 class="elan-title">Créer l'élan avant la prise de contact.</h4>
+              <p class="elan-text"><strong>Élan</strong> est notre structure de page maison, conçue pour amener plus de visiteurs jusqu'à la prise de contact. Pendant la phase Narration, nous l'adaptons à <strong>votre clientèle</strong> — vos clients, votre secteur, leurs attentes pour bâtir un parcours évident : offre claire, preuves visibles, bénéfices concrets et action facile à réaliser.</p>
+              <div class="elan-steps">
+                <div class="elan-step">
+                  <span class="elan-letter">É</span>
+                  <div class="elan-step-body">
+                    <span class="elan-step-name">Évidence</span>
+                    <span class="elan-step-desc">Comprendre votre offre en quelques secondes.</span>
+                  </div>
+                </div>
+                <div class="elan-step">
+                  <span class="elan-letter">L</span>
+                  <div class="elan-step-body">
+                    <span class="elan-step-name">Légitimité</span>
+                    <span class="elan-step-desc">Voir des preuves qui installent la confiance.</span>
+                  </div>
+                </div>
+                <div class="elan-step">
+                  <span class="elan-letter">A</span>
+                  <div class="elan-step-body">
+                    <span class="elan-step-name">Adhésion</span>
+                    <span class="elan-step-desc">Se projeter dans les bénéfices du futur site.</span>
+                  </div>
+                </div>
+                <div class="elan-step">
+                  <span class="elan-letter">N</span>
+                  <div class="elan-step-body">
+                    <span class="elan-step-name">Nouer le contact</span>
+                    <span class="elan-step-desc">Savoir quoi faire ensuite, sans chercher.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="um-goal"><strong>L'objectif :</strong> valider une direction claire (une identité et une voix) avant de produire.</p>
+          </div>
+        </div>
+
+        <div class="um-panel" data-i="2">
+          <div class="um-card" data-letter="K">
+            <div class="um-head">
+              <span class="um-letter">K</span>
+              <div>
+                <p class="um-num">Étape 3 / 5 · Production</p>
+                <h3>Kōbō <small>· K comme Kōbō</small></h3>
+              </div>
+            </div>
+            <p class="um-intro"><strong style="color:var(--white);font-weight:600">Kōbō</strong> <span style="font-family:'Cormorant Garamond',Georgia,serif;color:var(--amber);font-weight:600;font-size:1.15em">工房</span>, « atelier » en japonais : l'endroit où le site se façonne, pièce par pièce : intégration des pages, graphisme, performance, SEO structurel. C'est ici que nous construisons, avec le souci du détail.</p>
+            <p class="um-sub">Ce qu'elle comprend</p>
+            <ul>
+              <li>Création et intégration des pages demandées</li>
+              <li>Création ou adaptation des éléments graphiques</li>
+              <li>Intégration des textes, visuels et contenus</li>
+              <li>Optimisation des images et des performances</li>
+              <li>Optimisation SEO de la structure</li>
+              <li>Balises Meta Title, Meta Description (et catalogue si nécessaire)</li>
+            </ul>
+            <p class="um-goal"><strong>L'objectif :</strong> produire un site propre, rapide et cohérent, affiné en continu.</p>
+          </div>
+        </div>
+
+        <div class="um-panel" data-i="3">
+          <div class="um-card" data-letter="A">
+            <div class="um-head">
+              <span class="um-letter">A</span>
+              <div>
+                <p class="um-num">Étape 4 / 5 · Test</p>
+                <h3>Assurance <small>· A comme Assurance</small></h3>
+              </div>
+            </div>
+            <p class="um-intro">Assurance qualité : responsive, fonctionnalités, recette client. Rien ne passe sans contrôle.</p>
+            <p class="um-sub">Ce qu'elle comprend</p>
+            <ul>
+              <li>Vérification du responsive (ordinateur, tablette, mobile)</li>
+              <li>Tests des formulaires, liens, boutons et fonctionnalités</li>
+              <li>Recette finale avec le client</li>
+            </ul>
+            <p class="um-goal"><strong>L'objectif :</strong> ne rien laisser passer : un site fiable, validé sous tous les angles.</p>
+          </div>
+        </div>
+
+        <div class="um-panel" data-i="4">
+          <div class="um-card" data-letter="I">
+            <div class="um-head">
+              <span class="um-letter">I</span>
+              <div>
+                <p class="um-num">Étape 5 / 5 · Mise en ligne</p>
+                <h3>Inauguration <small>· I comme Inauguration</small></h3>
+              </div>
+            </div>
+            <p class="um-intro">Nous franchissons les nuages : lancement, vérif des perfs, suivi post-live.</p>
+            <p class="um-sub">Ce qu'elle comprend</p>
+            <ul>
+              <li>Mise en ligne du nouveau site</li>
+              <li>Vérification des performances après lancement</li>
+              <li>Suivi et corrections mineures après mise en ligne</li>
+            </ul>
+            <p class="um-goal"><strong>L'objectif :</strong> lancer un site optimisé, et l'accompagner dans la durée.</p>
+          </div>
+        </div>
+
+        <div class="um-nav">
+          <button id="umPrev" type="button" aria-label="Étape précédente">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <span class="um-count" id="umCount">01 / 05</span>
+          <button id="umNext" type="button" aria-label="Étape suivante">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+
+      </div>
+
+      <div class="section-cta">
+        <p>Prêt à lancer votre projet ?</p>
+        <a href="contact.html" class="btn-primary">Démarrer mon projet
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /.sunset-wrap2 (problème + comment ça marche) -->
+
+  <!-- ════════ BÉNÉFICES / RÉASSURANCE ════════ -->
+  <section id="benefits" style="position:relative;padding:96px 24px;">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">
+          <div class="label-line-l"></div>
+          <span class="label-text">Pourquoi UnkaiWeb</span>
+          <div class="label-line-r"></div>
+        </div>
+        <h2 class="section-title">
+          Un projet simple,
+          <span class="amber-gradient"> cadré et sans risque.</span>
+        </h2>
+      </div>
+      <div class="bn-grid">
+        <div class="bn-feature">
+          <div class="bn-ico-lg"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="bn-stat">4–6 <span>semaines</span></div>
+          <h3>Votre site en ligne, vite</h3>
+          <p>Un délai court et tenu, grâce à un processus structuré du premier échange à la mise en ligne.</p>
+        </div>
+        <div class="bn-list">
+          <div class="bn-item">
+            <div class="bn-ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <div><h4>Peu d'effort pour vous</h4><p>Nous prenons en charge l'essentiel : vous gardez le cap sur votre métier, nous nous occupons du reste.</p></div>
+          </div>
+          <div class="bn-item">
+            <div class="bn-ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div><h4>Sans risque</h4><p>Une période d'accompagnement offerte après la mise en ligne, pour partir l'esprit tranquille.</p></div>
+          </div>
+          <div class="bn-item">
+            <div class="bn-ico"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+            <div><h4>Un process clair</h4><p>Un projet cadré étape par étape : simple, transparent et rassurant.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ AUDIT GRATUIT ════════ -->
+  <section id="audit" style="position:relative;padding:40px 24px 96px;">
+    <div class="container">
+      <div class="audit-card">
+        <span class="audit-badge">Audit offert</span>
+        <h2>Pas sûr de ce qui cloche sur votre site&nbsp;? Nous vous le disons.</h2>
+        <p>Nous analysons votre site actuel et vous renvoyons un audit clair : ce qui fonctionne, ce qui freine vos visiteurs, et les priorités pour gagner en clarté, crédibilité et visibilité locale.</p>
+        <ul class="audit-list">
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Clarté du message</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Crédibilité &amp; design</li>
+          <li><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Référencement local</li>
+        </ul>
+        <a href="contact.html" class="btn-primary">Demander mon audit gratuit
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+        <p class="audit-note">100% gratuit, sans engagement · réponse sous 48h.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="sunset-wrap3"><!-- fond ciel : témoignages + tarifs -->
+
+  <!-- fade: slate-950 → slate-900 -->
+  <div class="fade-divider" style="background:linear-gradient(to bottom,#020617,#0f172a)"></div>
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="glow-blob" style="top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:rgba(245,158,11,0.05)"></div>
+    <div class="container" style="position:relative;z-index:10">
+      <div class="section-header">
+        <div class="section-label">
+          <div class="label-line-l"></div>
+          <span class="label-text">Témoignages</span>
+          <div class="label-line-r"></div>
+        </div>
+        <h2 class="section-title">
+          Ce qu'en disent nos clients,
+          <span class="amber-gradient"> résultats à l'appui.</span>
+        </h2>
+      </div>
+      <div class="testimonials-grid">
+        <article class="testimonial-card">
+          <div class="quote-badge">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+          </div>
+          <div class="tc-result">
+            <span class="tc-stat">Top 3</span>
+            <span class="tc-stat-label">référencement Google local à Uzès, atteint en 1 mois</span>
+          </div>
+          <!-- TODO : remplacer par le vrai verbatim du client -->
+          <blockquote>« Le site reflète exactement l'image du salon, et nos clients nous trouvent enfin facilement sur Google. »</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar">C</div>
+            <div><div class="author-name">Le Carmen</div><div class="author-role">Salon de coiffure · Uzès</div></div>
+          </div>
+          <div class="testimonial-bottom-line"></div>
+        </article>
+        <article class="testimonial-card">
+          <div class="quote-badge">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+          </div>
+          <div class="tc-result">
+            <span class="tc-stat">350 visiteurs</span>
+            <span class="tc-stat-label">sur le site dès la première semaine de lancement</span>
+          </div>
+          <!-- TODO : remplacer par le vrai verbatim du client -->
+          <blockquote>« Un site clair et accueillant, qui a tout de suite donné envie de venir essayer. »</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar">V</div>
+            <div><div class="author-name">Vertical S'Match</div><div class="author-role">Complexe multisport · Vauvert</div></div>
+          </div>
+          <div class="testimonial-bottom-line"></div>
+        </article>
+        <article class="testimonial-card">
+          <div class="quote-badge">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+          </div>
+          <div class="tc-result">
+            <span class="tc-stat">+40 %</span>
+            <span class="tc-stat-label">de réservations sur l'année depuis la refonte</span>
+          </div>
+          <!-- TODO : remplacer par le vrai verbatim du client -->
+          <blockquote>« Les voyageurs réservent en confiance : le site donne vraiment envie du lieu. »</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar">U</div>
+            <div><div class="author-name">Une pause au fusain</div><div class="author-role">Gîte de charme</div></div>
+          </div>
+          <div class="testimonial-bottom-line"></div>
+        </article>
+      </div>
+
+      <div class="section-cta">
+        <p>Et si le prochain résultat était le vôtre ?</p>
+        <a href="contact.html" class="btn-primary">Démarrer mon projet
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- fade: slate-900 → slate-900 (même couleur, pas de divider nécessaire) -->
+  <!-- PRICING — DÉSACTIVÉ pour le moment (réactiver : retirer le style display:none ci-dessous) -->
+  <section id="pricing" style="display:none">
+    <canvas id="beams-canvas" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.7;pointer-events:none;z-index:0;filter:blur(28px)"></canvas>
+    <div class="pricing-edge-fade" style="position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom, var(--slate-900) 0%, transparent 15%, transparent 85%, var(--slate-900) 100%)"></div>
+    <div class="pricing-bg-blob"></div>
+    <svg class="pricing-bg-grid" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+          <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#F59E0B" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+    </svg>
+    <div class="container" style="position:relative;z-index:10">
+      <div class="section-header">
+        <div class="section-label">
+          <div class="label-line-l"></div>
+          <span class="label-text">Tarifs</span>
+          <div class="label-line-r"></div>
+        </div>
+        <h2 class="section-title">
+          Des prix clairs.
+          <span class="amber-gradient"> Zéro surprise.</span>
+        </h2>
+      </div>
+      <div class="pricing-grid">
+
+        <article class="pricing-card">
+          <div class="pricing-head">
+            <p class="tier-label">One page</p>
+            <div class="tier-amount"><span class="tier-num">1 800€</span></div>
+            <p class="tier-desc">Idéal pour se lancer avec une présence claire et soignée.</p>
+          </div>
+          <ul class="feature-list">
+            <li><span class="feature-check">✓</span> Une page complète et percutante</li>
+            <li><span class="feature-check">✓</span> Design 100% sur mesure</li>
+            <li><span class="feature-check">✓</span> Optimisé mobile &amp; référencement local</li>
+            <li><span class="feature-check">✓</span> Formulaire de contact</li>
+          </ul>
+          <a href="contact.html" class="btn-secondary btn-full">Démarrer mon projet</a>
+        </article>
+
+        <article class="pricing-card pricing-card-featured">
+          <span class="pricing-tag">Le plus demandé</span>
+          <div class="pricing-head">
+            <p class="tier-label">Site vitrine</p>
+            <div class="tier-amount"><span class="tier-num">3 000€</span></div>
+            <p class="tier-desc">Plusieurs pages pour présenter toute votre activité.</p>
+          </div>
+          <ul class="feature-list">
+            <li><span class="feature-check">✓</span> Accueil, services, à propos, contact…</li>
+            <li><span class="feature-check">✓</span> Design 100% sur mesure</li>
+            <li><span class="feature-check">✓</span> Référencement local optimisé</li>
+            <li><span class="feature-check">✓</span> Accompagnement dédié, de A à Z</li>
+          </ul>
+          <a href="contact.html" class="btn-primary btn-full">Démarrer mon projet</a>
+        </article>
+
+        <article class="pricing-card">
+          <div class="pricing-head">
+            <p class="tier-label">Boutique e-commerce</p>
+            <div class="tier-amount"><span class="tier-num">4 000€</span></div>
+            <p class="tier-desc">Pour vendre vos produits directement en ligne.</p>
+          </div>
+          <ul class="feature-list">
+            <li><span class="feature-check">✓</span> Catalogue &amp; paiement en ligne</li>
+            <li><span class="feature-check">✓</span> Gestion des produits</li>
+            <li><span class="feature-check">✓</span> Design 100% sur mesure</li>
+            <li><span class="feature-check">✓</span> SEO &amp; performance</li>
+          </ul>
+          <a href="contact.html" class="btn-secondary btn-full">Démarrer mon projet</a>
+        </article>
+
+      </div>
+      <p class="pricing-note">Paiement unique, sans abonnement · devis gratuit · échange sans engagement</p>
+
+      <!-- ════════ ACQUISITION : services récurrents, après la création ════════ -->
+      <div class="acq-block">
+        <div class="acq-divider" aria-hidden="true"></div>
+        <div class="acq-intro">
+          <span class="label-text">Étape suivante · acquisition</span>
+          <h3>Votre site est en ligne ? Faites-le <span class="amber-gradient">connaître.</span></h3>
+          <p>Un beau site ne sert à rien sans visiteurs. Une fois votre site livré, nous activons un véritable canal d'acquisition pour attirer un flux régulier de clients qualifiés et booster vos visites.</p>
+        </div>
+        <div class="acq-grid">
+
+          <article class="pricing-card">
+            <div class="pricing-head">
+              <p class="tier-label">SEO / GEO</p>
+              <div class="tier-amount"><em>à partir de</em><span class="tier-num">399€</span><span class="tier-per">/ mois</span></div>
+              <p class="tier-desc">Référencement naturel &amp; local pour remonter durablement sur Google et les moteurs IA.</p>
+            </div>
+            <ul class="feature-list">
+              <li><span class="feature-check">✓</span> Optimisation continue du contenu &amp; des mots-clés</li>
+              <li><span class="feature-check">✓</span> Référencement local (fiche Google, avis, cartes)</li>
+              <li><span class="feature-check">✓</span> Suivi des positions &amp; rapport mensuel</li>
+            </ul>
+            <a href="contact.html" class="btn-secondary btn-full">En savoir plus</a>
+          </article>
+
+          <article class="pricing-card">
+            <div class="pricing-head">
+              <p class="tier-label">SEA — Publicité</p>
+              <div class="tier-amount"><em>à partir de</em><span class="tier-num">399€</span><span class="tier-per">/ mois</span></div>
+              <p class="tier-desc">Des campagnes Google Ads pour un flux de visites immédiat, dès le lancement.</p>
+            </div>
+            <ul class="feature-list">
+              <li><span class="feature-check">✓</span> Création &amp; gestion des campagnes Google Ads</li>
+              <li><span class="feature-check">✓</span> Ciblage local et par intention d'achat</li>
+              <li><span class="feature-check">✓</span> Optimisation du budget &amp; reporting</li>
+            </ul>
+            <a href="contact.html" class="btn-secondary btn-full">En savoir plus</a>
+          </article>
+
+        </div>
+        <p class="pricing-note">Honoraires mensuels, sans engagement de longue durée · budget publicitaire en sus pour le SEA</p>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /.sunset-wrap3 (témoignages + tarifs) -->
+
+  <div class="sunset-wrap4"><!-- fond ciel : FAQ -->
+
+  <!-- fade: slate-900 → slate-950 -->
+  <div class="fade-divider" style="background:linear-gradient(to bottom,#0f172a,#020617)"></div>
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">
+          <div class="label-line-l"></div>
+          <span class="label-text">FAQ</span>
+          <div class="label-line-r"></div>
+        </div>
+        <h2 class="section-title">
+          Vos questions.
+          <span class="amber-gradient"> Nos réponses.</span>
+        </h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Combien de temps faut-il pour créer mon site ?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><p>Cela dépend de l'ampleur du projet : un one page va plus vite qu'un e-commerce. Après notre premier échange, nous vous donnons un délai clair, et nous nous y tenons. Le sur-mesure prend le temps qu'il faut pour être juste, jamais plus.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Y a-t-il un abonnement à payer ?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><p>Non. La création de votre site est un paiement unique. Si vous souhaitez que nous gérions ensuite l'hébergement et la maintenance, nous vous proposons une formule dédiée, mais vous n'êtes jamais enfermé dans un engagement.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Mon site sera-t-il unique ?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><p>Oui. On ne travaille pas avec des templates. Votre site est créé sur-mesure à partir de vos contenus, de votre activité et de votre identité. Deux clients du même secteur n'auront jamais le même site.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Puis-je modifier mon site après sa mise en ligne ?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><p>Oui. Nous pouvons vous former pour gérer vous-même les modifications simples, ou nous en charger pour vous. Nous en discutons selon vos besoins et l'autonomie que vous souhaitez.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Vous occupez-vous de l'hébergement et du nom de domaine ?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><p>Oui. Nous pouvons gérer l'hébergement, le nom de domaine et toute la mise en ligne. Vous n'avez rien de technique à gérer, nous nous occupons de tout.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Concrètement, qu'est-ce qu'un bon site pour vous ?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><p>Un site clair, où le visiteur comprend tout de suite ce que vous faites, vous fait confiance, et sait comment vous contacter. Pas juste un beau site : un site utile, qui travaille pour votre activité.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-text">Comment se passe le premier contact ?</span>
+            <svg class="faq-chevron" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer"><p>Nous échangeons sur votre projet, vos objectifs et votre budget. C'est gratuit et sans engagement : au minimum, vous repartez avec une vision claire de ce que nous pouvons faire pour vous.</p></div>
+        </div>
+      </div>
+
+      <div class="section-cta">
+        <p>Une autre question ? Parlons-en directement.</p>
+        <a href="contact.html" class="btn-primary">Démarrer mon projet
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /.sunset-wrap4 (FAQ) -->
+
+  <!-- CONCEPT UNKAI -->
+  <section id="concept">
+    <div class="concept-bg"></div>
+    <div class="concept-scrim"></div>
+    <div class="concept-clouds"></div>
+    <div class="container concept-inner">
+      <div class="concept-text">
+        <span class="concept-label">Le concept</span>
+        <h2 class="concept-title">Unkai<span class="concept-kanji">雲海</span></h2>
+        <p class="concept-subtitle">La mer de nuages</p>
+        <p>L'Unkai (雲海) est un phénomène naturel où une mer de nuages se forme et recouvre le paysage jusqu'à l'horizon, créant une atmosphère mystérieuse et apaisante.</p>
+        <p>Ce spectacle apparaît souvent à l'aube, lorsque la chaleur du soleil rencontre l'air frais des montagnes et des vallées.</p>
+        <p>Le contempler, c'est prendre de la hauteur : s'élever au-dessus des nuages, dominer le brouillard, et voir plus loin que les autres.</p>
+        <p>C'est l'esprit de chacune de nos créations. Avec la précision de l'artisanat japonais, nous concevons des sites sur mesure qui font ressortir votre marque, avec clarté et justesse.</p>
+        <div class="concept-cta" style="margin-top:28px">
+          <a href="contact.html" class="btn-primary">Démarrer mon projet
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <img class="logo-night" src="Images/Logos/U/Logo Unkai - Carré rectangle Blanc.png" alt="UnkaiWeb" />
+            <img class="logo-day" src="Images/Logos/U/Logo Unkai - Carré rectangle noir.png" alt="UnkaiWeb" />
+          </div>
+          <p>Création de sites web sur mesure pour les PME, artisans et commerçants de Montpellier et de l'Hérault. Clairs, crédibles, et pensés pour être contactés.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:contact@unkaiweb.fr">contact@unkaiweb.fr</a></li>
+            <li><span style="color:var(--slate-400);font-size:.875rem">Montpellier, Hérault</span></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Informations</h4>
+          <ul>
+            <li><a href="/mentions-legales">Mentions légales</a></li>
+            <li><a href="/cgv">CGV</a></li>
+            <li><a href="/confidentialite">Politique de confidentialité</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 UnkaiWeb. Tous droits réservés.</p>
+        <p>Conçu avec passion à Montpellier 🇫🇷</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- STICKY CTA MOBILE -->
+  <div id="sticky-cta">
+    <a href="contact.html" class="btn-primary">
+      Démarrer mon projet
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    </a>
+    <p>Échange sans engagement</p>
+  </div>
+
+  <script>
+    // ── Build scrolling background grid ──
+    const PC_IMAGES = [
+      // Sites réels livrés (.jpg) répartis parmi les mockups (.webp) du carrousel
+      'portfolio/PC/Sites%20réels/Kllemo.jpg',
+      'portfolio/PC/1.webp','portfolio/PC/3.webp',
+      'portfolio/PC/Sites%20réels/Le%20carmen%20uzes.jpg',
+      'portfolio/PC/4.webp','portfolio/PC/5.webp',
+      'portfolio/PC/Sites%20réels/vertical%20smatch.jpg',
+      'portfolio/PC/6.webp','portfolio/PC/7.webp',
+      'portfolio/PC/Sites%20réels/Une%20pause%20au%20fusain.jpg',
+      'portfolio/PC/16.webp','portfolio/PC/18.webp',
+      'portfolio/PC/Sites%20réels/Reactifms.jpg',
+      'portfolio/PC/20.webp','portfolio/PC/22.webp','portfolio/PC/23.webp',
+      'portfolio/PC/25.webp','portfolio/PC/26.webp',
+    ];
+    const PORTABLE_IMAGES = [
+      'portfolio/Portable/2.webp','portfolio/Portable/8.webp',
+      'portfolio/Portable/17.webp','portfolio/Portable/19.webp',
+      'portfolio/Portable/21.webp','portfolio/Portable/24.webp',
+      'portfolio/Portable/27.webp',
+    ];
+    const ROW_CONFIGS = [
+      ['l','p','l','l','p','l','p','l','l','p'],
+      ['p','l','l','p','l','p','l','l','p','l'],
+      ['l','l','p','l','p','l','l','p','l','l'],
+      ['p','l','p','l','l','p','l','p','l','p'],
+      ['l','p','l','p','l','l','p','l','p','l'],
+    ];
+
+    const container = document.getElementById('rows-container');
+    let pcIdx = 0, portIdx = 0;
+
+    // ⚡ Perf mobile : moins de duplications (DOM plus léger). L'animation est, elle,
+    //    coupée en CSS sous 768px → le carrousel reste affiché mais sans repaint continu.
+    const PERF_MOBILE = window.matchMedia('(max-width: 768px)').matches;
+    const DUPS = PERF_MOBILE ? 2 : 4;
+
+    ROW_CONFIGS.forEach(config => {
+      const row = document.createElement('div');
+      row.className = 'scroll-row';
+      const inner = document.createElement('div');
+      inner.className = 'scroll-row-inner';
+
+      for (let dup = 0; dup < DUPS; dup++) {
+        config.forEach(type => {
+          const isPortrait = type === 'p';
+          const cell = document.createElement('div');
+          cell.className = 'grid-cell cell-showcase ' + (isPortrait ? 'cell-portrait' : 'cell-landscape');
+
+          const src = isPortrait
+            ? PORTABLE_IMAGES[portIdx++ % PORTABLE_IMAGES.length]
+            : PC_IMAGES[pcIdx++ % PC_IMAGES.length];
+
+          const img = document.createElement('img');
+          img.src = src; img.alt = ''; img.loading = 'lazy'; img.decoding = 'async';
+
+          const overlay = document.createElement('div');
+          overlay.className = 'showcase-overlay';
+
+          cell.appendChild(img);
+          cell.appendChild(overlay);
+          inner.appendChild(cell);
+        });
+      }
+      row.appendChild(inner);
+      container.appendChild(row);
+    });
+
+    // ── Mouse parallax on scrolling background ──
+    const rowsContainer = document.getElementById('rows-container');
+    let mx = 0, my = 0, cx = 0, cy = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = (e.clientX / window.innerWidth - 0.5) * 10;
+      my = (e.clientY / window.innerHeight - 0.5) * 6;
+    });
+
+    // On suspend le parallax et le défilement du fond quand le hero quitte l'écran.
+    const scrollingBg = document.getElementById('scrolling-bg');
+    let heroVisible = true;
+    new IntersectionObserver(([entry]) => {
+      heroVisible = entry.isIntersecting;
+      scrollingBg.classList.toggle('paused', !heroVisible);
+    }, { threshold: 0 }).observe(document.getElementById('hero'));
+
+    function parallaxLoop() {
+      if (heroVisible) {
+        cx += (mx - cx) * 0.02;
+        cy += (my - cy) * 0.02;
+        rowsContainer.style.transform =
+          `translate(calc(-50% + ${cx}px), calc(-50% + ${cy}px)) rotate(-8deg)`;
+      }
+      requestAnimationFrame(parallaxLoop);
+    }
+    parallaxLoop();
+
+    // ── FAQ accordion ──
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+        btn.setAttribute('aria-expanded', !isOpen);
+      });
+    });
+
+    // ── Beams background (Services section) ──
+    (function() {
+      const canvas = document.getElementById('beams-canvas');
+      if (!canvas) return;
+      const section = document.getElementById('pricing');
+      const ctx = canvas.getContext('2d');
+      const BEAM_COUNT = 30;
+      let beams = [];
+      let rafId;
+
+      function createBeam() {
+        const angle = -35 + Math.random() * 10;
+        return {
+          x: Math.random() * canvas.width * 1.5 - canvas.width * 0.25,
+          y: Math.random() * canvas.height * 1.5 - canvas.height * 0.25,
+          width: 30 + Math.random() * 60,
+          length: canvas.height * 2.5,
+          angle: angle,
+          speed: 0.5 + Math.random() * 1.0,
+          opacity: 0.10 + Math.random() * 0.14,
+          hue: 35 + Math.random() * 20,
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: 0.02 + Math.random() * 0.03,
+        };
+      }
+
+      function resetBeam(beam, index) {
+        const col = index % 3;
+        const spacing = canvas.width / 3;
+        beam.y = canvas.height + 100;
+        beam.x = col * spacing + spacing / 2 + (Math.random() - 0.5) * spacing * 0.5;
+        beam.width = 80 + Math.random() * 80;
+        beam.speed = 0.4 + Math.random() * 0.5;
+        beam.hue = 35 + (index * 20) / BEAM_COUNT;
+        beam.opacity = 0.10 + Math.random() * 0.10;
+      }
+
+      function resize() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        const rect = section.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = section.offsetHeight * dpr;
+        canvas.style.width = rect.width + 'px';
+        canvas.style.height = section.offsetHeight + 'px';
+        ctx.scale(dpr, dpr);
+        beams = Array.from({ length: BEAM_COUNT }, createBeam);
+      }
+
+      function drawBeam(beam) {
+        ctx.save();
+        ctx.translate(beam.x, beam.y);
+        ctx.rotate(beam.angle * Math.PI / 180);
+        const pulsingOpacity = beam.opacity * (0.8 + Math.sin(beam.pulse) * 0.2);
+        const g = ctx.createLinearGradient(0, 0, 0, beam.length);
+        g.addColorStop(0,   `hsla(${beam.hue},90%,60%,0)`);
+        g.addColorStop(0.1, `hsla(${beam.hue},90%,60%,${pulsingOpacity * 0.5})`);
+        g.addColorStop(0.4, `hsla(${beam.hue},90%,60%,${pulsingOpacity})`);
+        g.addColorStop(0.6, `hsla(${beam.hue},90%,60%,${pulsingOpacity})`);
+        g.addColorStop(0.9, `hsla(${beam.hue},90%,60%,${pulsingOpacity * 0.5})`);
+        g.addColorStop(1,   `hsla(${beam.hue},90%,60%,0)`);
+        ctx.fillStyle = g;
+        ctx.fillRect(-beam.width / 2, 0, beam.width, beam.length);
+        ctx.restore();
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        beams.forEach((beam, i) => {
+          beam.y -= beam.speed;
+          beam.pulse += beam.pulseSpeed;
+          if (beam.y + beam.length < -100) resetBeam(beam, i);
+          drawBeam(beam);
+        });
+        if (running) rafId = requestAnimationFrame(animate);
+      }
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let running = false;
+      function start() { if (!running && !prefersReduced) { running = true; rafId = requestAnimationFrame(animate); } }
+      function stop()  { running = false; cancelAnimationFrame(rafId); }
+
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      // On n'anime les beams que lorsque la section tarif est visible.
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) start(); else stop();
+      }, { threshold: 0 }).observe(section);
+    })();
+
+    // ── Menu mobile : panneau latéral droit ──
+    function setMobileMenu(open) {
+      document.getElementById('mobile-menu').classList.toggle('open', open);
+      document.getElementById('mobile-backdrop').classList.toggle('open', open);
+      document.body.classList.toggle('menu-open', open);
+      const btn = document.getElementById('hamburger');
+      if (btn) btn.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function toggleMobileMenu() {
+      setMobileMenu(!document.getElementById('mobile-menu').classList.contains('open'));
+    }
+    function closeMobileMenu() { setMobileMenu(false); }
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMobileMenu(); });
+
+    // ── Sticky CTA mobile ──
+    const heroCta = document.getElementById('hero-cta');
+    const stickyCta = document.getElementById('sticky-cta');
+    const observer = new IntersectionObserver(([entry]) => {
+      stickyCta.classList.toggle('visible', !entry.isIntersecting);
+    }, { threshold: 0 });
+    if (heroCta) observer.observe(heroCta);
+
+    // ── Bascule thème jour / nuit ──
+    const ICON_SUN  = `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`;
+    const ICON_MOON = `<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+    function updateThemeIcon() {
+      const btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      // En mode sombre on propose le soleil (passer au jour), et inversement.
+      btn.innerHTML = isLight ? ICON_MOON : ICON_SUN;
+      btn.setAttribute('aria-label', isLight ? 'Activer le mode sombre' : 'Activer le mode jour');
+    }
+    function applyTheme() {
+      const root = document.documentElement;
+      const isLight = root.getAttribute('data-theme') === 'light';
+      if (isLight) { root.removeAttribute('data-theme'); }
+      else { root.setAttribute('data-theme', 'light'); }
+      try { localStorage.setItem('theme', isLight ? 'dark' : 'light'); } catch (e) {}
+      updateThemeIcon();
+    }
+    function toggleTheme() {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      // Crossfade doux si l'API View Transitions est dispo (sinon bascule directe)
+      if (document.startViewTransition && !reduce) {
+        document.startViewTransition(applyTheme);
+      } else {
+        applyTheme();
+      }
+    }
+    updateThemeIcon();
+  </script>
+
+  <!-- Carrousel des réalisations (ordinateur flottant + déroulement) -->
+  <script>
+    (function () {
+      const DIR = 'portfolio/PC/Sites%20réels/';
+      const SITES = [
+        {
+          chips: ['Art & Sculpture', 'Vitrine + boutique'], name: 'Kllemo', src: DIR + 'Kllemo.jpg', href: 'portfolio.html',
+          desc: "Un site épuré et immersif pour l'artiste sculpteur : galerie d'œuvres en grand format et boutique d'éditions numérotées intégrée.",
+          stat: '×3', statLabel: 'de demandes entrantes depuis la mise en ligne'
+        },
+        {
+          chips: ['Coiffure & Beauté', 'Réservation + SEO local'], name: 'Le Carmen', src: DIR + 'Le%20carmen%20uzes.jpg', href: 'portfolio-lecarmenuzes.html',
+          desc: "Le site du salon de coiffure haut de gamme d'Uzès : présentation de l'équipe, réservation Planity intégrée et SEO local soigné.",
+          stat: 'Top 3', statLabel: 'du référencement Google local en 1 mois'
+        },
+        {
+          chips: ['Sport & Loisirs', 'Réservation en ligne'], name: "Vertical S'Match", src: DIR + 'vertical%20smatch.jpg', href: 'portfolio-verticalsmatch.html',
+          desc: 'Le site du complexe multisport de Vauvert : padel, squash, badminton, pickleball et escalade, avec réservation en ligne intégrée.',
+          stat: '350 visiteurs', statLabel: 'dès la première semaine de lancement'
+        },
+        {
+          chips: ['Tourisme & Hébergement', 'Gîte de charme'], name: 'Une pause au fusain', src: DIR + 'Une%20pause%20au%20fusain.jpg', href: 'portfolio-unepauseaufusain.html',
+          desc: "Un site vitrine poétique et immersif pour un gîte de charme à 1h de Paris : grandes photos, livre d'or et contact simplifié.",
+          stat: '+40%', statLabel: 'de réservations par an depuis la refonte'
+        },
+        {
+          chips: ['Industrie & BTP', 'Vitrine + devis'], name: 'Réactif Multiservices', src: DIR + 'Reactifms.jpg', href: 'portfolio-reactifms.html',
+          desc: "Le site d'une entreprise multiservices technique : portfolio de chantiers, double parcours pro / particuliers et demande de devis en 24h.",
+          stat: '+15%', statLabel: 'de demandes de devis dès la première semaine'
+        },
+      ];
+
+      let i = 0, busy = false;
+      const laptop = document.getElementById('pfLaptop');
+      const fade   = document.getElementById('pfFade');
+      const shot   = document.getElementById('pfShot');
+      const chips  = document.getElementById('pfChips');
+      const title  = document.getElementById('pfTitle');
+      const desc   = document.getElementById('pfDesc');
+      const stat   = document.getElementById('pfStat');
+      const statL  = document.getElementById('pfStatLabel');
+      const link   = document.getElementById('pfLink');
+      const cnt    = document.getElementById('pfCounter');
+      const dotsW  = document.getElementById('pfDots');
+      if (!laptop || !fade || !shot) return;
+
+      SITES.forEach((_, idx) => {
+        const d = document.createElement('span');
+        d.className = 'proof-dot' + (idx === 0 ? ' active' : '');
+        d.addEventListener('click', () => go(idx));
+        dotsW.appendChild(d);
+      });
+      const dots = Array.from(dotsW.children);
+      const pad = (n) => String(n).padStart(2, '0');
+
+      function go(idx) {
+        const target = (idx + SITES.length) % SITES.length;
+        if (target === i || busy) return;
+        busy = true;
+        // l'ancien glisse vers la gauche
+        laptop.classList.add('is-out');
+        fade.classList.add('is-out');
+        setTimeout(() => {
+          i = target;
+          const s = SITES[i];
+          shot.src = s.src; shot.alt = 'Aperçu du site ' + s.name;
+          chips.innerHTML = s.chips.map(c => '<span class="proof-chip">' + c + '</span>').join('');
+          title.textContent = s.name; desc.textContent = s.desc;
+          stat.textContent = s.stat; statL.textContent = s.statLabel; link.href = s.href;
+          cnt.textContent = pad(i + 1) + ' / ' + pad(SITES.length);
+          dots.forEach((d, k) => d.classList.toggle('active', k === i));
+          // le nouveau démarre à droite (sans transition), puis glisse au centre
+          laptop.classList.remove('is-out'); fade.classList.remove('is-out');
+          laptop.classList.add('is-enter'); fade.classList.add('is-enter');
+          void laptop.offsetWidth;            // reflow pour figer le point de départ à droite
+          requestAnimationFrame(() => {
+            laptop.classList.remove('is-enter');
+            fade.classList.remove('is-enter');
+            setTimeout(() => { busy = false; }, 640);
+          });
+        }, 360);
+      }
+
+      document.getElementById('pfNext').addEventListener('click', () => go(i + 1));
+      document.getElementById('pfPrev').addEventListener('click', () => go(i - 1));
+
+      // ── Swipe tactile + drag souris ──
+      const stage = document.querySelector('.proof-showcase');
+      if (stage) {
+        let startX = 0, startY = 0, dragging = false;
+        const THRESH = 45; // px mini pour valider un swipe
+        stage.addEventListener('pointerdown', (e) => {
+          if (e.target.closest('button, a, .proof-dot')) return; // on garde les clics sur les contrôles
+          dragging = true; startX = e.clientX; startY = e.clientY;
+          stage.classList.add('dragging');
+          if (e.pointerType === 'mouse') e.preventDefault(); // évite la sélection de texte au drag
+        });
+        const finish = (e) => {
+          if (!dragging) return;
+          dragging = false; stage.classList.remove('dragging');
+          const dx = e.clientX - startX, dy = e.clientY - startY;
+          if (Math.abs(dx) > THRESH && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? i + 1 : i - 1);
+        };
+        stage.addEventListener('pointerup', finish);
+        stage.addEventListener('pointerleave', (e) => { if (dragging) finish(e); });
+        stage.addEventListener('pointercancel', () => { dragging = false; stage.classList.remove('dragging'); });
+      }
+    })();
+  </script>
+
+
+  <!-- Stepper méthode UNKAI -->
+  <script>
+    (function () {
+      const tabs = Array.from(document.querySelectorAll('.um-tab'));
+      const panels = Array.from(document.querySelectorAll('.um-panel'));
+      const count = document.getElementById('umCount');
+      if (!tabs.length || !panels.length) return;
+      let cur = 0;
+      function show(i) {
+        cur = (i + panels.length) % panels.length;
+        tabs.forEach((t, k) => t.classList.toggle('active', k === cur));
+        panels.forEach((p, k) => p.classList.toggle('active', k === cur));
+        if (count) count.textContent = String(cur + 1).padStart(2, '0') + ' / 05';
+      }
+      tabs.forEach((t, k) => t.addEventListener('click', () => show(k)));
+      const prev = document.getElementById('umPrev'), next = document.getElementById('umNext');
+      if (prev) prev.addEventListener('click', () => show(cur - 1));
+      if (next) next.addEventListener('click', () => show(cur + 1));
+    })();
+  </script>
+
+</body>
+</html>
