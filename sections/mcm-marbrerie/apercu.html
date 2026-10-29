@@ -3,27 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MCM Marbrerie | Processus client</title>
+<title>MCM Marbrerie | Aperçu processus client</title>
+<!-- Simule les styles globaux d un kit Elementor pour tester la robustesse -->
+<style>body{margin:0}.elementor-kit-1 h2,.elementor-kit-1 h3{font-family:Arial;color:red;text-transform:uppercase}.elementor-kit-1 a{color:lime}.elementor-kit-1 p{margin-bottom:40px}</style>
+</head>
+<body class="elementor-kit-1">
+<!-- ==========================================================
+     MCM Marbrerie | Section "Processus client"
+     À coller tel quel dans un widget "HTML" Elementor.
+     Conseil : conteneur parent en pleine largeur, marges internes à 0.
+     ========================================================== -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     SECTION "PROCESSUS CLIENT" | MCM Marbrerie
-     Tout est préfixé .mcm-process pour s'intégrer sans conflit.
-     Ajuster les couleurs / polices dans les variables ci-dessous
-     pour coller exactement à la charte du site.
-     ============================================================ */
+  /* Les sélecteurs commencent tous par .mcm-process pour passer devant
+     les styles globaux du kit Elementor (titres, liens, paragraphes).
+     Polices et couleur d'accent reprennent les réglages globaux Elementor
+     du site s'ils existent, sinon les valeurs de secours. */
   .mcm-process {
-    --mcm-bg: #f5f2ed;          /* blanc pierre */
+    --mcm-bg: #f5f2ed;
     --mcm-surface: #ffffff;
-    --mcm-ink: #1f1f1f;         /* anthracite */
-    --mcm-muted: #6b6560;       /* gris taupe */
-    --mcm-accent: #a8865a;      /* bronze / laiton */
-    --mcm-accent-dark: #8a6c44;
+    --mcm-ink: #1f1f1f;
+    --mcm-muted: #6b6560;
+    --mcm-accent: var(--e-global-color-accent, #a8865a);
     --mcm-line: #ddd5ca;
-    --mcm-font-title: "Cormorant Garamond", Georgia, serif;
-    --mcm-font-text: "Montserrat", Helvetica, Arial, sans-serif;
+    --mcm-font-title: var(--e-global-typography-primary-font-family, "Cormorant Garamond"), Georgia, serif;
+    --mcm-font-text: var(--e-global-typography-text-font-family, "Montserrat"), Helvetica, Arial, sans-serif;
 
     position: relative;
     padding: clamp(64px, 9vw, 120px) 20px;
@@ -36,50 +42,46 @@
     overflow: hidden;
   }
   .mcm-process *, .mcm-process *::before, .mcm-process *::after { box-sizing: border-box; }
+  .mcm-process .mcm-process__inner { max-width: 1200px; margin: 0 auto; }
 
-  .mcm-process__inner { max-width: 1200px; margin: 0 auto; }
-
-  /* En-tête */
-  .mcm-process__head { text-align: center; max-width: 720px; margin: 0 auto clamp(48px, 6vw, 80px); }
-  .mcm-process__eyebrow {
+  .mcm-process .mcm-process__head { text-align: center; max-width: 720px; margin: 0 auto clamp(48px, 6vw, 80px); }
+  .mcm-process .mcm-process__eyebrow {
     display: inline-flex; align-items: center; gap: 14px;
-    font-size: 12px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase;
+    font-family: var(--mcm-font-text);
+    font-size: 12px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; line-height: 1.4;
     color: var(--mcm-accent);
     margin: 0 0 18px;
   }
-  .mcm-process__eyebrow::before, .mcm-process__eyebrow::after {
+  .mcm-process .mcm-process__eyebrow::before, .mcm-process .mcm-process__eyebrow::after {
     content: ""; width: 36px; height: 1px; background: currentColor; opacity: .6;
   }
-  .mcm-process__title {
+  .mcm-process .mcm-process__title {
     font-family: var(--mcm-font-title);
-    font-weight: 500;
-    font-size: clamp(34px, 5vw, 56px);
-    line-height: 1.08;
+    font-weight: 500; font-size: clamp(34px, 5vw, 56px); line-height: 1.08;
+    letter-spacing: .01em; text-transform: none;
+    color: var(--mcm-ink);
     margin: 0 0 20px;
-    letter-spacing: .01em;
   }
-  .mcm-process__title em { font-style: italic; color: var(--mcm-accent); }
-  .mcm-process__intro {
+  .mcm-process .mcm-process__title em { font-style: italic; color: var(--mcm-accent); }
+  .mcm-process .mcm-process__intro {
+    font-family: var(--mcm-font-text);
     font-size: 16px; line-height: 1.75; font-weight: 300; color: var(--mcm-muted); margin: 0;
   }
 
-  /* Étapes */
-  .mcm-process__steps {
+  .mcm-process .mcm-process__steps {
     list-style: none; margin: 0; padding: 0;
     display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px;
     position: relative;
-    counter-reset: mcm-step;
   }
-  /* Ligne de liaison (desktop) */
-  .mcm-process__steps::before {
+  .mcm-process .mcm-process__steps::before {
     content: ""; position: absolute; top: 38px; left: 10%; right: 10%; height: 1px;
     background: linear-gradient(90deg, transparent, var(--mcm-accent) 12%, var(--mcm-accent) 88%, transparent);
     opacity: .45;
   }
+  .mcm-process .mcm-step { position: relative; text-align: center; padding: 0 6px; margin: 0; }
+  .mcm-process .mcm-step::marker { content: none; }
 
-  .mcm-step { position: relative; text-align: center; padding: 0 6px; }
-
-  .mcm-step__badge {
+  .mcm-process .mcm-step__badge {
     position: relative; z-index: 1;
     width: 76px; height: 76px; margin: 0 auto 26px;
     display: grid; place-items: center;
@@ -90,107 +92,102 @@
     box-shadow: 0 10px 30px -18px rgba(31,31,31,.35);
     transition: background .35s ease, color .35s ease, border-color .35s ease, transform .35s ease;
   }
-  .mcm-step__badge svg { width: 30px; height: 30px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-  .mcm-step__num {
+  .mcm-process .mcm-step__badge svg { width: 30px; height: 30px; stroke: currentColor; fill: none; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+  .mcm-process .mcm-step__num {
     position: absolute; top: -6px; right: -6px;
     min-width: 28px; height: 28px; padding: 0 6px;
     display: grid; place-items: center;
     border-radius: 14px;
     background: var(--mcm-ink); color: #fff;
-    font-size: 11px; font-weight: 600; letter-spacing: .05em;
+    font-family: var(--mcm-font-text);
+    font-size: 11px; font-weight: 600; letter-spacing: .05em; line-height: 1;
     font-variant-numeric: tabular-nums;
   }
-  .mcm-step:hover .mcm-step__badge {
+  .mcm-process .mcm-step:hover .mcm-step__badge {
     background: var(--mcm-ink); color: var(--mcm-accent); border-color: var(--mcm-ink);
     transform: translateY(-4px);
   }
-
-  .mcm-step__title {
+  .mcm-process .mcm-step__title {
     font-family: var(--mcm-font-title);
-    font-size: 24px; font-weight: 600; line-height: 1.2;
+    font-size: 24px; font-weight: 600; line-height: 1.2; letter-spacing: 0; text-transform: none;
+    color: var(--mcm-ink);
     margin: 0 0 12px;
   }
-  .mcm-step__text {
+  .mcm-process .mcm-step__text {
+    font-family: var(--mcm-font-text);
     font-size: 14px; line-height: 1.7; font-weight: 300; color: var(--mcm-muted); margin: 0;
   }
 
-  /* Bandeau CTA */
-  .mcm-process__cta {
+  .mcm-process .mcm-process__cta {
     margin-top: clamp(56px, 7vw, 88px);
     display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
     padding: 32px 40px;
-    background: var(--mcm-ink);
-    color: #fff;
+    background: var(--mcm-ink); color: #fff;
     position: relative; overflow: hidden;
   }
-  /* veinage discret type marbre */
-  .mcm-process__cta::before {
+  .mcm-process .mcm-process__cta::before {
     content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .18;
     background:
       linear-gradient(115deg, transparent 40%, rgba(255,255,255,.35) 41%, transparent 43%),
       linear-gradient(140deg, transparent 62%, rgba(168,134,90,.6) 63%, transparent 64.5%),
       linear-gradient(100deg, transparent 75%, rgba(255,255,255,.25) 75.5%, transparent 77%);
   }
-  .mcm-process__cta-text { position: relative; margin: 0; }
-  .mcm-process__cta-text strong {
+  .mcm-process .mcm-process__cta-text { position: relative; margin: 0; }
+  .mcm-process .mcm-process__cta-text strong {
     display: block; font-family: var(--mcm-font-title); font-weight: 500;
-    font-size: clamp(22px, 2.6vw, 30px); line-height: 1.2; margin-bottom: 6px;
+    font-size: clamp(22px, 2.6vw, 30px); line-height: 1.2; margin-bottom: 6px; color: #fff;
   }
-  .mcm-process__cta-text span { font-size: 14px; font-weight: 300; color: rgba(255,255,255,.72); }
+  .mcm-process .mcm-process__cta-text span { font-family: var(--mcm-font-text); font-size: 14px; font-weight: 300; color: rgba(255,255,255,.72); }
 
-  .mcm-process__btn {
+  .mcm-process a.mcm-process__btn,
+  .mcm-process a.mcm-process__btn:visited {
     position: relative;
     display: inline-flex; align-items: center; gap: 12px;
     padding: 16px 30px;
     background: var(--mcm-accent); color: #fff; text-decoration: none;
-    font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
-    border: 1px solid var(--mcm-accent);
+    font-family: var(--mcm-font-text);
+    font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; line-height: 1;
+    border: 1px solid var(--mcm-accent); border-radius: 0;
     transition: background .3s ease, color .3s ease, transform .2s ease;
   }
-  .mcm-process__btn:hover { background: transparent; color: var(--mcm-accent); }
-  .mcm-process__btn:active { transform: scale(.97); }
-  .mcm-process__btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-  .mcm-process__btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.6; transition: transform .3s ease; }
-  .mcm-process__btn:hover svg { transform: translateX(4px); }
+  .mcm-process a.mcm-process__btn:hover { background: transparent; color: var(--mcm-accent); }
+  .mcm-process a.mcm-process__btn:active { transform: scale(.97); }
+  .mcm-process a.mcm-process__btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+  .mcm-process .mcm-process__btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.6; transition: transform .3s ease; }
+  .mcm-process a.mcm-process__btn:hover svg { transform: translateX(4px); }
 
-  /* Apparition au scroll */
-  .mcm-process [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
-  .mcm-process [data-reveal].is-visible { opacity: 1; transform: none; }
-  .mcm-step:nth-child(2) { transition-delay: .08s; }
-  .mcm-step:nth-child(3) { transition-delay: .16s; }
-  .mcm-step:nth-child(4) { transition-delay: .24s; }
-  .mcm-step:nth-child(5) { transition-delay: .32s; }
+  /* Animation d'apparition : activée seulement si le script tourne,
+     pour que rien ne reste masqué dans l'éditeur Elementor. */
+  .mcm-process.mcm-js [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .mcm-process.mcm-js [data-reveal].is-visible { opacity: 1; transform: none; }
+  .mcm-process .mcm-step:nth-child(2) { transition-delay: .08s; }
+  .mcm-process .mcm-step:nth-child(3) { transition-delay: .16s; }
+  .mcm-process .mcm-step:nth-child(4) { transition-delay: .24s; }
+  .mcm-process .mcm-step:nth-child(5) { transition-delay: .32s; }
 
-  /* Tablette */
   @media (max-width: 1024px) {
-    .mcm-process__steps { grid-template-columns: repeat(3, 1fr); row-gap: 48px; }
-    .mcm-process__steps::before { display: none; }
+    .mcm-process .mcm-process__steps { grid-template-columns: repeat(3, 1fr); row-gap: 48px; }
+    .mcm-process .mcm-process__steps::before { display: none; }
   }
-
-  /* Mobile : frise verticale */
   @media (max-width: 680px) {
-    .mcm-process__steps { grid-template-columns: 1fr; row-gap: 0; }
-    .mcm-process__steps::before {
+    .mcm-process .mcm-process__steps { grid-template-columns: 1fr; row-gap: 0; }
+    .mcm-process .mcm-process__steps::before {
       display: block; top: 38px; bottom: 38px; left: 38px; right: auto; width: 1px; height: auto;
-      background: linear-gradient(180deg, var(--mcm-accent), var(--mcm-accent));
+      background: var(--mcm-accent);
     }
-    .mcm-step { display: grid; grid-template-columns: 76px 1fr; gap: 20px; text-align: left; padding: 0 0 36px; }
-    .mcm-step:last-child { padding-bottom: 0; }
-    .mcm-step__badge { margin: 0; }
-    .mcm-step__title { margin-top: 10px; font-size: 22px; }
-    .mcm-process__cta { padding: 28px 24px; }
-    .mcm-process__btn { width: 100%; justify-content: center; }
+    .mcm-process .mcm-step { display: grid; grid-template-columns: 76px 1fr; gap: 20px; text-align: left; padding: 0 0 36px; }
+    .mcm-process .mcm-step:last-child { padding-bottom: 0; }
+    .mcm-process .mcm-step__badge { margin: 0; }
+    .mcm-process .mcm-step__title { margin-top: 10px; font-size: 22px; }
+    .mcm-process .mcm-process__cta { padding: 28px 24px; }
+    .mcm-process a.mcm-process__btn { width: 100%; justify-content: center; }
   }
-
   @media (prefers-reduced-motion: reduce) {
-    .mcm-process [data-reveal] { opacity: 1; transform: none; transition: none; }
-    .mcm-step__badge, .mcm-process__btn, .mcm-process__btn svg { transition: none; }
+    .mcm-process.mcm-js [data-reveal] { opacity: 1; transform: none; transition: none; }
+    .mcm-process .mcm-step__badge, .mcm-process a.mcm-process__btn, .mcm-process .mcm-process__btn svg { transition: none; }
   }
 </style>
-</head>
-<body style="margin:0">
 
-<!-- ====================== DÉBUT SECTION ====================== -->
 <section class="mcm-process" id="processus" aria-labelledby="mcm-process-title">
   <div class="mcm-process__inner">
 
@@ -207,7 +204,6 @@
       <li class="mcm-step" data-reveal>
         <div class="mcm-step__badge" aria-hidden="true">
           <span class="mcm-step__num">01</span>
-          <!-- plan -->
           <svg viewBox="0 0 24 24"><path d="M3 5l6-2 6 2 6-2v16l-6 2-6-2-6 2z"/><path d="M9 3v16M15 5v16"/></svg>
         </div>
         <div>
@@ -219,7 +215,6 @@
       <li class="mcm-step" data-reveal>
         <div class="mcm-step__badge" aria-hidden="true">
           <span class="mcm-step__num">02</span>
-          <!-- échantillons -->
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><path d="M13 17h8M17 13v8"/></svg>
         </div>
         <div>
@@ -231,7 +226,6 @@
       <li class="mcm-step" data-reveal>
         <div class="mcm-step__badge" aria-hidden="true">
           <span class="mcm-step__num">03</span>
-          <!-- devis -->
           <svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/><path d="M9 12h8M9 16h8M9 8h3"/></svg>
         </div>
         <div>
@@ -243,7 +237,6 @@
       <li class="mcm-step" data-reveal>
         <div class="mcm-step__badge" aria-hidden="true">
           <span class="mcm-step__num">04</span>
-          <!-- mètre -->
           <svg viewBox="0 0 24 24"><path d="M2 15l13-13 7 7-13 13z"/><path d="M6 11l2 2M9 8l2 2M12 5l2 2M8 15l1.5 1.5M11 12l1.5 1.5"/></svg>
         </div>
         <div>
@@ -255,7 +248,6 @@
       <li class="mcm-step" data-reveal>
         <div class="mcm-step__badge" aria-hidden="true">
           <span class="mcm-step__num">05</span>
-          <!-- pose -->
           <svg viewBox="0 0 24 24"><path d="M3 10l9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-6h6v6"/></svg>
         </div>
         <div>
@@ -281,20 +273,16 @@
 
 <script>
   (function () {
-    var els = document.querySelectorAll('.mcm-process [data-reveal]');
-    if (!('IntersectionObserver' in window)) {
-      els.forEach(function (el) { el.classList.add('is-visible'); });
-      return;
-    }
+    var root = document.getElementById('processus');
+    if (!root || !('IntersectionObserver' in window)) return;
+    root.classList.add('mcm-js');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
       });
     }, { threshold: 0.15 });
-    els.forEach(function (el) { io.observe(el); });
+    root.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
   })();
 </script>
-<!-- ======================= FIN SECTION ======================= -->
-
 </body>
 </html>
